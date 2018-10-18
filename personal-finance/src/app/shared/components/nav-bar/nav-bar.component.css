@@ -1,0 +1,12 @@
+#logo{
+  height:3em;
+  width:10em;
+  float:left;
+  cursor: pointer;
+}
+#logo:focus{
+  outline:none;
+}
+header{
+  height:10vh;
+}
