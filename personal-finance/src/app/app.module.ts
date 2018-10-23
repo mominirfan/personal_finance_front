@@ -3,14 +3,16 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { NavBarComponent } from './shared/components/nav-bar/nav-bar.component';
-import { LoginComponent } from './login/login.component';
+import { ChartComponent } from './chart/chart.component';
+import { PiechartDirective } from './piechart.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomepageComponent,
     NavBarComponent,
-    LoginComponent
+    ChartComponent,
+    PiechartDirective
   ],
   imports: [
     BrowserModule
