@@ -5,6 +5,8 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { NavBarComponent } from './shared/components/nav-bar/nav-bar.component';
 import { ChartComponent } from './chart/chart.component';
 import { PiechartDirective } from './piechart.directive';
+import{ LoginComponent } from './login/login.component';
+import { AppRoutingModule }     from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -12,10 +14,12 @@ import { PiechartDirective } from './piechart.directive';
     HomepageComponent,
     NavBarComponent,
     ChartComponent,
-    PiechartDirective
+    PiechartDirective,
+    LoginComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
