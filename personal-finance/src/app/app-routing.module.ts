@@ -1,11 +1,14 @@
-import { NgModule }             from '@angular/core';
+import { BudgetComponent } from './budget/budget.component';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { LoginComponent }       from './login/login.component';
+import { LoginComponent } from './login/login.component';
 import { HomepageComponent } from './homepage/homepage.component';
+
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'homepage', component: HomepageComponent },
-  { path: '', redirectTo: '/homepage', pathMatch: 'full' }
+  { path: '', redirectTo: '/homepage', pathMatch: 'full' },
+  { path: 'budget', component: BudgetComponent}
 ];
 @NgModule({
   imports: [ RouterModule.forRoot(appRoutes) ],

@@ -1,61 +1,51 @@
-import {Component, NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser-animations';
-import {NgxChartsModule} from '@swimlane/ngx-charts';
-import {single, multi} from '../data.ts';
+import { Component, OnInit } from '@angular/core';
+import * as CanvasJS from '../chart/canvasjs.min';
+
 
 @Component({
   selector: 'app-budget',
-  template: `
-    <ngx-charts-bar-horizontal-stacked
-      [view]="view"
-      [scheme]="colorScheme"
-      [results]="multi"
-      [gradient]="gradient"
-      [xAxis]="showXAxis"
-      [yAxis]="showYAxis"
-      [legend]="showLegend"
-      [showXAxisLabel]="showXAxisLabel"
-      [showYAxisLabel]="showYAxisLabel"
-      [xAxisLabel]="xAxisLabel"
-      [yAxisLabel]="yAxisLabel"
-      (select)="onSelect($event)">
-    </ngx-charts-bar-horizontal-stacked>
-  `
+  templateUrl: './budget.component.html',
+  styleUrls: ['./budget.component.css']
 })
-export class App {
-  single: any[];
-  multi: any[];
+export class BudgetComponent implements OnInit {
 
-  view: any[] = [700, 400];
+  constructor() { }
 
-  // options
-  showXAxis = true;
-  showYAxis = true;
-  gradient = false;
-  showLegend = true;
-  showXAxisLabel = true;
-  xAxisLabel = 'Country';
-  showYAxisLabel = true;
-  yAxisLabel = 'Population';
+  ngOnInit() {
+    let chart = new CanvasJS.Chart('chartContainer',
+    {
+      title:{
+      text: 'Budget'
+      },
 
-  colorScheme = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
-  };
+      data: [
+      {
+        type: 'stackedBar',
+         dataPoints: [
+        { x: new Date(2012, 1, 1), y: 71 },
+        { x: new Date(2012, 2, 1), y: 55},
+        { x: new Date(2012, 3, 1), y: 50 },
+        { x: new Date(2012, 4, 1), y: 65 },
+        { x: new Date(2012, 5, 1), y: 95 }
 
-  constructor() {
-    Object.assign(this, {single, multi})
+        ]
+      },
+        {
+        type: 'stackedBar',
+         dataPoints: [
+        { x: new Date(2012, 1, 1), y: 71 },
+        { x: new Date(2012, 2, 1), y: 55},
+        { x: new Date(2012, 3, 1), y: 50 },
+        { x: new Date(2012, 4, 1), y: 65 },
+        { x: new Date(2012, 5, 1), y: 95 }
+
+        ]
+      }
+
+      ]
+    });
+
+    chart.render();
   }
 
-  onSelect(event) {
-    console.log(event);
-  }
 }
-
-
-@NgModule({
-  imports: [ BrowserModule, BrowserAnimationsModule, NgxChartsModule ],
-  declarations: [ App ],
-  bootstrap: [ App ]
-})
-export class AppModule {}

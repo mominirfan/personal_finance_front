@@ -5,9 +5,11 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { NavBarComponent } from './shared/components/nav-bar/nav-bar.component';
 import { ChartComponent } from './chart/chart.component';
 import { PiechartDirective } from './piechart.directive';
-import { BudgetComponent } from './budget/budget.component';
 import{ LoginComponent } from './login/login.component';
 import { AppRoutingModule }     from './app-routing.module';
+import { BudgetComponent } from './budget/budget.component';
+import { ComponentComponent } from './component/component.component';
+import { LoansComponent } from './loans/loans.component';
 
 @NgModule({
   declarations: [
@@ -16,8 +18,10 @@ import { AppRoutingModule }     from './app-routing.module';
     NavBarComponent,
     ChartComponent,
     PiechartDirective,
-    BudgetComponent
-    LoginComponent
+    LoginComponent,
+    BudgetComponent,
+    ComponentComponent,
+    LoansComponent
   ],
   imports: [
     BrowserModule,

@@ -37,5 +37,5 @@ export class ChartComponent implements OnInit {
     });
 
     chart.render();
-      }
+  }
 }
