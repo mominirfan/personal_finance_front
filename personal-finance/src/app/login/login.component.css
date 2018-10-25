@@ -1,5 +1,16 @@
-
+body, html {
+  background: #188e3b; /* Old browsers */
+  background: -moz-linear-gradient(-45deg, #188e3b 0%, #28d375 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(-45deg, #188e3b 0%,#28d375 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(135deg, #188e3b 0%,#28d375 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#188e3b', endColorstr='#28d375',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  height: 100%;
+}
 .container-fluid{
-  margin-top: 15vh;
-  padding: 5vh;
+  padding-top: 25vh;
+  padding-bottom: 10vh;
+}
+.card{
+  height: 65vh;
+  width: 60vh;
 }
