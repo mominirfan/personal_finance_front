@@ -1,9 +1,9 @@
 body, html {
-  background: #188e3b; /* Old browsers */
-  background: -moz-linear-gradient(-45deg, #188e3b 0%, #28d375 100%); /* FF3.6-15 */
-  background: -webkit-linear-gradient(-45deg, #188e3b 0%,#28d375 100%); /* Chrome10-25,Safari5.1-6 */
-  background: linear-gradient(135deg, #188e3b 0%,#28d375 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#188e3b', endColorstr='#28d375',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+  background: #28d375; /* Old browsers */
+  background: -moz-radial-gradient(center, ellipse cover, #28d375 0%, #188e3b 99%); /* FF3.6-15 */
+  background: -webkit-radial-gradient(center, ellipse cover, #28d375 0%,#188e3b 99%); /* Chrome10-25,Safari5.1-6 */
+  background: radial-gradient(ellipse at center, #28d375 0%,#188e3b 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#28d375', endColorstr='#188e3b',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
   height: 100%;
 }
 .container-fluid{
@@ -11,6 +11,8 @@ body, html {
   padding-bottom: 10vh;
 }
 .card{
+  border-radius: 1em;
   height: 65vh;
   width: 60vh;
+  padding: 2vh;
 }
