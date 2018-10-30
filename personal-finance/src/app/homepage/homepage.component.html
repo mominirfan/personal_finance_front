@@ -1,14 +1,108 @@
 <app-nav-bar></app-nav-bar>
 
 <body>
-
-  <div class="container" style="background-color: white">
-    <h1>
-      Mike Hunt
-    </h1>
+  <div class="container">
+    <h1>Mike Hunt</h1>
+    <br>
     <div class="row">
       <div class="col-md-5" >
-          <div class = "row m-1 rounded border-dark" style="background-color: #ecf0f1">
+        <div class="card">
+          <div class="card-body">
+            <h2>Current Balance:</h2>
+            <h3>$1,736,832</h3>
+            <br>
+            <table class="table table-bordered m-1">
+              <thead>
+                <th>
+                  Bills
+                </th>
+                <th>
+                  Cost
+                </th>
+                <th>
+                  Date
+                </th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    Electric
+                  </td>
+                  <td>
+                    $200
+                  </td>
+                  <td>
+                    May 8th 2019
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Netflix and Chill
+                  </td>
+                  <td>
+                    $360
+                  </td>
+                  <td>
+                    May 8th 2019
+                  </td>
+
+                </tr>
+                <tr>
+                  <td>
+                    Hookers
+                  </td>
+                  <td>
+                    $690
+                  </td>
+                  <td>
+                    May 8th 2019
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Blow
+                  </td>
+                  <td>
+                    $1000
+                  </td>
+                  <td>
+                    May 8th 2019
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5" >
+        <div class="container">
+          <div class="card">
+            <div class="card-body">
+              <h2>Spending Suggestions:</h2>
+              <ul>
+                <li>
+                  Don't do cocaine
+                </li>
+                <li>
+                  Buy Hulu
+                </li>
+                <li>
+                  Stop buying pumpkin spice lattes
+                </li>
+                <li>
+                  Drop out of college (you'll save so fucking much)
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <h2>
+            <app-chart></app-chart>
+          </h2>
+        </div>
+      </div>
+          <!--<div class = "row m-1 rounded border-dark" style="background-color: #ecf0f1">
             <h2>
               Current Balance:
             </h2>
@@ -81,9 +175,9 @@
           </tbody>
         </table>
       </div>
-      </div>
+      </div>-->
 
-      <div class="col-md-5">
+      <!--<div class="col-md-5">
         <div class="row rounded m-1" style="background-color: #ecf0f1">
           <h2>Spending Suggestions:</h2>
           <ul>
@@ -106,8 +200,7 @@
             <app-chart></app-chart>
           </h2>
         </div>
-      </div>
+      </div>-->
     </div>
   </div>
-
 </body>
