@@ -1,10 +1,10 @@
 body, html {
-  /*background: #28d375;
-  background: -moz-radial-gradient(center, ellipse cover, #28d375 0%, #188e3b 99%);
-  background: -webkit-radial-gradient(center, ellipse cover, #28d375 0%,#188e3b 99%);
-  background: radial-gradient(ellipse at center, #28d375 0%,#188e3b 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#28d375', endColorstr='#188e3b',GradientType=1 );IE6-9 fallback on horizontal gradient */
-  height: 100%;
+  /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#00af20+0,00ff76+100 */
+background: #00af20; /* Old browsers */
+background: -moz-linear-gradient(left, #28A745 0%, #00ff76 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(left, #28A745 0%,#00ff76 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to right, #28A745 0%,#00ff76 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#28A745', endColorstr='#00ff76',GradientType=1 ); /* IE6-9 */
 }
 .container-fluid{
   padding-top: 10vh;
@@ -12,7 +12,49 @@ body, html {
 }
 .card{
   border-radius: 1em;
-  height: 55vh;
-  width: 60vh;
   padding: 2vh;
+}
+.register .register-form{
+    padding: 10%;
+    margin-top: 10%;
+}
+.btnRegister{
+    float: right;
+    margin-top: 10%;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 2%;
+    font-weight: 600;
+    width: 50%;
+    cursor: pointer;
+}
+.register .nav-tabs{
+    margin-top: 3%;
+    border: none;
+    border-radius: 1.5rem;
+    width: 28%;
+    float: right;
+}
+.register .nav-tabs .nav-link{
+    padding: 2%;
+    height: 34px;
+    font-weight: 600;
+    color: #fff;
+    border-top-right-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+}
+.register .nav-tabs .nav-link:hover{
+    border: none;
+}
+.register .nav-tabs .nav-link.active{
+    width: 100px;
+    color: #28A745;
+    border: 2px solid #28A745;
+    border-top-left-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
+}
+.register-heading{
+    text-align: center;
+    margin-top: 8%;
+    margin-bottom: -15%;
 }
