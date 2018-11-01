@@ -4,17 +4,69 @@
 
   <div class="container" style="background-color: white">
     <h1>
-      Mike Hunt
+      {{name}}
     </h1>
     <div class="row">
       <div class="col-md-5" >
-          <div class = "row m-1 rounded border-dark" style="background-color: #ecf0f1">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h2>Current Balance:</h2>
+            <h3>{{this.balance}}</h3>
+            <br>
+            <table class="table table-bordered m-1">
+              <thead>
+                <th>
+                  Bills
+                </th>
+                <th>
+                  Cost
+                </th>
+                <th>
+                  Date
+                </th>
+              </thead>
+              <tbody>
+                <tr *ngFor="let bill of bills">
+                  <td>
+                    {{bill.type}}
+                  </td>
+                  <td>
+                    {{bill.cost}}
+                  </td>
+                  <td>
+                    {{bill.date}}
+                  </td>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5" >
+        <div class="container">
+          <div class="card shadow-sm">
+            <div class="card-body">
+              <h2>Spending Suggestions:</h2>
+              <ul>
+                <li *ngFor="let suggestion of suggestions">
+                  {{suggestion.text}}
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="container">
+          <h2>
+            <app-chart></app-chart>
+          </h2>
+        </div>
+      </div>
+          <!--<div class = "row m-1 rounded border-dark" style="background-color: #ecf0f1">
             <h2>
               Current Balance:
             </h2>
             <br>
             <br>
-            <h3>$1,736,832</h3>
+            <h3>{{balance}}</h3>
           </div>
         <div class = "row m-1 rounded" style="background-color: #ecf0f1">
         <h2>
@@ -33,57 +85,23 @@
             </th>
           </thead>
           <tbody>
-            <tr>
+            <tr *ngFor="let bill of bills">
               <td>
-                Electric
+                {{bill.type}}
               </td>
               <td>
-                $200
+                {{bill.cost}}
               </td>
               <td>
-                May 8th 2019
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Netflix and Chill
-              </td>
-              <td>
-                $360
-              </td>
-              <td>
-                May 8th 2019
-              </td>
-
-            </tr>
-            <tr>
-              <td>
-                Hookers
-              </td>
-              <td>
-                $690
-              </td>
-              <td>
-                May 8th 2019
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Blow
-              </td>
-              <td>
-                $1000
-              </td>
-              <td>
-                May 8th 2019
+                {{bill.date}}
               </td>
             </tr>
           </tbody>
         </table>
       </div>
-      </div>
+      </div>-->
 
-      <div class="col-md-5">
+      <!--<div class="col-md-5">
         <div class="row rounded m-1" style="background-color: #ecf0f1">
           <h2>Spending Suggestions:</h2>
           <ul>
@@ -106,8 +124,7 @@
             <app-chart></app-chart>
           </h2>
         </div>
-      </div>
+      </div>-->
     </div>
   </div>
-
 </body>
