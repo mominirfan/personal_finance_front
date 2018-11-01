@@ -1,15 +1,17 @@
 <app-nav-bar></app-nav-bar>
 
 <body>
-  <div class="container">
-    <h1>Mike Hunt</h1>
-    <br>
+
+  <div class="container" style="background-color: white">
+    <h1>
+      {{name}}
+    </h1>
     <div class="row">
       <div class="col-md-5" >
         <div class="card shadow-sm">
           <div class="card-body">
             <h2>Current Balance:</h2>
-            <h3>$1,736,832</h3>
+            <h3>{{this.balance}}</h3>
             <br>
             <table class="table table-bordered m-1">
               <thead>
@@ -24,38 +26,16 @@
                 </th>
               </thead>
               <tbody>
-                <tr>
-                  <td>Electric</td>
-                  <td>$200</td>
-                  <td>May 8th 2019</td>
-                </tr>
-                <tr>
-                  <td>Netflix and Chill</td>
-                  <td>$360</td>
-                  <td>May 8th 2019</td>
-                </tr>
-                <tr>
+                <tr *ngFor="let bill of bills">
                   <td>
-                    Hookers
+                    {{bill.type}}
                   </td>
                   <td>
-                    $690
+                    {{bill.cost}}
                   </td>
                   <td>
-                    May 8th 2019
+                    {{bill.date}}
                   </td>
-                </tr>
-                <tr>
-                  <td>
-                    Blow
-                  </td>
-                  <td>
-                    $1000
-                  </td>
-                  <td>
-                    May 8th 2019
-                  </td>
-                </tr>
               </tbody>
             </table>
           </div>
@@ -67,17 +47,8 @@
             <div class="card-body">
               <h2>Spending Suggestions:</h2>
               <ul>
-                <li>
-                  Don't do cocaine
-                </li>
-                <li>
-                  Buy Hulu
-                </li>
-                <li>
-                  Stop buying pumpkin spice lattes
-                </li>
-                <li>
-                  Drop out of college (you'll save so fucking much)
+                <li *ngFor="let suggestion of suggestions">
+                  {{suggestion.text}}
                 </li>
               </ul>
             </div>
@@ -95,7 +66,7 @@
             </h2>
             <br>
             <br>
-            <h3>$1,736,832</h3>
+            <h3>{{balance}}</h3>
           </div>
         <div class = "row m-1 rounded" style="background-color: #ecf0f1">
         <h2>
@@ -114,49 +85,15 @@
             </th>
           </thead>
           <tbody>
-            <tr>
+            <tr *ngFor="let bill of bills">
               <td>
-                Electric
+                {{bill.type}}
               </td>
               <td>
-                $200
+                {{bill.cost}}
               </td>
               <td>
-                May 8th 2019
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Netflix and Chill
-              </td>
-              <td>
-                $360
-              </td>
-              <td>
-                May 8th 2019
-              </td>
-
-            </tr>
-            <tr>
-              <td>
-                Hookers
-              </td>
-              <td>
-                $690
-              </td>
-              <td>
-                May 8th 2019
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Blow
-              </td>
-              <td>
-                $1000
-              </td>
-              <td>
-                May 8th 2019
+                {{bill.date}}
               </td>
             </tr>
           </tbody>
