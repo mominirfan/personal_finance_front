@@ -5,10 +5,6 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { NavBarComponent } from './shared/components/nav-bar/nav-bar.component';
 import { ChartComponent } from './chart/chart.component';
 import { PiechartDirective } from './piechart.directive';
-<<<<<<< HEAD
-import { LoginComponent } from './login/login.component';
-import { AppRoutingModule }     from './app-routing.module';
-=======
 import{ LoginComponent } from './login/login.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BudgetComponent } from './budget/budget.component';
@@ -16,7 +12,6 @@ import { ComponentComponent } from './component/component.component';
 import { LoansComponent } from './loans/loans.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { FormsModule } from '@angular/forms';
->>>>>>> 5d952efe25adeff230b18221e7a480f310ea122d
 
 @NgModule({
   declarations: [
