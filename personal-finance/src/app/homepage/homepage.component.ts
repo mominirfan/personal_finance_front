@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BuiltinFunctionCall } from '@angular/compiler/src/compiler_util/expression_converter';
-import { Bill } from '../domains/models/bill';
-import { Suggestion } from '../domains/models/suggestion';
+import { Bill } from '../domain/models/bill';
+import { Suggestion } from '../domain/models/suggestion';
 
 @Component({
   selector: 'app-homepage',
