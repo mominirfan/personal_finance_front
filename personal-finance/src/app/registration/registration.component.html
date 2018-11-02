@@ -8,13 +8,13 @@
           </div>
 <div class = "container" id = "registration">
 
-  <form id = "entry" #registration = "ngForm">
+  <form id = "entry" #registration = "ngForm" *ngIf= "account" >
 
     <div class = "form-group">
     <label for = "username"> Username: </label>
-    <input type = "text" id = "username" name = "username"  class = "form-control" [(ngModel)] = "username">
+    <input type = "text" id = "username" name = "username"  class = "form-control" [(ngModel)] = "account.userName">
     </div>
-    <p>{{username}}</p>
+    <p>{{account.userName}}</p>
 
     <div class = "form-group">
     <label for = "password"> Password: </label>
@@ -30,27 +30,27 @@
 
     <div class = "form-group">
     <label for = "firstname"> First Name: </label>
-    <input type = "text" id = "firstname" name = "firstname"  class = "form-control" [(ngModel)] = "firstname">
+    <input type = "text" id = "firstname" name = "firstname"  class = "form-control" [(ngModel)] = "account.firstName">
     </div>
-    <p>{{firstname}}</p>
+    <p>{{account.firstName}}</p>
 
     <div class = "form-group">
     <label for = "lastname"> Last Name: </label>
-    <input type = "text" id = "lastname" name = "lastname"  class = "form-control" [(ngModel)] = "lastname">
+    <input type = "text" id = "lastname" name = "lastname"  class = "form-control" [(ngModel)] = "account.lastName">
     </div>
-    <p>{{lastname}}</p>
+    <p>{{account.lastName}}</p>
 
     <div class = "form-group">
     <label for = "email"> Email: </label>
-    <input type = "email" id = "email" name = "email"  class = "form-control" [(ngModel)] = "email">
+    <input type = "email" id = "email" name = "email"  class = "form-control" [(ngModel)] = "account.email">
     </div>
-    <p>{{email}}</p>
+    <p>{{account.email}}</p>
 
     <div class = "form-group">
     <label for = "income"> Monthly Income: </label>
-    <input type = "text" id = "income" name = "income" class = "form-control" [(ngModel)] = "income">
+    <input type = "text" id = "income" name = "income" class = "form-control" [(ngModel)] = "account.income">
     </div>
-    <p>{{income}}</p>
+    <p>{{account.income}}</p>
     <button type = "submit" class = "button btn-primary btn-block" (click) = "subReg()"> Submit </button>
   </form>
 </div>

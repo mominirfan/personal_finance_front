@@ -9,37 +9,42 @@ import * as CanvasJS from '../chart/canvasjs.min';
 })
 export class BudgetComponent implements OnInit {
 
+  budget_labels = ['Savings', 'Misc.', 'House', 'Car', 'Fun', 'Util.', 'Food'];
+  budget_sum = 4000;
+  budget_vals = [1000, 500, 500, 500, 500, 500, 500];
+  spend_vals = [500, 400, 400, 300, 400, 300, 500, 400];
+
   constructor() { }
 
   ngOnInit() {
+
+    let spend_points = [];
+    let remain_points = [];
+
+    let i;
+    for (i = 0 ; i < this.budget_vals.length ; i++) {
+      spend_points.push({label: this.budget_labels[i], y: this.spend_vals[i]} );
+    }
+
+    for (i = 0 ; i < this.budget_vals.length ; i++) {
+      remain_points.push({label: this.budget_labels[i], y: (this.budget_vals[i] - this.spend_vals[i])} );
+    }
+
     let chart = new CanvasJS.Chart('chartContainer',
     {
       title:{
-      text: 'Budget'
+      text: 'Budget',
+      valueFormatString:  'Food'
       },
 
       data: [
       {
         type: 'stackedBar',
-         dataPoints: [
-        { x: new Date(2012, 1, 1), y: 71 },
-        { x: new Date(2012, 2, 1), y: 55},
-        { x: new Date(2012, 3, 1), y: 50 },
-        { x: new Date(2012, 4, 1), y: 65 },
-        { x: new Date(2012, 5, 1), y: 95 }
-
-        ]
+         dataPoints: spend_points
       },
         {
         type: 'stackedBar',
-         dataPoints: [
-        { x: new Date(2012, 1, 1), y: 71 },
-        { x: new Date(2012, 2, 1), y: 55},
-        { x: new Date(2012, 3, 1), y: 50 },
-        { x: new Date(2012, 4, 1), y: 65 },
-        { x: new Date(2012, 5, 1), y: 95 }
-
-        ]
+         dataPoints: remain_points
       }
 
       ]
