@@ -32,11 +32,15 @@ export class BudgetComponent implements OnInit {
 
     let chart = new CanvasJS.Chart('chartContainer',
     {
-      title:{
+      title: {
       text: 'Budget',
-      valueFormatString:  'Food'
       },
-
+      axisX: {
+        gridThickness: 0
+      },
+      axisY: {
+        gridThickness: 0
+      },
       data: [
       {
         type: 'stackedBar',
