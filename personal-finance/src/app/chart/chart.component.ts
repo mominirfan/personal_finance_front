@@ -9,9 +9,21 @@ import * as CanvasJS from './canvasjs.min';
 })
 export class ChartComponent implements OnInit {
 
+  budget_labels = ['Savings', 'Misc.', 'House', 'Car', 'Fun', 'Util.', 'Food'];
+  spend_vals = [500, 400, 400, 300, 400, 300, 500];
+
   constructor() { }
 
   ngOnInit() {
+
+    let spend_points = [];
+
+    let i;
+    for (i = 0 ; i < this.budget_labels.length ; i++) {
+      spend_points.push({y: this.spend_vals[i], name: this.budget_labels[i]}) ;
+    }
+
+
     let chart = new CanvasJS.Chart('chartContainer', {
       theme: 'light2',
       animationEnabled: true,
@@ -24,15 +36,7 @@ export class ChartComponent implements OnInit {
         showInLegend: true,
         toolTipContent: '<b>{name}</b>: ${y} (#percent%)',
         indexLabel: '{name} - #percent%',
-        dataPoints: [
-          { y: 450, name: 'Food' },
-          { y: 120, name: 'Insurance' },
-          { y: 300, name: 'Traveling' },
-          { y: 800, name: 'Housing' },
-          { y: 150, name: 'Education' },
-          { y: 150, name: 'Shopping'},
-          { y: 250, name: 'Others' }
-        ]
+        dataPoints: spend_points
       }]
     });
 

@@ -10,9 +10,9 @@ import * as CanvasJS from '../chart/canvasjs.min';
 export class BudgetComponent implements OnInit {
 
   budget_labels = ['Savings', 'Misc.', 'House', 'Car', 'Fun', 'Util.', 'Food'];
-  budget_sum = 4000;
+  budget_sum = 4000; // make this thier monthly income
   budget_vals = [1000, 500, 500, 500, 500, 500, 500];
-  spend_vals = [500, 400, 400, 300, 400, 300, 500, 400];
+  spend_vals = [500, 400, 400, 300, 400, 300, 500];
 
   constructor() { }
 
@@ -22,11 +22,11 @@ export class BudgetComponent implements OnInit {
     let remain_points = [];
 
     let i;
-    for (i = 0 ; i < this.budget_vals.length ; i++) {
+    for (i = 0 ; i < this.budget_labels.length ; i++) {
       spend_points.push({label: this.budget_labels[i], y: this.spend_vals[i]} );
     }
 
-    for (i = 0 ; i < this.budget_vals.length ; i++) {
+    for (i = 0 ; i < this.budget_labels.length ; i++) {
       remain_points.push({label: this.budget_labels[i], y: (this.budget_vals[i] - this.spend_vals[i])} );
     }
 
