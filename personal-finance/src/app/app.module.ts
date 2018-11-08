@@ -14,6 +14,7 @@ import { RegistrationComponent } from './registration/registration.component';
 import { FormsModule } from '@angular/forms';
 import { DomainModule } from './domain';
 import { HttpClientModule } from '@angular/common/http';
+import { BudgetEditorComponent } from './budget-editor/budget-editor.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
     BudgetComponent,
     ComponentComponent,
     LoansComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    BudgetEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +38,7 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports: [BudgetEditorComponent]
 })
 export class AppModule { }

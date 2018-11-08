@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import { Bill } from '../domains/models/bill';
+import { Bill } from '../domain/models/bill';
 
 @Injectable()
 export class HomepageService {
