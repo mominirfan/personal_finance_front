@@ -7,8 +7,8 @@
       {{name}}
     </h1>
     <div class="row">
-      <div class="col-md-5" >
-        <div class="card shadow-sm">
+      <div class="col-md-6" >
+        <div class="card shadow-sm mb-4">
           <div class="card-body">
             <h2>Current Balance:</h2>
             <h3>{{this.balance}}</h3>
@@ -28,103 +28,55 @@
               <tbody>
                 <tr *ngFor="let bill of bills">
                   <td>
-                    {{bill.type}}
+                    {{bill.budgetType}}
                   </td>
                   <td>
-                    {{bill.cost}}
+                    {{bill.amt}}
                   </td>
                   <td>
-                    {{bill.date}}
+                    {{bill.active_date}}
                   </td>
               </tbody>
             </table>
           </div>
         </div>
       </div>
-      <div class="col-md-5" >
-        <div class="container">
-          <div class="card shadow-sm">
-            <div class="card-body">
-              <h2>Spending Suggestions:</h2>
-              <ul>
-                <li *ngFor="let suggestion of suggestions">
-                  {{suggestion.text}}
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
+      <div class="col-md-6" >
         <div class="container">
           <h2>
             <app-chart></app-chart>
           </h2>
         </div>
       </div>
-          <!--<div class = "row m-1 rounded border-dark" style="background-color: #ecf0f1">
-            <h2>
-              Current Balance:
-            </h2>
-            <br>
-            <br>
-            <h3>{{balance}}</h3>
-          </div>
-        <div class = "row m-1 rounded" style="background-color: #ecf0f1">
-        <h2>
-          Upcoming Bills
-        </h2>
-        <table class="table table-bordered m-1">
-          <thead>
-            <th>
-              Bills
-            </th>
-            <th>
-              Cost
-            </th>
-            <th>
-              Date
-            </th>
-          </thead>
-          <tbody>
-            <tr *ngFor="let bill of bills">
-              <td>
-                {{bill.type}}
-              </td>
-              <td>
-                {{bill.cost}}
-              </td>
-              <td>
-                {{bill.date}}
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      </div>-->
-
-      <!--<div class="col-md-5">
-        <div class="row rounded m-1" style="background-color: #ecf0f1">
+    </div>
+    <div class="card shadow-sm">
+        <div class="card-body" *ngIf=suggestionsOne>
           <h2>Spending Suggestions:</h2>
-          <ul>
-            <li>
-              Don't do cocaine
-            </li>
-            <li>
-              Buy Hulu
-            </li>
-            <li>
-              Stop buying pumpkin spice lattes
-            </li>
-            <li>
-              Drop out of college (you'll save so fucking much)
-            </li>
-          </ul>
+          <hr>
+          <div class="row">
+            <div class="col-md-6">
+                <h3>
+                    {{suggestionsOne[0].suggType}}
+                  </h3>
+                <ul>
+                    <li *ngFor="let suggestion of suggestionsOne">
+                      {{suggestion.sugg}}
+                    </li>
+                  </ul>
+            </div>
+            <div class="col-md-6">
+                <h3>
+                    {{suggestionsTwo[0].suggType}}
+                  </h3>
+                  <ul>
+                    <li *ngFor="let suggestion of suggestionsTwo">
+                      {{suggestion.sugg}}
+                    </li>
+                  </ul>
+            </div>
+
         </div>
-        <div class="row rounded m-1" style="background-color: #ecf0f1">
-          <h2>
-            <app-chart></app-chart>
-          </h2>
-        </div>
-      </div>-->
+      </div>
     </div>
   </div>
 </body>

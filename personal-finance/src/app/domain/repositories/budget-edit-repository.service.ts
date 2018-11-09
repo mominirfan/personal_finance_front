@@ -42,5 +42,3 @@ export class BudgetEditRepository {
     return Observable.throw(exception);
   }
 }
-
-}

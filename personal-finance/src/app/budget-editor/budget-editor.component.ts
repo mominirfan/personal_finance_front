@@ -8,12 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BudgetEditorComponent implements OnInit {
 
-  curBudget: Budget;
+  budget: Budget;
   newBudget: Budget = {};
+  monthly_inc: number;
 
   constructor() { }
 
   ngOnInit() {
+    this.monthly_inc = 5000;
   }
 
 }

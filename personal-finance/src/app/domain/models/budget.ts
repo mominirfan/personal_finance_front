@@ -1,9 +1,10 @@
 export class Budget {
-  Savings?: number;
-  Misc?: number;
-  House?: number;
-  Car?: number;
-  Fun?: number;
-  Util?: number;
-  Food?: number;
+  savings?: number;
+  misc?: number;
+  house?: number;
+  car?: number;
+  fun?: number;
+  util?: number;
+  food?: number;
 }
+

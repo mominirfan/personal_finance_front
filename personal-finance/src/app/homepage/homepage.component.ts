@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BuiltinFunctionCall } from '@angular/compiler/src/compiler_util/expression_converter';
 import { Bill } from '../domain/models/bill';
 import { Suggestion } from '../domain/models/suggestion';
+import { HomepageRepository } from '../domain/repositories/homepage-repository.service';
 
 @Component({
   selector: 'app-homepage',
@@ -12,28 +13,43 @@ import { Suggestion } from '../domain/models/suggestion';
 export class HomepageComponent implements OnInit {
   bills: Bill[];
   name: string;
-  suggestions: Suggestion[];
+  suggestionsOne: Suggestion[];
+  suggestionsTwo: Suggestion[];
   balance: number;
 
-  constructor() { }
+  constructor(
+    private homepageRepo: HomepageRepository,
+  ) { }
 
   ngOnInit() {
-    this.bills = [
-      { type: 'Cocaine', cost: 120, date: 'May 8, 1919' },
-      { type: 'Divorce Papers', cost: 10000, date: 'May 8, 1822' },
-      { type: 'Rocket Fuel', cost: 10000, date: 'July 20, 1969' },
-    ];
 
-    this.suggestions = [
-      {text: 'Don\'t do cocaine'},
-      {text: 'Buy Hulu'},
-      {text: 'Stop buying pumpkin spice lattes'},
-      {text: 'Drop out of college (you\'ll save so fucking much)'},
+    this.homepageRepo.getBills().subscribe((bills) => {
+      this.bills = bills;
+    //   console.log(this.bills);
+    //   let suggOne = -1;
+    //   let suggTwo = -1;
+    //   let amts = [];
+    //   for (const bill of this.bills) {
+    //     amts.push(+bill.amt);
+    //  }
+    //  amts.sort((a, b) => a - b);
+    //  suggOne = amts[amts.length - 1];
+    //  suggOne = amts[amts.length - 2];
+
+     this.homepageRepo.getSuggestions('coke').subscribe((suggestions) => {
+      this.suggestionsOne = suggestions;
+      console.log(this.suggestionsOne);
+    });
+
+    this.homepageRepo.getSuggestions('booze').subscribe((suggestions) => {
+      this.suggestionsTwo = suggestions;
+      console.log(this.suggestionsTwo);
+    });
+    this.name = this.bills[0].userName;
+
+    });
 
 
-    ];
-
-    this.name = 'Mike Hunt';
     this.balance = 42069;
 
   }

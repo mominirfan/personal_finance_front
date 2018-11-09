@@ -1,3 +1,4 @@
 export class Suggestion {
-  text: string;
+  suggType: string;
+  sugg: string;
 }

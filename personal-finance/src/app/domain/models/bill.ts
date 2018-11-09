@@ -1,5 +1,6 @@
 export class Bill {
-  type: string;
-  cost: number;
-  date: string;
+  userName?: string;
+  budgetType?: string;
+  amt?: string;
+  active_date?: string;
 }
