@@ -1,5 +1,6 @@
 export class Loan {
-  loan?: string;
-  amount?: number;
-  due_date?: Date;
+  loanName?: string;
+  loanAmount?: number;
+  interest?: number;
+  paymentDate?: Date;
 }

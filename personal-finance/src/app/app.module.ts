@@ -28,7 +28,7 @@ import { BudgetEditorComponent } from './budget-editor/budget-editor.component';
     ComponentComponent,
     LoansComponent,
     RegistrationComponent,
-    BudgetEditorComponent
+    BudgetEditorComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,30 +1,87 @@
 <app-nav-bar></app-nav-bar>
-<div class="container">
-  <h1>
-    Your Loans
+<div class="container" *ngIf="loans">
+  <h1 class="mt-2">
+    {{loans[0].userName}}
   </h1>
-    <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Loan</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Due Date</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let loan of loans">
-            <td>
-              {{loan.loan}}
-            </td>
-            <td>
-                {{loan.amount}}
-              </td>
-              <td>
-                  {{loan.due_date}}
-                </td>
-          </tr>
-        </tbody>
-      </table>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Loan</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Interest</th>
+        <th scope="col">Due Date</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let loan of loans">
+        <td>
+          {{loan.loanName}}
+        </td>
+        <td>
+          {{loan.loanAmount}}
+        </td>
+        <td>
+          {{loan.interest}}
+        </td>
+        <td>
+          {{loan.paymentDate}}
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button type="button" class="btn btn-primary text-white" data-toggle="modal" data-target="#addLoan">Add a Loan</button>
+
+  <div class="container">
+    <!-- Modal -->
+    <div class="modal fade" id="addLoan" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Add a Loan</h4>
+          </div>
+          <div class="modal-body">
+            <h6>
+              Loan Name:
+            </h6>
+            <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="newLoan.loanName">
+            </div>
+            <h6>
+              Monthly Amount:
+            </h6>
+            <div class="form-group">
+              <input type="text" class="form-control" [(ngModel)]="newLoan.loanAmount">
+            </div>
+            <h6>
+                Interest (decimal)
+              </h6>
+              <div class="form-group">
+                <input type="text" class="form-control" [(ngModel)]="newLoan.interest">
+              </div>
+              <h6>
+                  Day Payment is Due
+                </h6>
+                <div class="form-group">
+                  <select type="text" class="form-control" [(ngModel)]=newLoan.paymentDate>
+                    <option *ngFor="let day of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]">
+                      {{day}}
+                    </option>
+                  </select>
+                </div>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" style="float: left">Add</button>
+            <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
+            <div class="clearfix"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
 
 </div>
-
