@@ -1,3 +1,100 @@
-<p>
-  budget-editor works!
-</p>
+<app-nav-bar></app-nav-bar>
+<div class="container">
+  <h1>Budget Editor</h1>
+  <div class="row">
+    <div class="col">
+      <div class="card">
+        <div class="card-header">
+          Budget Information
+        </div>
+        <div class="card-body">
+          <div class = "lead">
+            Monthly Income: {{this.monthly_inc}}
+          </div>
+          <div class="form-group">
+            <label for="Food">
+              Food
+            </label>
+            <input type="text"
+                  id="Food"
+                  class="form-control"
+                  [ngModel]="budget.food"
+                  (ngModelChange)="budget.food = $event" />
+          </div>
+          <div class="form-group">
+            <label for="Savings">
+              Savings
+            </label>
+            <input type="text"
+                  id="Savings"
+                  class="form-control"
+                  [ngModel]="budget.savings"
+                  (ngModelChange)="budget.savings = $event" />
+          </div>
+          <div class="form-group">
+            <label for="misc">
+              Misc.
+            </label>
+            <input type="text"
+                  id="misc"
+                  class="form-control"
+                  [ngModel]="budget.misc"
+                  (ngModelChange)="budget.misc = $event" />
+          </div>
+
+          <div class="form-group">
+            <label for="house">
+              House
+            </label>
+            <input type="text"
+                  id="house"
+                  class="form-control"
+                  [ngModel]="budget.house"
+                  (ngModelChange)="budget.house = $event" />
+          </div>
+          <div class="form-group">
+            <label for="car">
+              Car
+            </label>
+            <input type="text"
+                  id="car"
+                  class="form-control"
+                  [ngModel]="budget.car"
+                  (ngModelChange)="budget.car = $event" />
+          </div>
+          <div class="form-group">
+            <label for="fun">
+              Fun
+            </label>
+            <input type="text"
+                  id="fun"
+                  class="form-control"
+                  [ngModel]="budget.fun"
+                  (ngModelChange)="budget.fun = $event" />
+          </div>
+          <div class="form-group">
+            <label for="util">
+              Util
+            </label>
+            <input type="text"
+                  id="util"
+                  class="form-control"
+                  [ngModel]="budget.util"
+                  (ngModelChange)="budget.util = $event" />
+          </div>
+        </div>
+      </div>
+      <br />
+      <br />
+      <button class="btn btn-lg btn-success btn-block"
+              type="button"
+              >
+        Save
+      </button>
+    </div>
+  </div>
+</div>
+<br />
+
+<pre>{{budget | json}}</pre>
+
