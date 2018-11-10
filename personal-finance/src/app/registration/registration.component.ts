@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Account, RegistrationRepository } from '../domain';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
@@ -16,7 +17,8 @@ export class RegistrationComponent implements OnInit {
   // private email: string;
   // private income: string;
 
-  constructor( private registrationRepository: RegistrationRepository ) {
+  constructor( private registrationRepository: RegistrationRepository,
+    private router: Router, ) {
     this.account = new Account;
   }
 
@@ -28,6 +30,7 @@ export class RegistrationComponent implements OnInit {
       this.account.pWord = this.password;
       this.registrationRepository.register(this.account).subscribe(x => this.register(x));
     }
+    this.router.navigate(['login']);
 
   }
   private register( account: Account ) {

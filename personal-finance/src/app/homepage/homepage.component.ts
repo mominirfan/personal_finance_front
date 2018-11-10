@@ -22,6 +22,7 @@ export class HomepageComponent implements OnInit {
     private homepageRepo: HomepageRepository,
   ) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.name = this.currentUser.userName;
   }
 
   ngOnInit() {
@@ -39,7 +40,6 @@ export class HomepageComponent implements OnInit {
       this.suggestionsTwo = suggestions;
       console.log(this.suggestionsTwo);
     });
-    this.name = this.bills[0].userName;
 
     });
 

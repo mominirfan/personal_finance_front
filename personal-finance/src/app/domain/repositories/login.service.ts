@@ -13,9 +13,11 @@ export class LoginService {
         return this.http.post<any>(`${this.endpoint}`, { userName: username, pWord: password })
             .pipe(map(user => {
                 // login successful if there's a jwt token in the response
-                if (user) {
+                if (user.userName === username) {
                     // store user details and jwt token in local storage to keep user logged in between page refreshes
                     localStorage.setItem('currentUser', JSON.stringify(user));
+                } else {
+                  console.log("Wrong credentials");
                 }
 
                 return user;
