@@ -12,14 +12,19 @@ export class LoansComponent implements OnInit {
 
   loans: Loan[];
   newLoan: Loan = {};
+  currentUser: any = {};
+  userName: String = '';
 
   constructor(
     private loanRepo: LoanRepository,
     private modalService: NgbModal
-  ) { }
+  ) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.userName = this.currentUser.userName;
+  }
 
   ngOnInit() {
-    this.loanRepo.getLoans().subscribe((loans) => {
+    this.loanRepo.getLoans(this.userName).subscribe((loans) => {
       this.loans = loans;
       console.log(this.loans);
     });
