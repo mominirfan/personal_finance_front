@@ -5,6 +5,7 @@ import { Suggestion } from '../domain/models/suggestion';
 import { HomepageRepository } from '../domain/repositories/homepage-repository.service';
 import { Loan } from '../domain/models/loan';
 import { LoanRepository } from '../domain/repositories/loan-repository.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-homepage',
@@ -23,6 +24,7 @@ export class HomepageComponent implements OnInit {
   constructor(
     private homepageRepo: HomepageRepository,
     private loansRepo: LoanRepository,
+    private router: Router,
   ) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.name = this.currentUser.userName;
@@ -51,6 +53,11 @@ export class HomepageComponent implements OnInit {
 
 
     this.balance = 42069;
+
+  }
+
+  toLoans(){
+    this.router.navigate(['loans']);
 
   }
 
