@@ -37,7 +37,8 @@ import { BudgetEditorComponent } from './budget-editor/budget-editor.component';
     DomainModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent],
   exports: [BudgetEditorComponent]
 })

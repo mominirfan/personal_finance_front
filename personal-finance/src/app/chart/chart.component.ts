@@ -11,18 +11,20 @@ import { Bill } from '../domain/models/bill';
 })
 export class ChartComponent implements OnInit {
 
-  // budget_labels = ['Savings', 'Misc.', 'House', 'Car', 'Fun', 'Util.', 'Food'];
   budget_labels = [];
-  // spend_vals = [500, 400, 400, 300, 400, 300, 500];
   spend_vals = [];
   bills: Bill[];
+  currentUser: any = {};
 
   constructor(
     private homepageRepo: HomepageRepository,
-  ) { }
+  ) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  }
 
   ngOnInit() {
-    this.homepageRepo.getBills().subscribe((bills) => {
+
+    this.homepageRepo.getBills(this.currentUser.userName).subscribe((bills) => {
       this.bills = bills;
 
       for (const bill of this.bills) {

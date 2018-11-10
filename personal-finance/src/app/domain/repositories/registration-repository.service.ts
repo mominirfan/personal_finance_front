@@ -12,4 +12,5 @@ export class RegistrationRepository {
   public register(account: Account): Observable<Account> {
     return this.httpClient.post(this.endpoint, account);
   }
+
 }

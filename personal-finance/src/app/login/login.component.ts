@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from '../domain/repositories/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +9,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() {}
+  userName: String;
+  pWord: String;
 
-  ngOnInit() {
+  constructor(
+    // private formBuilder: FormBuilder,
+    private loginRepo: LoginService,
+    private router: Router,
+  ) {
   }
 
+  ngOnInit() {
+
+  }
+
+  login() {
+    this.loginRepo.login(this.userName, this.pWord).subscribe((userName) => {
+      if (userName) {
+        this.userName = userName;
+        this.router.navigate(['dashboard']);
+      } else {
+        // do something to handle wrong credentials
+      }
+    });
+
+
+
+  }
 }

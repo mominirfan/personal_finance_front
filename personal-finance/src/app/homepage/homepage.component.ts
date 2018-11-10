@@ -16,25 +16,19 @@ export class HomepageComponent implements OnInit {
   suggestionsOne: Suggestion[];
   suggestionsTwo: Suggestion[];
   balance: number;
+  currentUser: any = {};
 
   constructor(
     private homepageRepo: HomepageRepository,
-  ) { }
+  ) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  }
 
   ngOnInit() {
 
-    this.homepageRepo.getBills().subscribe((bills) => {
+    this.homepageRepo.getBills(this.currentUser.userName).subscribe((bills) => {
       this.bills = bills;
-    //   console.log(this.bills);
-    //   let suggOne = -1;
-    //   let suggTwo = -1;
-    //   let amts = [];
-    //   for (const bill of this.bills) {
-    //     amts.push(+bill.amt);
-    //  }
-    //  amts.sort((a, b) => a - b);
-    //  suggOne = amts[amts.length - 1];
-    //  suggOne = amts[amts.length - 2];
+      console.log(this.bills);
 
      this.homepageRepo.getSuggestions('coke').subscribe((suggestions) => {
       this.suggestionsOne = suggestions;
