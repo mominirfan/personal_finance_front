@@ -24,7 +24,7 @@ export class LoansComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loanRepo.getLoans(this.userName).subscribe((loans) => {
+    this.loanRepo.getAllLoans(this.userName).subscribe((loans) => {
       this.loans = loans;
       console.log(this.loans);
     });

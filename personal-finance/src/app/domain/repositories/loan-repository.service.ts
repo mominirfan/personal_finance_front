@@ -9,12 +9,16 @@ import { Loan } from '../models/loan';
 export class LoanRepository {
 
   protected endpoint = 'http://ec2-3-16-30-192.us-east-2.compute.amazonaws.com:8080/api/get-loans/';
-  protected orderedendpoint = 'http://ec2-3-16-30-192.us-east-2.compute.amazonaws.com:8080/api/order-loans/';
+  protected dashboardEndpoint = 'http://ec2-3-16-30-192.us-east-2.compute.amazonaws.com:8080/api/order-loans/';
 
   constructor (private httpClient: HttpClient) {}
 
-  getLoans(userName: String): Observable<Loan[]> {
+  getAllLoans(userName: String): Observable<Loan[]> {
     return this.httpClient.get<Loan[]>(`${this.endpoint}${userName}`);
+  }
+
+  getDashboardLoans(userName: String): Observable<Loan[]> {
+    return this.httpClient.get<Loan[]>(`${this.dashboardEndpoint}${userName}`);
   }
 
 }

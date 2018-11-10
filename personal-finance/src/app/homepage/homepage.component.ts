@@ -3,6 +3,8 @@ import { BuiltinFunctionCall } from '@angular/compiler/src/compiler_util/express
 import { Bill } from '../domain/models/bill';
 import { Suggestion } from '../domain/models/suggestion';
 import { HomepageRepository } from '../domain/repositories/homepage-repository.service';
+import { Loan } from '../domain/models/loan';
+import { LoanRepository } from '../domain/repositories/loan-repository.service';
 
 @Component({
   selector: 'app-homepage',
@@ -11,7 +13,7 @@ import { HomepageRepository } from '../domain/repositories/homepage-repository.s
 })
 
 export class HomepageComponent implements OnInit {
-  bills: Bill[];
+  loans: Loan[];
   name: string;
   suggestionsOne: Suggestion[];
   suggestionsTwo: Suggestion[];
@@ -20,6 +22,7 @@ export class HomepageComponent implements OnInit {
 
   constructor(
     private homepageRepo: HomepageRepository,
+    private loansRepo: LoanRepository,
   ) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.name = this.currentUser.userName;
@@ -27,9 +30,12 @@ export class HomepageComponent implements OnInit {
 
   ngOnInit() {
 
-    this.homepageRepo.getBills(this.currentUser.userName).subscribe((bills) => {
-      this.bills = bills;
-      console.log(this.bills);
+    // this.homepageRepo.getBills(this.currentUser.userName).subscribe((bills) => {
+    //   this.bills = bills;
+    //   console.log(this.bills);
+
+    this.loansRepo.getDashboardLoans(this.currentUser.userName).subscribe((loans) => {
+      this.loans = loans;
 
      this.homepageRepo.getSuggestions('coke').subscribe((suggestions) => {
       this.suggestionsOne = suggestions;

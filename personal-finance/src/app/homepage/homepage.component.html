@@ -12,10 +12,13 @@
             <h2>Current Balance:</h2>
             <h3>{{this.balance}}</h3>
             <br>
+            <h3>
+              Upcoming Loan Payments
+            </h3>
             <table class="table table-bordered m-1">
               <thead>
                 <th>
-                  Bills
+                  Loans
                 </th>
                 <th>
                   Cost
@@ -25,15 +28,15 @@
                 </th>
               </thead>
               <tbody>
-                <tr *ngFor="let bill of bills">
+                <tr *ngFor="let loan of loans">
                   <td>
-                    {{bill.budgetType}}
+                    {{loan.loanName}}
                   </td>
                   <td>
-                    {{bill.amt}}
+                    {{loan.loanAmount}}
                   </td>
                   <td>
-                    {{bill.active_date}}
+                    {{loan.paymentDay}}
                   </td>
               </tbody>
             </table>
