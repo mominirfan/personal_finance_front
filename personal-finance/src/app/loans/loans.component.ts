@@ -21,12 +21,30 @@ export class LoansComponent implements OnInit {
   ) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.userName = this.currentUser.userName;
+    this.newLoan.userName = this.userName;
+    this.newLoan.paid = 0;
   }
 
   ngOnInit() {
     this.loanRepo.getAllLoans(this.userName).subscribe((loans) => {
       this.loans = loans;
       console.log(this.loans);
+    });
+  }
+
+  addLoan() {
+    this.loans.push(this.newLoan);
+    this.loanRepo.addLoan(this.newLoan, this.userName).subscribe(() => {
+
+    });
+    this.newLoan = {};
+    this.newLoan.userName = this.currentUser;
+  }
+
+  makePayment(loan: Loan) {
+    loan.paid = 1;
+    this.loanRepo.updateLoan(loan, this.userName).subscribe(() => {
+
     });
   }
 }

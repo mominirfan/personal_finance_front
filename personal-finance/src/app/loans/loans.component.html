@@ -10,6 +10,8 @@
         <th scope="col">Amount</th>
         <th scope="col">Interest</th>
         <th scope="col">Due Date</th>
+        <th scope="col">Paid</th>
+        <!-- <th scope="col">Make Payment</th> -->
       </tr>
     </thead>
     <tbody>
@@ -25,6 +27,19 @@
         </td>
         <td>
           {{loan.paymentDay}}
+        </td>
+        <td *ngIf="loan.paid == 1">
+          <div class="bg-primary text-center text-white" style="border-radius: 10%; width: 25%; height: 50%">
+            &#x2713;
+          </div>
+        </td>
+        <td *ngIf="loan.paid == 0">
+          <!-- <div class="bg-danger text-center text-white d-inline mr-4" style="border-radius: 10%; width: 100%; height: 100%">
+            x
+          </div> -->
+          <button class="btn btn-primary d-inline (click)=makePayment(loan)">
+              pay
+            </button>
         </td>
       </tr>
     </tbody>
@@ -42,38 +57,42 @@
             <h4 class="modal-title">Add a Loan</h4>
           </div>
           <div class="modal-body">
-            <h6>
+            <!-- <h6>
               Loan Name:
-            </h6>
+            </h6> -->
             <div class="form-group">
-              <input type="text" class="form-control" [(ngModel)]="newLoan.loanName">
+              <label for="loanName">Loan Name:</label>
+              <input type="text" class="form-control" name="loanName" [(ngModel)]="newLoan.loanName">
             </div>
-            <h6>
+            <!-- <h6>
               Monthly Amount:
-            </h6>
+            </h6> -->
             <div class="form-group">
-              <input type="text" class="form-control" [(ngModel)]="newLoan.loanAmount">
+              <label for="loanAmount">Monthly Amount:</label>
+              <input type="text" class="form-control" name="loanAmount" [(ngModel)]="newLoan.loanAmount">
             </div>
-            <h6>
+            <!-- <h6>
                 Interest (decimal)
-              </h6>
-              <div class="form-group">
-                <input type="text" class="form-control" [(ngModel)]="newLoan.interest">
-              </div>
-              <h6>
+              </h6> -->
+            <div class="form-group">
+              <label for="interest">Interest</label>
+              <input type="text" class="form-control" name="interest" [(ngModel)]="newLoan.interest">
+            </div>
+            <!-- <h6>
                   Day Payment is Due
-                </h6>
-                <div class="form-group">
-                  <select type="text" class="form-control" [(ngModel)]=newLoan.paymentDate>
-                    <option *ngFor="let day of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]">
-                      {{day}}
-                    </option>
-                  </select>
-                </div>
+                </h6> -->
+            <div class="form-group">
+              <label for="paymentDate">Payment Due Date</label>
+              <select type="text" class="form-control" name="paymentDate" [(ngModel)]="newLoan.paymentDay">
+                <option *ngFor="let day of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]">
+                  {{day}}
+                </option>
+              </select>
+            </div>
 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal" style="float: left">Add</button>
+            <button type="button" class="btn btn-primary" data-dismiss="modal" style="float: left" (click)="addLoan()">Add</button>
             <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
             <div class="clearfix"></div>
           </div>
