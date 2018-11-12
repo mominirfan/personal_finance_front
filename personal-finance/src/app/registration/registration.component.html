@@ -1,58 +1,56 @@
+<div class="container-fluid container-bg fill">
+  <div class="row justify-content-center">
+    <div class="card col-4 p-3 shadow-lg p-2 rounded">
+      <img class="card-img-top img-fluid" src="../../assets/logo_transparent_login-white.png" alt="Card image cap">
+      <div class="card-body">
+        <form id = "entry" #registration = "ngForm" *ngIf= "account" >
 
-<div class = "row justify-content-center mt-5">
-  <div class = "col-md-4">
-      <div class = "container" id = "img">
-          <img src="../../assets/logo_transparent_login-white.png" id = "logo">
+          <div class = "form-group">
+          <label for = "username"> Username: </label>
+          <input type = "text" id = "username" name = "username"  class = "form-control" [(ngModel)] = "account.userName">
+          </div>
+          <p>{{account.userName}}</p>
+
+          <div class = "form-group">
+          <label for = "password"> Password: </label>
+          <input type = "password" id = "password" name = "password"  class = "form-control" [(ngModel)] = "password">
+          </div>
+          <p>{{password}}</p>
+
+          <div class = "form-group">
+          <label for = "password2"> Confirm Password: </label>
+          <input type = "password" id = "password2" name = "password2"  class = "form-control" [(ngModel)] = "password2">
+          </div>
+          <p>{{password2}}</p>
+
+          <div class = "form-group">
+          <label for = "firstname"> First Name: </label>
+          <input type = "text" id = "firstname" name = "firstname"  class = "form-control" [(ngModel)] = "account.firstName">
+          </div>
+          <p>{{account.firstName}}</p>
+
+          <div class = "form-group">
+          <label for = "lastname"> Last Name: </label>
+          <input type = "text" id = "lastname" name = "lastname"  class = "form-control" [(ngModel)] = "account.lastName">
+          </div>
+          <p>{{account.lastName}}</p>
+
+          <div class = "form-group">
+          <label for = "email"> Email: </label>
+          <input type = "email" id = "email" name = "email"  class = "form-control" [(ngModel)] = "account.email">
+          </div>
+          <p>{{account.email}}</p>
+
+          <div class = "form-group">
+          <label for = "income"> Monthly Income: </label>
+          <input type = "text" id = "income" name = "income" class = "form-control" [(ngModel)] = "account.income">
+          </div>
+          <p>{{account.income}}</p>
+          <div class="d-flex justify-content-center">
+            <button type = "submit" class = "btn btn-primary submit-btn" (click) = "subReg()"> Submit </button>
+          </div>
+        </form>
       </div>
-<div class = "container" id = "registration">
-
-  <form id = "entry" #registration = "ngForm" *ngIf= "account" >
-
-    <div class = "form-group">
-    <label for = "username"> Username: </label>
-    <input type = "text" id = "username" name = "username"  class = "form-control" [(ngModel)] = "account.userName">
     </div>
-    <p>{{account.userName}}</p>
-
-    <div class = "form-group">
-    <label for = "password"> Password: </label>
-    <input type = "password" id = "password" name = "password"  class = "form-control" [(ngModel)] = "password">
-    </div>
-    <p>{{password}}</p>
-
-    <div class = "form-group">
-    <label for = "password2"> Confirm Password: </label>
-    <input type = "password" id = "password2" name = "password2"  class = "form-control" [(ngModel)] = "password2">
-    </div>
-    <p>{{password2}}</p>
-
-    <div class = "form-group">
-    <label for = "firstname"> First Name: </label>
-    <input type = "text" id = "firstname" name = "firstname"  class = "form-control" [(ngModel)] = "account.firstName">
-    </div>
-    <p>{{account.firstName}}</p>
-
-    <div class = "form-group">
-    <label for = "lastname"> Last Name: </label>
-    <input type = "text" id = "lastname" name = "lastname"  class = "form-control" [(ngModel)] = "account.lastName">
-    </div>
-    <p>{{account.lastName}}</p>
-
-    <div class = "form-group">
-    <label for = "email"> Email: </label>
-    <input type = "email" id = "email" name = "email"  class = "form-control" [(ngModel)] = "account.email">
-    </div>
-    <p>{{account.email}}</p>
-
-    <div class = "form-group">
-    <label for = "income"> Monthly Income: </label>
-    <input type = "text" id = "income" name = "income" class = "form-control" [(ngModel)] = "account.income">
-    </div>
-    <p>{{account.income}}</p>
-    <div class="d-flex justify-content-center">
-      <button type = "submit" class = "btn btn-primary submit-btn" (click) = "subReg()"> Submit </button>
-    </div>
-  </form>
-</div>
-</div>
+  </div>
 </div>
