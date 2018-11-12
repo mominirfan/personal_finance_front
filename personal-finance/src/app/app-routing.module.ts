@@ -6,12 +6,13 @@ import { LoginComponent } from './login/login.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoansComponent } from './loans/loans.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'dashboard', component: HomepageComponent },
   {path: 'register', component: RegistrationComponent},
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: '', component: LandingPageComponent},
   { path: 'budget', component: BudgetComponent},
   { path: 'budget-edit', component: BudgetEditorComponent},
   { path: 'loans', component: LoansComponent}

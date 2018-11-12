@@ -15,6 +15,7 @@ import { FormsModule } from '@angular/forms';
 import { DomainModule } from './domain';
 import { HttpClientModule } from '@angular/common/http';
 import { BudgetEditorComponent } from './budget-editor/budget-editor.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { BudgetEditorComponent } from './budget-editor/budget-editor.component';
     LoansComponent,
     RegistrationComponent,
     BudgetEditorComponent,
+    LandingPageComponent,
   ],
   imports: [
     BrowserModule,
