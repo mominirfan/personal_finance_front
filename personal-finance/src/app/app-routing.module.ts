@@ -1,4 +1,3 @@
-import { BudgetEditorComponent } from './budget-editor/budget-editor.component';
 import { BudgetComponent } from './budget/budget.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -14,7 +13,6 @@ const appRoutes: Routes = [
   {path: 'register', component: RegistrationComponent},
   { path: '', component: LandingPageComponent},
   { path: 'budget', component: BudgetComponent},
-  { path: 'budget-edit', component: BudgetEditorComponent},
   { path: 'loans', component: LoansComponent}
 ];
 @NgModule({

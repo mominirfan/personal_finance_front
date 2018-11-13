@@ -50,7 +50,9 @@ export class BudgetComponent implements OnInit {
     let date = new Date();
     this.spend_vals = [];
     for (i = 0 ; i < this.budget_labels.length ; i++) {
-      this.spend_vals.push(this.newBudget[this.budget_labels[i]]);
+      let amt = this.newBudget['food'];
+      console.log(amt);
+      this.spend_vals.push(amt);
       newVal.push(
         {
           userName: this.currentUser.userName,

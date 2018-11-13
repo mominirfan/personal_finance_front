@@ -14,7 +14,6 @@ import { RegistrationComponent } from './registration/registration.component';
 import { FormsModule } from '@angular/forms';
 import { DomainModule } from './domain';
 import { HttpClientModule } from '@angular/common/http';
-import { BudgetEditorComponent } from './budget-editor/budget-editor.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { BudgetEditRepository } from './domain/repositories/budget-edit-repository.service';
 
@@ -30,7 +29,6 @@ import { BudgetEditRepository } from './domain/repositories/budget-edit-reposito
     ComponentComponent,
     LoansComponent,
     RegistrationComponent,
-    BudgetEditorComponent,
     LandingPageComponent,
   ],
   imports: [
@@ -44,6 +42,6 @@ import { BudgetEditRepository } from './domain/repositories/budget-edit-reposito
     BudgetEditRepository
   ],
   bootstrap: [AppComponent],
-  exports: [BudgetEditorComponent]
+  exports: []
 })
 export class AppModule { }
