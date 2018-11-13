@@ -1,3 +1,4 @@
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Budget } from './../domain/models/budget';
 import { BudgetEditRepository } from './../domain/repositories/budget-edit-repository.service';
 import { Component, OnInit } from '@angular/core';
@@ -12,14 +13,19 @@ import * as CanvasJS from '../chart/canvasjs.min';
 export class BudgetComponent implements OnInit {
 
   budget_labels = ['Savings', 'Misc.', 'House', 'Car', 'Fun', 'Util.', 'Food'];
-  budget_sum = 4000; // make this thier monthly income
+  monthly_inc: number; // make this thier monthly income
   budget_vals = [1000, 500, 500, 500, 500, 500, 500];
   spend_vals = [500, 400, 400, 300, 400, 300, 500];
   budget = [];
   currentUser: any = {};
 
+  // Editor Members
+  budg: Budget = {};
+  newBudget: Budget = {};
+
   constructor(
     private budgetRepo: BudgetEditRepository,
+    private modalService: NgbModal
   ) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
@@ -38,18 +44,33 @@ export class BudgetComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
+  save() {
+    let newVal = [];
+    let i;
+    let date = new Date();
+    this.spend_vals = [];
+    for (i = 0 ; i < this.budget_labels.length ; i++) {
+      this.spend_vals.push(this.newBudget[this.budget_labels[i]]);
+      newVal.push(
+        {
+          userName: this.currentUser.userName,
+          budgetType: this.budget_labels[i],
+          active_date: date,
+          amt: this.newBudget[this.budget_labels[i]]
+        }
+      );
+    }
 
-    this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
-      this.budget = budget;
+    this.budg = this.newBudget;
+    this.newBudget = {};
+    this.updateChart();
+  }
 
-    console.log(this.budget);
-    this.initBudgets();
-
+  updateChart() {
+    let i;
     let spend_points = [];
     let remain_points = [];
 
-    let i;
     for (i = 0 ; i < this.budget_labels.length ; i++) {
       spend_points.push({label: this.budget_labels[i], y: this.spend_vals[i]} );
     }
@@ -84,6 +105,19 @@ export class BudgetComponent implements OnInit {
     });
 
     chart.render();
+
+  }
+
+  ngOnInit() {
+
+    this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
+      this.budget = budget;
+
+    this.monthly_inc = 5000; //this.currentUser.income;
+    this.initBudgets();
+    this.updateChart();
+
   });
 
+}
 }

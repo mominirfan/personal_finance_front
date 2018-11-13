@@ -1,3 +1,5 @@
+import { BudgetEditRepository } from './../domain/repositories/budget-edit-repository.service';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Budget } from '../domain/models/budget';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,14 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BudgetEditorComponent implements OnInit {
 
-  budget: Budget;
-  newBudget: Budget = {};
-  monthly_inc: number;
+  constructor(
+    private modalService: NgbModal,
+    private budgetRepo: BudgetEditRepository
 
-  constructor() { }
+  ) { }
 
   ngOnInit() {
     this.monthly_inc = 5000;
   }
+
 
 }
