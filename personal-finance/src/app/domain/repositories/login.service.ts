@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class LoginService {
-    protected endpoint = 'http://ec2-18-224-172-230.us-east-2.compute.amazonaws.com:8080/login';
+    protected endpoint = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/login';
     constructor(private http: HttpClient) { }
 
     login(username: String, password: String) {

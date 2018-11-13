@@ -16,6 +16,7 @@ import { DomainModule } from './domain';
 import { HttpClientModule } from '@angular/common/http';
 import { BudgetEditorComponent } from './budget-editor/budget-editor.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { BudgetEditRepository } from './domain/repositories/budget-edit-repository.service';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     HttpClientModule
   ],
   providers: [
+    BudgetEditRepository
   ],
   bootstrap: [AppComponent],
   exports: [BudgetEditorComponent]

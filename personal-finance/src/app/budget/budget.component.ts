@@ -1,3 +1,5 @@
+import { Budget } from './../domain/models/budget';
+import { BudgetEditRepository } from './../domain/repositories/budget-edit-repository.service';
 import { Component, OnInit } from '@angular/core';
 import * as CanvasJS from '../chart/canvasjs.min';
 
@@ -13,10 +15,36 @@ export class BudgetComponent implements OnInit {
   budget_sum = 4000; // make this thier monthly income
   budget_vals = [1000, 500, 500, 500, 500, 500, 500];
   spend_vals = [500, 400, 400, 300, 400, 300, 500];
+  budget = [];
+  currentUser: any = {};
 
-  constructor() { }
+  constructor(
+    private budgetRepo: BudgetEditRepository,
+  ) {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+  }
+
+  initBudgets() {
+    this.budget_labels = [];
+    this.budget_vals = [];
+    let i;
+    let label;
+    let bud;
+    for (i = 0 ; i < this.budget.length ; i++) {
+      label = this.budget[i]['budgetType'];
+      bud = this.budget[i]['amt'];
+      this.budget_labels.push(label);
+      this.budget_vals.push(bud);
+    }
+  }
 
   ngOnInit() {
+
+    this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
+      this.budget = budget;
+
+    console.log(this.budget);
+    this.initBudgets();
 
     let spend_points = [];
     let remain_points = [];
@@ -51,10 +79,11 @@ export class BudgetComponent implements OnInit {
          dataPoints: remain_points
       }
 
+
       ]
     });
 
     chart.render();
-  }
+  });
 
 }

@@ -9,8 +9,8 @@ import { Suggestion } from '../models/suggestion';
 })
 export class HomepageRepository {
 
-  protected endpoint = 'http://ec2-18-224-172-230.us-east-2.compute.amazonaws.com:8080/api/get-budgets/';
-  protected suggestionEndpoint = 'http://ec2-18-224-172-230.us-east-2.compute.amazonaws.com:8080/api/get-suggs/';
+  protected endpoint = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/api/get-budgets/';
+  protected suggestionEndpoint = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/api/get-suggs/';
 
   constructor (private httpClient: HttpClient) {}
 

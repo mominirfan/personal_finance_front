@@ -8,7 +8,7 @@ import { catchError } from 'rxjs/operators';
 @Injectable()
 export class BudgetEditRepository {
 
-  protected endPoint = '';
+  protected endPoint = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/api/get-budgets';
 
   protected httpOptions = {
     headers: new HttpHeaders({
@@ -21,8 +21,8 @@ export class BudgetEditRepository {
     protected httpClient: HttpClient
   ) {}
 
-  public getBudget(): Observable<Budget> {
-    return this.httpClient.get(this.endPoint, this.httpOptions)
+  public getBudget(username: string): Observable<[{}]> {
+    return this.httpClient.get<[{}]>(`${this.endPoint}/${username}`, this.httpOptions)
     .pipe(catchError(this.handleException));
   }
 

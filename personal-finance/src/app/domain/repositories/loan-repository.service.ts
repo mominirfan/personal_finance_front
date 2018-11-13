@@ -8,8 +8,8 @@ import { Loan } from '../models/loan';
 })
 export class LoanRepository {
 
-  protected endpoint = 'http://ec2-18-224-172-230.us-east-2.compute.amazonaws.com:8080/api/get-loans/';
-  protected dashboardEndpoint = 'http://ec2-18-224-172-230.us-east-2.compute.amazonaws.com:8080/api/order-loans/';
+  protected endpoint = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/api/get-loans/';
+  protected dashboardEndpoint = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/api/order-loans/';
   protected addLoanEndpoint = '';
   protected updateLoanEndpoint = '';
 
