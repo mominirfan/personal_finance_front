@@ -5,7 +5,7 @@ import { Account } from '../models/account';
 @Injectable()
 export class RegistrationRepository {
 
-  protected endpoint = 'http://ec2-3-16-30-192.us-east-2.compute.amazonaws.com:8080/api/registration';
+  protected endpoint = 'http://ec2-18-224-172-230.us-east-2.compute.amazonaws.com:8080/api/registration';
 
   constructor (private httpClient: HttpClient) {}
 
