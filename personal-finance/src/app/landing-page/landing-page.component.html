@@ -2,9 +2,30 @@
   <nav class="navbar navbar-expand-lg pl-5 pr-5 pt-3">
     <div class="collapse navbar-collapse" id="navbarText">
       <img src="../../../assets/logo_transparent.png">
-      <button type="button" class="btn btn-white border-success login-btn ml-auto">Enter</button>
+      <button type="button" class="btn btn-white border-success login-btn ml-auto" data-toggle="modal" data-target="#exampleModal">Enter</button>
     </div>
   </nav>
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content text-dark">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex justify-content-between pr-5 pl-5">
+            <div class="">
+              <button type="button" class="btn btn-primary">Login</button>
+            </div>
+            <div class="">
+              <button type="button" class="btn btn-primary">Register</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
   <div class="container-flex pt-5 text-center">
     <h1>Sesame, a new way to finance!</h1>
   </div>
@@ -20,6 +41,9 @@
 <div class="container-flex mt-img text-center">
   <h1 class="bg-white">Reach new heights!</h1>
 </div>
-<div class="container mx-auto ">
+<div class="container d-flex justify-content-center">
+  <p>This Web Application was developed for educational purposes only.</p>
+</div>
+<div class="container d-flex justify-content-center">
   <p>Sesame Finanance CopyRight 2018</p>
 </div>
