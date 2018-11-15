@@ -104,6 +104,8 @@
               </div>
 
             </div>
+
+
           </div>
 
           <pre>{{newBudget | json}}</pre>
@@ -116,9 +118,30 @@
     <div class="clearfix"></div>
     <br>
     <div class="row shadow-sm align-items-center border rounded">
-      <div>
-        <div id="chartContainer" style="height: 50vh; width: 100%;"></div>
-      </div>
+
+        <div class = "col-md-auto" id="chartContainer" style="height: 50vh; width: 100%;"></div>
+
+    </div>
+
+    <br>
+    <div class = "row">
+        <div class = "col">
+          <h2>Expense History</h2>
+          <table class = "table">
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let row of budget_labels; let i=index">
+                <td>{{row}}</td>
+                <td>{{spend_vals[i] | currency}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
     </div>
   </div>
 </html>

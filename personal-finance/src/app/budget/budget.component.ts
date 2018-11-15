@@ -95,7 +95,7 @@ export class BudgetComponent implements OnInit {
       data: [
       {
         type: 'stackedBar',
-         dataPoints: spend_points
+        dataPoints: spend_points
       },
         {
         type: 'stackedBar',
