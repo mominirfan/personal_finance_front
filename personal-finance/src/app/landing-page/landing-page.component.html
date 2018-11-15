@@ -1,49 +1,136 @@
-<div class="container-flex page text-white">
-  <nav class="navbar navbar-expand-lg pl-5 pr-5 pt-3">
+<!-- <div class="container text-white"> -->
+<!-- <nav class="navbar navbar-expand-lg pl-5 pr-5 pt-3">
     <div class="collapse navbar-collapse" id="navbarText">
       <img src="../../../assets/logo_transparent.png">
       <button type="button" class="btn btn-white border-success login-btn ml-auto" data-toggle="modal" data-target="#exampleModal">Enter</button>
     </div>
-  </nav>
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content text-dark">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="d-flex justify-content-between pr-5 pl-5">
-            <div class="">
-              <button type="button" class="btn btn-primary" onclick="window.location.href='/login'">Login</button>
-            </div>
-            <div class="">
-              <button type="button" class="btn btn-primary" onclick="window.location.href='/register'">Register</button>
-            </div>
+  </nav> -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content text-dark">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="d-flex justify-content-between pr-5 pl-5">
+          <div class="">
+            <button type="button" class="btn btn-primary" onclick="window.location.href='/login'">Login</button>
+          </div>
+          <div class="">
+            <button type="button" class="btn btn-primary" onclick="window.location.href='/register'">Register</button>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="container-flex pt-5 text-center">
-    <h1>Sesame, a new way to finance!</h1>
-  </div>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
-  <br>
 </div>
-<div class="container-flex mt-img text-center">
+
+<div class="overlay"></div>
+<div id="mt-img">
+  <div id="homeTitle">
+    <br>
+    <img class="mt-4" src="../../../assets/logo_transparent.png">
+    <h1 class="mt-4">Sesame, a new way to finance!</h1>
+    <div class="text-center">
+      <button type="button" class="btn btn-white mr-4 mt-4" style="color: #00b09b" onclick="window.location.href='/login'">Login</button>
+      <button type="button" class="btn btn-white ml-4 mt-4" style="color: #00b09b" onclick="window.location.href='/register'">Register</button>
+    </div>
+    <div>
+
+    </div>
+
+  </div>
+</div>
+
+<div class="row mb-4">
+  <div class="col-md-6 mt-2 text-center">
+    <br>
+    <ul style="list-style: none">
+      <h1>
+        Functionality:
+      </h1>
+      <hr>
+      <li>
+        <h3>Dynamic Charts</h3>
+      </li>
+      <li>
+        <h3>Expenses tracking</h3>
+      </li>
+      <li>
+        <h3>Spending Suggestions</h3>
+      </li>
+      <li>
+        <h3>Loan Management</h3>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-6 mt-4 text-center">
+    <img src="../../../assets/budgetChart.png" style="width:90%; height: 90%;">
+  </div>
+</div>
+
+<div class="page">
+  <div class="row">
+    <div class="col-md-6 text-center">
+      <img class="mt-4" src="../../../assets/clipboard.png" style="width:15%; height: 15%;">
+      <p class="p-2 mt-2 ml-4 borders">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sed lacus tellus. Sed turpis ligula, luctus vel
+        magna non, rutrum viverra arcu. Mauris neque velit, molestie eu tortor in, convallis pulvinar metus. Orci
+        varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam eget tempor lacus. Cras
+        consequat ex nibh, non tempor magna commodo in. Integer condimentum elit vitae pharetra posuere. Vestibulum
+        elementum, lacus sit amet hendrerit aliquam, ex nibh faucibus nisi, scelerisque tempor nisl ligula lobortis
+        elit. Nullam justo turpis, euismod dignissim volutpat vel, consectetur eget neque. Ut ac varius ex. Donec
+        faucibus arcu vel ex porttitor, et dapibus elit dapibus. Duis cursus vulputate eros at imperdiet. Ut
+        ullamcorper purus vel egestas pulvinar. Morbi iaculis, ipsum nec maximus suscipit, ipsum elit consectetur
+        magna, non rhoncus augue neque a nibh. In fringilla risus imperdiet facilisis faucibus.
+      </p>
+    </div>
+    <div class="col-md-6 text-center">
+      <img class="mt-4" src="../../../assets/chart.png" style="width:15%; height: 15%;">
+      <p class="p-2 mt-2 mr-4 borders">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sed lacus tellus. Sed turpis ligula, luctus vel
+        magna non, rutrum viverra arcu. Mauris neque velit, molestie eu tortor in, convallis pulvinar metus. Orci
+        varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam eget tempor lacus. Cras
+        consequat ex nibh, non tempor magna commodo in. Integer condimentum elit vitae pharetra posuere. Vestibulum
+        elementum, lacus sit amet hendrerit aliquam, ex nibh faucibus nisi, scelerisque tempor nisl ligula lobortis
+        elit. Nullam justo turpis, euismod dignissim volutpat vel, consectetur eget neque. Ut ac varius ex. Donec
+        faucibus arcu vel ex porttitor, et dapibus elit dapibus. Duis cursus vulputate eros at imperdiet. Ut
+        ullamcorper purus vel egestas pulvinar. Morbi iaculis, ipsum nec maximus suscipit, ipsum elit consectetur
+        magna, non rhoncus augue neque a nibh. In fringilla risus imperdiet facilisis faucibus.
+      </p>
+    </div>
+  </div>
+  <p class="text-center">Sesame Finanance Copyright 2018 &copy;</p>
+</div>
+
+
+<!-- <div class="container">
+    <div class="overlay">
+        <div id="mt-img">
+          <div id="homeTitle">
+              <img class="mt-4" src="../../../assets/logo_transparent.png">
+              <h1 class="p-5">Sesame, a new way to finance!</h1>
+              <div class="text-center">
+                  <button type="button" class="btn btn-white mr-4 mt-4" style="color: #00b09b" onclick="window.location.href='/login'">Login</button>
+                  <button type="button" class="btn btn-white ml-4 mt-4" style="color: #00b09b" onclick="window.location.href='/register'">Register</button>
+              </div>
+          </div>
+
+        </div>
+    </div>
+
+  </div> -->
+
+<!-- </div> -->
+<!-- <div class="container-flex mt-img text-center">
   <h1 class="bg-white">Reach new heights!</h1>
 </div>
-<div class="container d-flex justify-content-center">
+-->
+<!-- <div class="container d-flex justify-content-center">
   <p>This Web Application was developed for educational purposes only.</p>
 </div>
 <div class="container d-flex justify-content-center">
-  <p>Sesame Finanance CopyRight 2018</p>
-</div>
+
+</div> -->

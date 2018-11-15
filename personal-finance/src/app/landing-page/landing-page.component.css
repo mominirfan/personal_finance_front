@@ -5,14 +5,50 @@ background: -moz-linear-gradient(top, #00b09b 0%, #96c93d 99%); /* FF3.6-15 */
 background: -webkit-linear-gradient(top, #00b09b 0%,#96c93d 99%); /* Chrome10-25,Safari5.1-6 */
 background: linear-gradient(to bottom, #00b09b 0%,#96c93d 99%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b09b', endColorstr='#96c93d',GradientType=0 ); /* IE6-9 */
-
+/* height: 90vh; */
 }
+
 .login-btn{
   width: 8em;
   padding: .25em;
   font-size: 1.25em;
 }
-.mt-img{
+/* .mt-img{
   background-image: url("https://images.unsplash.com/photo-1519670345864-d7d68dcd43ea?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=50e2325f9696b2103c9eb637d3c70103&auto=format&fit=crop&w=1790&q=80");
   padding: 15em;
+} */
+
+#mt-img {
+  background-image: url("https://images.unsplash.com/photo-1519670345864-d7d68dcd43ea?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=50e2325f9696b2103c9eb637d3c70103&auto=format&fit=crop&w=1790&q=80");
+  height: 90vh;
+  background-size: cover;
+  z-index: 1;
+}
+
+#homeTitle {
+  text-align: center;
+  color: white;
+  z-index: 10;
+  font-size: 4em;
+  position: relative;
+  font-family:"Nunito";
+  width:100%;
+}
+
+.overlay {
+  background: black;
+  position: absolute;
+  opacity: .4;
+  width: 100%;
+  z-index: 8;
+  height: 90vh;
+  top:0;
+  left:0
+}
+
+.borders {
+    border: 		#484848;
+    border-style:solid;
+    border-width: 1px;
+    border-radius:1%;
 }
