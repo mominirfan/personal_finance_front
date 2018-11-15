@@ -10,8 +10,8 @@ export class LoanRepository {
 
   protected endpoint = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/api/get-loans/';
   protected dashboardEndpoint = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/api/order-loans/';
-  protected addLoanEndpoint = '';
-  protected updateLoanEndpoint = '';
+  protected addLoanEndpoint = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/api/add-loan';
+  protected updateLoanEndpoint = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/api/update-loan';
 
   constructor (private httpClient: HttpClient) {}
 
@@ -24,10 +24,12 @@ export class LoanRepository {
   }
 
   addLoan(loan: Loan, userName: String) {
-    return this.httpClient.post<any>(`${this.addLoanEndpoint}${userName}`, { userName: userName, loan: loan });
+    console.log(loan);
+    return this.httpClient.post<any>(`${this.addLoanEndpoint}`, { userName: userName, loanName: loan.loanName,
+      loanAmount: loan.loanAmount, loanInterest: loan.interest });
   }
 
   updateLoan(loan: Loan, userName: String) {
-    return this.httpClient.put<any>(`${this.updateLoanEndpoint}${userName}`, { userName: userName, loan: loan });
+    return this.httpClient.put<any>(`${this.updateLoanEndpoint}`, { userName: userName, loanName: loan.loanName, paid: loan.paid });
   }
 }

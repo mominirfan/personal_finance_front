@@ -44,7 +44,6 @@ export class LoansComponent implements OnInit {
   makePayment(loan: Loan) {
     loan.paid = 1;
     this.loanRepo.updateLoan(loan, this.userName).subscribe(() => {
-
     });
   }
 }
