@@ -3,6 +3,8 @@ import { Budget } from './../domain/models/budget';
 import { BudgetEditRepository } from './../domain/repositories/budget-edit-repository.service';
 import { Component, OnInit } from '@angular/core';
 import * as CanvasJS from '../chart/canvasjs.min';
+import { ExpensesService } from '../domain/repositories/expenses.services';
+import { Expense } from '../domain/models/expense';
 
 
 @Component({
@@ -23,9 +25,12 @@ export class BudgetComponent implements OnInit {
   budg: Budget = {};
   newBudget: Budget = {};
 
+  expenses: Expense[];
+
   constructor(
     private budgetRepo: BudgetEditRepository,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private expenseService: ExpensesService,
   ) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
@@ -110,6 +115,13 @@ export class BudgetComponent implements OnInit {
 
   }
 
+  getExpenses() {
+    this.expenseService.getExpenses(this.currentUser.userName).subscribe((expenses) => {
+      this.expenses = expenses;
+      console.log(this.expenses);
+    });
+  }
+
   ngOnInit() {
 
     this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
@@ -118,8 +130,11 @@ export class BudgetComponent implements OnInit {
     this.monthly_inc = 5000; //this.currentUser.income;
     this.initBudgets();
     this.updateChart();
+    this.getExpenses();
 
   });
+
+
 
 }
 }
