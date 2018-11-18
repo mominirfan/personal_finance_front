@@ -26,10 +26,13 @@ export class LoginComponent implements OnInit {
   login() {
     this.loginRepo.login(this.userName, this.pWord).subscribe((userName) => {
       if (userName) {
-        this.userName = userName;
+        this.userName = userName.userName;
+        this.loginRepo.getInfo(this.userName).subscribe((info) => {
+          localStorage.setItem('balance', JSON.stringify(info.bal));
+        });
         this.router.navigate(['dashboard']);
       } else {
-        // do something to handle wrong credentials
+        // alert()
       }
     });
 

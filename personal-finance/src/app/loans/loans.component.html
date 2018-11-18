@@ -57,30 +57,18 @@
             <h4 class="modal-title">Add a Loan</h4>
           </div>
           <div class="modal-body">
-            <!-- <h6>
-              Loan Name:
-            </h6> -->
             <div class="form-group">
               <label for="loanName">Loan Name:</label>
               <input type="text" class="form-control" name="loanName" [(ngModel)]="newLoan.loanName">
             </div>
-            <!-- <h6>
-              Monthly Amount:
-            </h6> -->
             <div class="form-group">
-              <label for="loanAmount">Monthly Amount:</label>
+              <label for="loanAmount">Total Amount:</label>
               <input type="text" class="form-control" name="loanAmount" [(ngModel)]="newLoan.loanAmount">
             </div>
-            <!-- <h6>
-                Interest (decimal)
-              </h6> -->
             <div class="form-group">
               <label for="interest">Interest</label>
               <input type="text" class="form-control" name="interest" [(ngModel)]="newLoan.interest">
             </div>
-            <!-- <h6>
-                  Day Payment is Due
-                </h6> -->
             <div class="form-group">
               <label for="paymentDate">Payment Due Date</label>
               <select type="text" class="form-control" name="paymentDate" [(ngModel)]="newLoan.paymentDay">

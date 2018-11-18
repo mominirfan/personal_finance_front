@@ -126,8 +126,10 @@ export class BudgetComponent implements OnInit {
 
     this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
       this.budget = budget;
+      console.log("hey fycker");
+      console.log(this.budget);
 
-    this.monthly_inc = 5000; //this.currentUser.income;
+    this.monthly_inc = 5000;
     this.initBudgets();
     this.updateChart();
     this.getExpenses();

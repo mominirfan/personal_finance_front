@@ -18,7 +18,7 @@ export class HomepageComponent implements OnInit {
   name: string;
   suggestionsOne: Suggestion[];
   suggestionsTwo: Suggestion[];
-  balance: number;
+  balance: string;
   currentUser: any = {};
 
   constructor(
@@ -27,6 +27,7 @@ export class HomepageComponent implements OnInit {
     private router: Router,
   ) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.balance = JSON.parse(localStorage.getItem('balance'));
     this.name = this.currentUser.userName;
   }
 
@@ -39,24 +40,21 @@ export class HomepageComponent implements OnInit {
     this.loansRepo.getDashboardLoans(this.currentUser.userName).subscribe((loans) => {
       this.loans = loans;
 
-     this.homepageRepo.getSuggestions('coke').subscribe((suggestions) => {
+     this.homepageRepo.getSuggestions('salt').subscribe((suggestions) => {
       this.suggestionsOne = suggestions;
       console.log(this.suggestionsOne);
     });
 
-    this.homepageRepo.getSuggestions('booze').subscribe((suggestions) => {
+    this.homepageRepo.getSuggestions('juice').subscribe((suggestions) => {
       this.suggestionsTwo = suggestions;
       console.log(this.suggestionsTwo);
     });
 
     });
 
-
-    this.balance = 42069;
-
   }
 
-  toLoans(){
+  toLoans() {
     this.router.navigate(['loans']);
 
   }

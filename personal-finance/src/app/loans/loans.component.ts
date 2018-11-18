@@ -33,9 +33,11 @@ export class LoansComponent implements OnInit {
   }
 
   addLoan() {
+    this.newLoan.loanPayment = this.newLoan.loanAmount * this.newLoan.interest / 12;
+    this.newLoan.loanPayment = Math.round(100 * this.newLoan.loanPayment) / 100;
     this.loans.push(this.newLoan);
     this.loanRepo.addLoan(this.newLoan, this.userName).subscribe(() => {
-
+      console.log(this.newLoan);
     });
     this.newLoan = {};
     this.newLoan.userName = this.currentUser;
@@ -44,6 +46,8 @@ export class LoansComponent implements OnInit {
   makePayment(loan: Loan) {
     loan.paid = 1;
     this.loanRepo.updateLoan(loan, this.userName).subscribe(() => {
+    });
+    this.loanRepo.subtractFromBal(loan, this.userName).subscribe(() => {
     });
   }
 }
