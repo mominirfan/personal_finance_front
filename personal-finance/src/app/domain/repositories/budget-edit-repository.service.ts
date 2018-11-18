@@ -10,6 +10,7 @@ export class BudgetEditRepository {
 
   protected endPoint = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/api/get-budgets';
   protected endPoint2 = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/api/edit-budget';
+  protected depositEndpoint = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/api/increment-bal';
 
   protected httpOptions = {
     headers: new HttpHeaders({
@@ -35,6 +36,10 @@ export class BudgetEditRepository {
   public updateBudget(budget: [{}]): Observable<[{}]> {
     return this.httpClient.put<[{}]>(`${this.endPoint2}`, budget, this.httpOptions)
     .pipe(catchError(this.handleException));
+  }
+
+  addDeposit(depositAmt: Number, userName: String) {
+    return this.httpClient.put<any>(`${this.depositEndpoint}`, { 'userName': String(userName), 'change': String(depositAmt) });
   }
 
   protected handleException(exception: any) {

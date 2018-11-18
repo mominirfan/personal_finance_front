@@ -26,6 +26,7 @@ export class BudgetComponent implements OnInit {
   newBudget: Budget = {};
 
   expenses: Expense[];
+  depositAmt: Number;
 
   constructor(
     private budgetRepo: BudgetEditRepository,
@@ -126,8 +127,6 @@ export class BudgetComponent implements OnInit {
 
     this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
       this.budget = budget;
-      console.log("hey fycker");
-      console.log(this.budget);
 
     this.monthly_inc = 5000;
     this.initBudgets();
@@ -135,8 +134,9 @@ export class BudgetComponent implements OnInit {
     this.getExpenses();
 
   });
-
-
-
 }
+  deposit() {
+    this.budgetRepo.addDeposit(this.depositAmt, this.currentUser.userName).subscribe(() => {
+    });
+  }
 }

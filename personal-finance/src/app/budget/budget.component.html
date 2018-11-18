@@ -7,6 +7,7 @@
       <div class="container">
           <button type="button" class="btn btn-primary text-white" data-toggle="modal" data-target="#ed">Edit Budget</button>
           <button type="button" class="btn btn-primary text-white" data-toggle="modal" data-target="#expenseModal">Add Expense</button>
+          <button type="button" class="btn btn-primary text-white" data-toggle="modal" data-target="#depositModal">Add Deposit</button>
           <div class="container">
               <div class="modal fade" id="expenseModal" role="dialog">
                   <div class="modal-dialog">
@@ -60,6 +61,30 @@
 
                     </div>
               </div>
+
+              <div class="modal fade" id="depositModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title">Add a Deposit</h4>
+                      </div>
+                      <div class="modal-body">
+                        <div class="form-group">
+                          <label for="depositAmt">Amount:</label>
+                          <input type="text" class="form-control" name="depositAmt" [(ngModel)]="depositAmt">
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" style="float: left" (click)="deposit()">Add</button>
+                        <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
+                        <div class="clearfix"></div>
+                      </div>
+                    </div>
+
+                  </div>
+            </div>
 
             <div class="modal fade" id="ed" role="dialog">
               <div class="modal-dialog">
