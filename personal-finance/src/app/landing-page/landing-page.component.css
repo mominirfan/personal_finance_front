@@ -9,15 +9,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b09b', end
 }
 
 .login-btn{
-  width: 8em;
-  padding: .25em;
-  font-size: 1.25em;
+  width: 5em;
+  font-size: .4em;
 }
-/* .mt-img{
-  background-image: url("https://images.unsplash.com/photo-1519670345864-d7d68dcd43ea?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=50e2325f9696b2103c9eb637d3c70103&auto=format&fit=crop&w=1790&q=80");
-  padding: 15em;
-} */
-
 #mt-img {
   background-image: url("https://images.unsplash.com/photo-1519670345864-d7d68dcd43ea?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=50e2325f9696b2103c9eb637d3c70103&auto=format&fit=crop&w=1790&q=80");
   height: 90vh;
