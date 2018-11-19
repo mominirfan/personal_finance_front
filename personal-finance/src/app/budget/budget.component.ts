@@ -20,13 +20,14 @@ export class BudgetComponent implements OnInit {
   spend_vals = [500, 400, 400, 300, 400, 300, 500];
   budget = [];
   currentUser: any = {};
+  balance: number;
 
   // Editor Members
   budg: Budget = {};
   newBudget: Budget = {};
 
   expenses: Expense[];
-  depositAmt: Number;
+  depositAmt: number;
 
   constructor(
     private budgetRepo: BudgetEditRepository,
@@ -34,6 +35,8 @@ export class BudgetComponent implements OnInit {
     private expenseService: ExpensesService,
   ) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.balance = JSON.parse(localStorage.getItem('balance'));
+
   }
 
   initBudgets() {
@@ -137,6 +140,8 @@ export class BudgetComponent implements OnInit {
 }
   deposit() {
     this.budgetRepo.addDeposit(this.depositAmt, this.currentUser.userName).subscribe(() => {
+      this.balance = +this.balance + +this.depositAmt;
+      localStorage.setItem('balance', JSON.stringify(this.balance));
     });
   }
 }
