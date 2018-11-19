@@ -9,10 +9,9 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b09b', end
 }
 .fill {
     min-height: 100vh;
-    height: 150vh;
 }
 .card{
-  margin-top: 20vh;
+  margin-top: 10vh;
 }
 .login-btn{
   width: 15em;
