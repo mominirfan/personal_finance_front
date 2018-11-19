@@ -9,7 +9,7 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00b09b', end
 }
 .fill {
     min-height: 100vh;
-    height: 100vh;
+    height: 150vh;
 }
 .card{
   margin-top: 20vh;
