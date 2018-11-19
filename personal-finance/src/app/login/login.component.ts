@@ -29,8 +29,8 @@ export class LoginComponent implements OnInit {
         this.userName = userName.userName;
         this.loginRepo.getInfo(this.userName).subscribe((info) => {
           localStorage.setItem('balance', JSON.stringify(info.bal));
+          this.router.navigate(['dashboard']);
         });
-        this.router.navigate(['dashboard']);
       } else {
       }
     });
