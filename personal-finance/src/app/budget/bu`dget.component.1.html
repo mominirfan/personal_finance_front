@@ -99,33 +99,78 @@
                     <div class = "lead">
                       Monthly Income: {{monthly_inc}}
                     </div>
-                    <br/>
-                    <br/>
-
-                    <form name="myForm">
-                      <label for="type" class="lead"> Budget Type </label>
-                      <br/>
-                      <select id="type" (change)="newBudget.budgetType = $event.target.value">
-                        <option *ngFor="let label of budget_labels">
-                              {{label}}
-                        </option>
-                      </select>
-                    </form>
-
-                    <br/>
-                    <br/>
                     <div class="form-group">
-                      <label for="Amount" class = "lead">
-                        Amount
+                      <label for="Food">
+                        Food
                       </label>
                       <input type="text"
-                            id="amount"
+                            id="Food"
                             class="form-control"
-                            [ngModel]="newBudget.amt"
-                            (ngModelChange)="newBudget.amt = $event" />
-                  </div>
-                  <br />
-                  <br />
+                            [ngModel]="newBudget.food"
+                            (ngModelChange)="newBudget.food = $event" />
+                    </div>
+                    <div class="form-group">
+                      <label for="Savings">
+                        Savings
+                      </label>
+                      <input type="text"
+                            id="Savings"
+                            class="form-control"
+                            [ngModel]="newBudget.savings"
+                            (ngModelChange)="newBudget.savings = $event" />
+                    </div>
+                    <div class="form-group">
+                      <label for="misc">
+                        Misc.
+                      </label>
+                      <input type="text"
+                            id="misc"
+                            class="form-control"
+                            [ngModel]="newBudget.misc"
+                            (ngModelChange)="newBudget.misc = $event" />
+                    </div>
+                    <div class="form-group">
+                      <label for="house">
+                        House
+                      </label>
+                      <input type="text"
+                            id="house"
+                            class="form-control"
+                            [ngModel]="newBudget.house"
+                            (ngModelChange)="newBudget.house = $event" />
+                    </div>
+                    <div class="form-group">
+                      <label for="car">
+                        Car
+                      </label>
+                      <input type="text"
+                            id="car"
+                            class="form-control"
+                            [ngModel]="newBudget.car"
+                            (ngModelChange)="newBudget.car = $event" />
+                    </div>
+                    <div class="form-group">
+                      <label for="fun">
+                        Fun
+                      </label>
+                      <input type="text"
+                            id="fun"
+                            class="form-control"
+                            [ngModel]="newBudget.fun"
+                            (ngModelChange)="newBudget.fun = $event" />
+                    </div>
+                    <div class="form-group">
+                      <label for="util">
+                        Util
+                      </label>
+                      <input type="text"
+                            id="util"
+                            class="form-control"
+                            [ngModel]="newBudget.util"
+                            (ngModelChange)="newBudget.util = $event" />
+                    </div>
+                    <br />
+                    <br />
                   </div>
                   <br />
                   <div class="modal-footer">

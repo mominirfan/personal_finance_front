@@ -1,3 +1,4 @@
+import { BudgetItem } from './../domain/models/budget-item';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Budget } from './../domain/models/budget';
 import { BudgetEditRepository } from './../domain/repositories/budget-edit-repository.service';
@@ -14,7 +15,7 @@ import { Expense } from '../domain/models/expense';
 })
 export class BudgetComponent implements OnInit {
 
-  budget_labels = ['Savings', 'Misc.', 'House', 'Car', 'Fun', 'Util.', 'Food'];
+  budget_labels = [];
   monthly_inc: number; // make this thier monthly income
   budget_vals = [1000, 500, 500, 500, 500, 500, 500];
   spend_vals = [500, 400, 400, 300, 400, 300, 500];
@@ -24,7 +25,7 @@ export class BudgetComponent implements OnInit {
 
   // Editor Members
   budg: Budget = {};
-  newBudget: Budget = {};
+  newBudget: BudgetItem = {};
 
   expenses: Expense[];
   depositAmt: number;
@@ -54,12 +55,27 @@ export class BudgetComponent implements OnInit {
   }
 
   save() {
+    this.budgetRepo.updateBudget(this.newBudget);
+    this.budg = this.newBudget;
+
+
+    this.newBudget = {};
+    this.newBudget.userName = this.currentUser.userName;
+    this.updateChart();
+  }
+
+  save2() {
     let newVal = [];
     let i;
     let date = new Date();
     this.spend_vals = [];
+    let amt;
+    let category;
+
     for (i = 0 ; i < this.budget_labels.length ; i++) {
-      let amt = this.newBudget['food'];
+
+      category = this.budget_labels[i];
+      amt = this.newBudget[category];
       console.log(amt);
       this.spend_vals.push(amt);
       newVal.push(
@@ -103,11 +119,13 @@ export class BudgetComponent implements OnInit {
       },
       data: [
       {
-        type: 'stackedBar',
+        color: "#000",
+        type: 'stackedBar100',
         dataPoints: spend_points
       },
         {
-        type: 'stackedBar',
+        color: "green",
+        type: 'stackedBar100',
          dataPoints: remain_points
       }
 
@@ -131,6 +149,7 @@ export class BudgetComponent implements OnInit {
     this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
       this.budget = budget;
 
+    this.newBudget.userName = this.currentUser.userName;
     this.monthly_inc = 5000;
     this.initBudgets();
     this.updateChart();
