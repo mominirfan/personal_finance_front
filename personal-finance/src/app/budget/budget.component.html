@@ -1,7 +1,7 @@
 <html>
   <app-nav-bar></app-nav-bar>
   <div class="container">
-    <h1>Mike Hunt's Budget</h1>
+    <h1>{{currentUser.userName}}'s Budget</h1>
     <div class="float-right">
 
       <div class="container">
@@ -140,9 +140,7 @@
 
 
           </div>
-          <pre>{{newBudget | json}}</pre>
-          <pre>{{budg | json}}</pre>
-          <pre>{{currentUser.income}}</pre>
+
 
         </div>
 

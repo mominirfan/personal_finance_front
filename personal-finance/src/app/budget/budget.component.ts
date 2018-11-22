@@ -55,42 +55,21 @@ export class BudgetComponent implements OnInit {
   }
 
   save() {
-    this.budgetRepo.updateBudget(this.newBudget);
+    this.budgetRepo.updateBudget(this.newBudget).subscribe(() => {
+      console.log(this.newBudget);
+    });
     this.budg = this.newBudget;
 
 
     this.newBudget = {};
     this.newBudget.userName = this.currentUser.userName;
-    this.updateChart();
-  }
-
-  save2() {
-    let newVal = [];
-    let i;
-    let date = new Date();
-    this.spend_vals = [];
-    let amt;
-    let category;
-
-    for (i = 0 ; i < this.budget_labels.length ; i++) {
-
-      category = this.budget_labels[i];
-      amt = this.newBudget[category];
-      console.log(amt);
-      this.spend_vals.push(amt);
-      newVal.push(
-        {
-          userName: this.currentUser.userName,
-          budgetType: this.budget_labels[i],
-          active_date: date,
-          amt: this.newBudget[this.budget_labels[i]]
-        }
-      );
-    }
-
-    this.budg = this.newBudget;
-    this.newBudget = {};
-    this.updateChart();
+    this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
+      this.budget = budget;
+      this.newBudget = {};
+      this.newBudget.userName = this.currentUser.userName;
+      this.initBudgets();
+      this.updateChart();
+  });
   }
 
   updateChart() {
@@ -109,7 +88,7 @@ export class BudgetComponent implements OnInit {
     let chart = new CanvasJS.Chart('chartContainer',
     {
       title: {
-      text: 'Budget',
+      text: ' % Budget For This Month',
       },
       axisX: {
         gridThickness: 0
@@ -148,14 +127,13 @@ export class BudgetComponent implements OnInit {
 
     this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
       this.budget = budget;
-
-    this.newBudget.userName = this.currentUser.userName;
-    this.monthly_inc = 5000;
-    this.initBudgets();
-    this.updateChart();
-    this.getExpenses();
-
+      this.newBudget.userName = this.currentUser.userName;
+      this.monthly_inc = 5000;
+      this.initBudgets();
+      this.updateChart();
+      this.getExpenses();
   });
+
 }
   deposit() {
     this.budgetRepo.addDeposit(this.depositAmt, this.currentUser.userName).subscribe(() => {
