@@ -58,7 +58,7 @@ export class BudgetComponent implements OnInit {
     this.budgetRepo.updateBudget(this.newBudget).subscribe(() => {
       console.log(this.newBudget);
     });
-    this.budg = this.newBudget;
+    // this.budg = this.newBudget;
 
 
     this.newBudget = {};
