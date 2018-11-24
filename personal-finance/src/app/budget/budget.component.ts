@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import * as CanvasJS from '../chart/canvasjs.min';
 import { ExpensesService } from '../domain/repositories/expenses.services';
 import { Expense } from '../domain/models/expense';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -34,6 +35,7 @@ export class BudgetComponent implements OnInit {
     private budgetRepo: BudgetEditRepository,
     private modalService: NgbModal,
     private expenseService: ExpensesService,
+    private router: Router,
   ) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.balance = JSON.parse(localStorage.getItem('balance'));
@@ -124,6 +126,11 @@ export class BudgetComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (!this.currentUser) {
+      this.router.navigate(['login']);
+      return;
+    }
 
     this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
       this.budget = budget;

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Loan } from '../domain/models/loan';
 import { LoanRepository } from '../domain/repositories/loan-repository.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-loans',
@@ -22,16 +23,22 @@ export class LoansComponent implements OnInit {
 
   constructor(
     private loanRepo: LoanRepository,
-    private modalService: NgbModal
+    private modalService: NgbModal,
+    private router: Router,
   ) {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.userName = this.currentUser.userName;
-    this.newLoan.userName = this.userName;
     this.newLoan.paid = 0;
     this.payLoan = 0;
   }
 
   ngOnInit() {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (!this.currentUser) {
+      this.router.navigate(['login']);
+      return;
+    }
+    this.userName = this.currentUser.userName;
+    this.newLoan.userName = this.userName;
+
     this.loanRepo.getAllLoans(this.userName).subscribe((loans) => {
       this.loans = loans;
       console.log(this.loans);
@@ -62,7 +69,7 @@ export class LoansComponent implements OnInit {
     loan.paid = 1;
 
     // the loan balance won't be changed since we paid the minimum amount
-    // loan.loanBalance = loan.loanBalance - loan.loanPayment;
+    loan.loanBalance = loan.loanBalance - loan.loanPayment;
 
     loan.loanPaidAmt = loan.loanPaidAmt + loan.loanPayment;
     this.loanRepo.updateLoan(loan, this.userName).subscribe(() => {

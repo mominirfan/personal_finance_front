@@ -38,7 +38,10 @@ export class LoanRepository {
   }
 
   updateLoan(loan: Loan, userName: String) {
-    return this.httpClient.put<any>(`${this.updateLoanEndpoint}`, { userName: userName, loanName: loan.loanName, paid: loan.paid });
+    return this.httpClient.put<any>(`${this.updateLoanEndpoint}`, { userName: userName, loanName: loan.loanName,
+      loanAmount: loan.loanAmount, interest: loan.interest,
+      paymentDay: loan.paymentDay, loanPayment: loan.loanPayment, loanDescription: loan.loanDescription,
+      loanPaidAmt: loan.loanPaidAmt, loanBalance: loan.loanBalance });
   }
 
   subtractFromBal(payment: number, userName: String) {
