@@ -27,8 +27,8 @@ export class LoanRepository {
 
   calculateLoanStats(loan: Loan) {
     // Multiply loan amount by interest and divide by 12 to get min loan payment
-    loan.loanPayment = loan.loanBalance * loan.interest / 12;
-    loan.loanPayment = Math.round(100 * loan.loanPayment) / 100;
+    loan.loanPayment = +loan.loanBalance * +loan.interest / 12;
+    loan.loanPayment = Math.round(100 * +loan.loanPayment) / 100;
     return loan;
   }
   addLoan(loan: Loan, userName: String) {
@@ -46,7 +46,8 @@ export class LoanRepository {
   }
 
   updatePaidLoan(loan: Loan, userName: String) {
-    return this.httpClient.put<any>(`${this.updateLoanEndpoint}`, { userName: userName, loanName: loan.loanName, paid: loan.paid});
+    return this.httpClient.put<any>(`${this.updateLoanEndpoint}`, { userName: userName, loanName: loan.loanName,
+       loanDescription: loan.loanDescription, paid: loan.paid});
   }
 
   subtractFromBal(payment: number, userName: String) {

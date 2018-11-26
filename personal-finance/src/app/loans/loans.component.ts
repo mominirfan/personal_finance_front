@@ -57,47 +57,51 @@ export class LoansComponent implements OnInit {
 
   }
 
-  // makePayment(loan: Loan) {
-  //   loan.paid = 1;
-  //   this.loanRepo.updateLoan(loan, this.userName).subscribe(() => {
-  //   });
-  //   this.loanRepo.subtractFromBal(loan, this.userName).subscribe(() => {
-  //   });
-  // }
-
   minPayment(loan: Loan) {
+    console.log("minpayment");
+    // console.log("first");
+    console.log(loan);
     loan.paid = 1;
 
     // the loan balance won't be changed since we paid the minimum amount
-    loan.loanBalance = loan.loanBalance - loan.loanPayment;
+    loan.loanBalance = +loan.loanBalance - +loan.loanPayment;
 
-    loan.loanPaidAmt = loan.loanPaidAmt + loan.loanPayment;
+    loan.loanPaidAmt = +loan.loanPaidAmt + +loan.loanPayment;
+    console.log(loan.loanPaidAmt);
+    console.log(loan.loanPayment);
     this.loanRepo.updateLoan(loan, this.userName).subscribe(() => {
+      this.loanRepo.updatePaidLoan(loan, this.userName).subscribe(() => {
+        this.loanRepo.subtractFromBal(loan.loanPayment, this.userName).subscribe(() => {
+        });
+      });
+
     });
 
-    this.loanRepo.updatePaidLoan(loan, this.userName).subscribe(() => {
 
-    });
-    this.loanRepo.subtractFromBal(loan.loanPayment, this.userName).subscribe(() => {
-    });
+
   }
 
   payCustom(loan: Loan) {
+    // console.log("first");
+    console.log("fuckkkkk payCustom");
+    console.log(loan);
     loan.paid = 1;
-    loan.loanBalance = loan.loanBalance - this.payLoan;
-    loan.loanPaidAmt = loan.loanPaidAmt + this.payLoan;
+    loan.loanBalance = +loan.loanBalance - +this.payLoan;
+    loan.loanPaidAmt = +loan.loanPaidAmt + +this.payLoan;
 
     loan = this.loanRepo.calculateLoanStats(loan);
-
+    // console.log("second");
+    // console.log(loan);
 
     this.loanRepo.updateLoan(loan, this.userName).subscribe(() => {
+      this.loanRepo.updatePaidLoan(loan, this.userName).subscribe(() => {
+        this.loanRepo.subtractFromBal(this.payLoan, this.userName).subscribe(() => {
+        });
+      });
+
     });
 
-    this.loanRepo.updatePaidLoan(loan, this.userName).subscribe(() => {
 
-    });
-    this.loanRepo.subtractFromBal(this.payLoan, this.userName).subscribe(() => {
-    });
 
 
   }

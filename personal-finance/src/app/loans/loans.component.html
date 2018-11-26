@@ -22,8 +22,8 @@
             </div>
         </div>
         <hr>
-    <li *ngFor="let loan of loans; let i = index" class="collapsible mt-1" data-toggle="collapse" [attr.data-target]="'#' + 'Id' + i ">
-      <div class="row">
+    <li *ngFor="let loan of loans; let i = index" class="mt-1">
+      <div class="row collapsible" data-toggle="collapse" [attr.data-target]="'#' + 'Id' + i ">
         <div class="col-md-4 text-center">
             {{loan.loanName}}
         </div>
@@ -41,7 +41,7 @@
 
       <!-- id="collapseExample" -->
       <div class="collapse"  [attr.id]= "'Id'+i">
-        <div class="card card-body mt-4">
+        <div class="card card-body mt-4 mb-4 mr-4">
           <div class="row">
             <div class="col-md-4">
                 <h4>Loan Description</h4>
@@ -53,7 +53,7 @@
             </div>
             <div class="col-md-4">
               <h4>Loan Payment</h4>
-                <p class="ml-2">{{loan.loanPayment}}</p>
+                <p class="ml-2">{{loan.loanPayment | currency}}</p>
                 <h4>Amount Paid Into Loan</h4>
                 <p class="ml-2">{{loan.loanPaidAmt | currency}}</p>
                 <h4>Remaining Loan Balance</h4>
