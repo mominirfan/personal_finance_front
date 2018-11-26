@@ -11,6 +11,7 @@ export class LoanRepository {
   protected endpoint = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/api/get-loans/';
   protected dashboardEndpoint = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/api/order-loans/';
   protected addLoanEndpoint = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/api/add-loan';
+  protected editLoanEndpoint = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/api/edit-loan';
   protected updateLoanEndpoint = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/api/update-loan';
   protected decrementEndpoint = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/api/decrement-bal';
 
@@ -38,10 +39,14 @@ export class LoanRepository {
   }
 
   updateLoan(loan: Loan, userName: String) {
-    return this.httpClient.put<any>(`${this.updateLoanEndpoint}`, { userName: userName, loanName: loan.loanName,
+    return this.httpClient.put<any>(`${this.editLoanEndpoint}`, { userName: userName, loanName: loan.loanName,
       loanAmount: loan.loanAmount, interest: loan.interest,
       paymentDay: loan.paymentDay, loanPayment: loan.loanPayment, loanDescription: loan.loanDescription,
       loanPaidAmt: loan.loanPaidAmt, loanBalance: loan.loanBalance });
+  }
+
+  updatePaidLoan(loan: Loan, userName: String) {
+    return this.httpClient.put<any>(`${this.updateLoanEndpoint}`, { userName: userName, loanName: loan.loanName, paid: loan.paid});
   }
 
   subtractFromBal(payment: number, userName: String) {

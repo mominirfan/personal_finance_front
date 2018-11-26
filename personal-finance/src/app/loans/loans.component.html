@@ -17,8 +17,8 @@
             <strong>paid</strong>
             </div>
         </div>
-    <li *ngFor="let loan of loans; let i = index" class="collapsible mt-1">
-      <div class="row" data-toggle="collapse" [attr.data-target]="'#' + 'Id' + i ">
+    <li *ngFor="let loan of loans; let i = index" class="collapsible mt-1" data-toggle="collapse" [attr.data-target]="'#' + 'Id' + i ">
+      <div class="row">
         <div class="col-md-4 text-center">
             {{loan.loanName}}
         </div>
@@ -43,10 +43,12 @@
                 <p class="ml-2">{{loan.loanDescription}}</p>
                 <h4>Loan Amount</h4>
                 <p class="ml-2">{{loan.loanAmount | currency}}</p>
-            </div>
-            <div class="col-md-4">
                 <h4>Interest</h4>
                 <p class="ml-2">{{loan.interest}}%</p>
+            </div>
+            <div class="col-md-4">
+              <h4>Loan Payment</h4>
+                <p class="ml-2">{{loan.loanPayment}}</p>
                 <h4>Amount Paid Into Loan</h4>
                 <p class="ml-2">{{loan.loanPaidAmt | currency}}</p>
                 <h4>Remaining Loan Balance</h4>
@@ -104,10 +106,6 @@
               <label for="loanAmount">Total Amount:</label>
               <input type="text" class="form-control" name="loanAmount" [(ngModel)]="newLoan.loanAmount">
             </div>
-            <div class="form-group">
-                <label for="loanAmount">Amount Paid (if any)</label>
-                <input type="text" class="form-control" name="loanAmount" [(ngModel)]="newLoan.loanPaidAmt">
-              </div>
             <div class="form-group">
               <label for="interest">Interest</label>
               <input type="text" class="form-control" name="interest" [(ngModel)]="newLoan.interest">

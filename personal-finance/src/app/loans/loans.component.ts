@@ -74,6 +74,10 @@ export class LoansComponent implements OnInit {
     loan.loanPaidAmt = loan.loanPaidAmt + loan.loanPayment;
     this.loanRepo.updateLoan(loan, this.userName).subscribe(() => {
     });
+
+    this.loanRepo.updatePaidLoan(loan, this.userName).subscribe(() => {
+
+    });
     this.loanRepo.subtractFromBal(loan.loanPayment, this.userName).subscribe(() => {
     });
   }
@@ -87,6 +91,10 @@ export class LoansComponent implements OnInit {
 
 
     this.loanRepo.updateLoan(loan, this.userName).subscribe(() => {
+    });
+
+    this.loanRepo.updatePaidLoan(loan, this.userName).subscribe(() => {
+
     });
     this.loanRepo.subtractFromBal(this.payLoan, this.userName).subscribe(() => {
     });
