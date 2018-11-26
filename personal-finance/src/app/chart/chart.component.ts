@@ -46,9 +46,6 @@ export class ChartComponent implements OnInit {
        theme: 'light2',
        animationEnabled: true,
        exportEnabled: true,
-       title: {
-         text: 'Monthly Expense'
-       },
        data: [{
          type: 'pie',
          showInLegend: true,

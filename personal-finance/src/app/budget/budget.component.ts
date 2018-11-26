@@ -92,9 +92,6 @@ export class BudgetComponent implements OnInit {
 
     let chart = new CanvasJS.Chart('chartContainer',
     {
-      title: {
-      text: 'Budget',
-      },
       axisX: {
         gridThickness: 0
       },
