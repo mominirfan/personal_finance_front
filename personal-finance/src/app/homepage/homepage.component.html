@@ -10,49 +10,64 @@
         <div class="card shadow-sm mb-4" (click)="toLoans()">
           <div class="card-body">
             <h2>Current Balance:</h2>
-            <h3>{{this.balance}}</h3>
+            <div *ngIf="balance"><h3>{{this.balance}}</h3></div>
+            <div *ngIf="!balance">
+              <div class="alert alert-success" role="alert">
+                Please update your current balance.
+              </div>
+            </div>
             <hr>
             <h2>
               Upcoming Loan Payments:
             </h2>
-            <table class="table table-bordered m-1">
-              <thead>
-                <th>
-                  Loans
-                </th>
-                <th>
-                  Cost
-                </th>
-                <th>
-                  Date
-                </th>
-              </thead>
-              <tbody>
-                <tr *ngFor="let loan of loans">
-                  <td>
-                    {{loan.loanName}}
-                  </td>
-                  <td>
-                    {{loan.loanAmount}}
-                  </td>
-                  <td>
-                    {{loan.paymentDay}}
-                  </td>
-              </tbody>
-            </table>
+            <div *ngIf="loansBool">
+              <table class="table table-bordered m-1">
+                <thead>
+                  <th>
+                    Loans
+                  </th>
+                  <th>
+                    Cost
+                  </th>
+                  <th>
+                    Date
+                  </th>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let loan of loans">
+                    <td>
+                      {{loan.loanName}}
+                    </td>
+                    <td>
+                      {{loan.loanAmount}}
+                    </td>
+                    <td>
+                      {{loan.paymentDay}}
+                    </td>
+                </tbody>
+              </table>
+            </div>
+            <div *ngIf="!loansBool">
+              <div class="alert alert-success" role="alert">
+                No current loans added to your account.
+              </div>
+            </div>
           </div>
         </div>
       </div>
       <div class="col-md-6" >
         <div class="container">
-<<<<<<< HEAD
           <div class="card shadow-sm p-3">
             <h2>Monthly Expenses</h2>
-            <app-chart></app-chart>
+            <div *ngIf="balance">
+              <app-chart></app-chart>
+            </div>
+            <div *ngIf="!balance">
+              <div class="alert alert-success" role="alert">
+                No current expenses added to your account.
+              </div>
+            </div>
           </div>
-=======
-            <app-chart></app-chart>
->>>>>>> 87637113b73e9cbe89d5fa815e39321c0ddc5974
         </div>
       </div>
     </div>

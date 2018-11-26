@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 
 export class HomepageComponent implements OnInit {
   loans: Loan[];
+  loansBool: boolean;
   name: string;
   suggestionsOne: Suggestion[];
   suggestionsTwo: Suggestion[];
@@ -31,6 +32,7 @@ export class HomepageComponent implements OnInit {
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.balance = JSON.parse(localStorage.getItem('balance'));
+
     if (!this.currentUser) {
       this.router.navigate(['login']);
       return;
@@ -48,7 +50,10 @@ export class HomepageComponent implements OnInit {
       this.suggestionsOne = suggestions;
       console.log(this.suggestionsOne);
     });
-
+    this.loansBool = true;
+    if(this.loans.length  < 1){
+      this.loansBool = false;
+    }
     this.homepageRepo.getSuggestions('juice').subscribe((suggestions) => {
       this.suggestionsTwo = suggestions;
       console.log(this.suggestionsTwo);
