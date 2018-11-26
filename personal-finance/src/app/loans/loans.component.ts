@@ -27,7 +27,6 @@ export class LoansComponent implements OnInit {
     private router: Router,
   ) {
     this.newLoan.paid = 0;
-    this.payLoan = 0;
   }
 
   ngOnInit() {
@@ -54,15 +53,12 @@ export class LoansComponent implements OnInit {
       this.newLoan = new Loan();
     this.newLoan.userName = this.currentUser;
     });
-
   }
 
   minPayment(loan: Loan) {
     loan.paid = 1;
 
-    // the loan balance won't be changed since we paid the minimum amount
     loan.loanBalance = +loan.loanBalance - +loan.loanPayment;
-
     loan.loanPaidAmt = +loan.loanPaidAmt + +loan.loanPayment;
     this.loanRepo.updateLoan(loan, this.userName).subscribe(() => {
       this.loanRepo.updatePaidLoan(loan, this.userName).subscribe(() => {
@@ -70,11 +66,7 @@ export class LoansComponent implements OnInit {
           this.payLoan = 0;
         });
       });
-
     });
-
-
-
   }
 
   payCustom(loan: Loan) {
