@@ -1,3 +1,4 @@
+import { ExpenseSum } from './../domain/models/expense_sum';
 import { BudgetItem } from './../domain/models/budget-item';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Budget } from './../domain/models/budget';
@@ -16,9 +17,10 @@ import { Router } from '@angular/router';
 })
 export class BudgetComponent implements OnInit {
 
+  budget_drop = ['','Food','Savings','Util.','Car','House','Ent.'];
   budget_labels = [];
   monthly_inc: number; // make this thier monthly income
-  budget_vals = [1000, 500, 500, 500, 500, 500, 500];
+  budget_vals = [];
   spend_vals = [500, 400, 400, 300, 400, 300, 500];
   budget = [];
   currentUser: any = {};
@@ -30,6 +32,7 @@ export class BudgetComponent implements OnInit {
   newExpense: Expense = {};
 
   expenses: Expense[];
+  summed_expenses: ExpenseSum[];
   depositAmt: number;
 
   constructor(
@@ -58,21 +61,40 @@ export class BudgetComponent implements OnInit {
   }
 
   save() {
-    this.budgetRepo.updateBudget(this.newBudget).subscribe(() => {
-      console.log(this.newBudget);
+
+    if (this.budget_labels.includes(this.newBudget.budgetType)) {
+
+      this.budgetRepo.editBudget(this.newBudget).subscribe(() => {
+        console.log(this.newBudget);
+      });
+      // this.budg = this.newBudget;
+
+
+      this.newBudget.amt = undefined;
+      this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
+      this.budget = budget;
+      this.initBudgets();
+      this.updateChart();
     });
-    // this.budg = this.newBudget;
+
+    } else {
+      this.budgetRepo.addBudget(this.newBudget).subscribe(() => {
+        console.log(this.newBudget);
+      });
+      // this.budg = this.newBudget;
 
 
-    this.newBudget = {};
-    this.newBudget.userName = this.currentUser.userName;
-    this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
-    this.budget = budget;
-    this.newBudget = {};
-    this.newBudget.userName = this.currentUser.userName;
-    this.initBudgets();
-    this.updateChart();
-  });
+      this.newBudget.amt = undefined;
+      this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
+      this.budget = budget;
+      this.initBudgets();
+      this.updateChart();
+
+    });
+
+    }
+
+
   }
 
   saveExpense() {
@@ -82,13 +104,9 @@ export class BudgetComponent implements OnInit {
     });
 
 
-    this.newExpense = {};
-    this.newExpense.userName = this.currentUser.userName;
+    this.newExpense.amt = undefined;
     this.getExpenses();
     this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
-    this.budget = budget;
-    this.newBudget = {};
-    this.newBudget.userName = this.currentUser.userName;
     this.initBudgets();
     this.updateChart();
   });
@@ -145,6 +163,15 @@ export class BudgetComponent implements OnInit {
     });
   }
 
+  getExpenseSum() {
+    this.expenseService.getExpenseSum(this.currentUser.userName).subscribe((summed_expenses) => {
+      this.summed_expenses = summed_expenses;
+      this.initBudgets();
+      this.updateChart();
+
+    });
+  }
+
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     if (!this.currentUser) {
@@ -158,8 +185,8 @@ export class BudgetComponent implements OnInit {
       this.newExpense.userName = this.currentUser.userName;
       this.monthly_inc = 5000;
       this.initBudgets();
-      this.updateChart();
       this.getExpenses();
+      this.updateChart();
   });
 
 }
