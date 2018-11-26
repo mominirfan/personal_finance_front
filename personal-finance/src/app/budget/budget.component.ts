@@ -1,3 +1,4 @@
+import { BudgetItem } from './../domain/models/budget-item';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Budget } from './../domain/models/budget';
 import { BudgetEditRepository } from './../domain/repositories/budget-edit-repository.service';
@@ -5,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 import * as CanvasJS from '../chart/canvasjs.min';
 import { ExpensesService } from '../domain/repositories/expenses.services';
 import { Expense } from '../domain/models/expense';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,7 +16,7 @@ import { Expense } from '../domain/models/expense';
 })
 export class BudgetComponent implements OnInit {
 
-  budget_labels = ['Savings', 'Misc.', 'House', 'Car', 'Fun', 'Util.', 'Food'];
+  budget_labels = [];
   monthly_inc: number; // make this thier monthly income
   budget_vals = [1000, 500, 500, 500, 500, 500, 500];
   spend_vals = [500, 400, 400, 300, 400, 300, 500];
@@ -24,7 +26,8 @@ export class BudgetComponent implements OnInit {
 
   // Editor Members
   budg: Budget = {};
-  newBudget: Budget = {};
+  newBudget: BudgetItem = {};
+  newExpense: Expense = {};
 
   expenses: Expense[];
   depositAmt: number;
@@ -33,6 +36,7 @@ export class BudgetComponent implements OnInit {
     private budgetRepo: BudgetEditRepository,
     private modalService: NgbModal,
     private expenseService: ExpensesService,
+    private router: Router,
   ) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.balance = JSON.parse(localStorage.getItem('balance'));
@@ -54,27 +58,40 @@ export class BudgetComponent implements OnInit {
   }
 
   save() {
-    let newVal = [];
-    let i;
-    let date = new Date();
-    this.spend_vals = [];
-    for (i = 0 ; i < this.budget_labels.length ; i++) {
-      let amt = this.newBudget['food'];
-      console.log(amt);
-      this.spend_vals.push(amt);
-      newVal.push(
-        {
-          userName: this.currentUser.userName,
-          budgetType: this.budget_labels[i],
-          active_date: date,
-          amt: this.newBudget[this.budget_labels[i]]
-        }
-      );
-    }
+    this.budgetRepo.updateBudget(this.newBudget).subscribe(() => {
+      console.log(this.newBudget);
+    });
+    // this.budg = this.newBudget;
 
-    this.budg = this.newBudget;
+
     this.newBudget = {};
+    this.newBudget.userName = this.currentUser.userName;
+    this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
+    this.budget = budget;
+    this.newBudget = {};
+    this.newBudget.userName = this.currentUser.userName;
+    this.initBudgets();
     this.updateChart();
+  });
+  }
+
+  saveExpense() {
+    this.expenseService.addExpense(this.newExpense).subscribe(() => {
+      this.getExpenses();
+      console.log(this.expenses);
+    });
+
+
+    this.newExpense = {};
+    this.newExpense.userName = this.currentUser.userName;
+    this.getExpenses();
+    this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
+    this.budget = budget;
+    this.newBudget = {};
+    this.newBudget.userName = this.currentUser.userName;
+    this.initBudgets();
+    this.updateChart();
+  });
   }
 
   updateChart() {
@@ -92,6 +109,9 @@ export class BudgetComponent implements OnInit {
 
     let chart = new CanvasJS.Chart('chartContainer',
     {
+      title: {
+      text: ' % Budget For This Month',
+      },
       axisX: {
         gridThickness: 0
       },
@@ -100,11 +120,13 @@ export class BudgetComponent implements OnInit {
       },
       data: [
       {
-        type: 'stackedBar',
+        color: "#000",
+        type: 'stackedBar100',
         dataPoints: spend_points
       },
         {
-        type: 'stackedBar',
+        color: "green",
+        type: 'stackedBar100',
          dataPoints: remain_points
       }
 
@@ -124,16 +146,22 @@ export class BudgetComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (!this.currentUser) {
+      this.router.navigate(['login']);
+      return;
+    }
 
     this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
       this.budget = budget;
-
-    this.monthly_inc = 5000;
-    this.initBudgets();
-    this.updateChart();
-    this.getExpenses();
-
+      this.newBudget.userName = this.currentUser.userName;
+      this.newExpense.userName = this.currentUser.userName;
+      this.monthly_inc = 5000;
+      this.initBudgets();
+      this.updateChart();
+      this.getExpenses();
   });
+
 }
   deposit() {
     this.budgetRepo.addDeposit(this.depositAmt, this.currentUser.userName).subscribe(() => {

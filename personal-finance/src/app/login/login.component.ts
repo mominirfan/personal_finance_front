@@ -11,6 +11,7 @@ export class LoginComponent implements OnInit {
 
   userName: String;
   pWord: String;
+  currentUser: any = {};
 
   constructor(
     // private formBuilder: FormBuilder,
@@ -21,6 +22,10 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
 
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (this.currentUser) {
+      this.router.navigate(['dashboard']);
+    }
   }
 
   login() {

@@ -33,8 +33,8 @@ export class BudgetEditRepository {
     .pipe(catchError(this.handleException));
   }
 
-  public updateBudget(budget: [{}]): Observable<[{}]> {
-    return this.httpClient.put<[{}]>(`${this.endPoint2}`, budget, this.httpOptions)
+  public updateBudget(budget: {}): Observable<{}> {
+    return this.httpClient.put<{}>(`${this.endPoint2}`, budget, this.httpOptions)
     .pipe(catchError(this.handleException));
   }
 

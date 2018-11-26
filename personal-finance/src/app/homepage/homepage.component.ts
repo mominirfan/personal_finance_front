@@ -19,19 +19,23 @@ export class HomepageComponent implements OnInit {
   suggestionsOne: Suggestion[];
   suggestionsTwo: Suggestion[];
   balance: string;
-  currentUser: any = {};
+  currentUser: any = { };
 
   constructor(
     private homepageRepo: HomepageRepository,
     private loansRepo: LoanRepository,
     private router: Router,
   ) {
-    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.balance = JSON.parse(localStorage.getItem('balance'));
-    this.name = this.currentUser.userName;
   }
 
   ngOnInit() {
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.balance = JSON.parse(localStorage.getItem('balance'));
+    if (!this.currentUser) {
+      this.router.navigate(['login']);
+      return;
+    }
+    this.name = this.currentUser.userName;
 
     // this.homepageRepo.getBills(this.currentUser.userName).subscribe((bills) => {
     //   this.bills = bills;

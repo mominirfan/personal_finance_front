@@ -1,50 +1,92 @@
 <app-nav-bar></app-nav-bar>
-<div class="container" *ngIf="loans">
+<div class="container mb-4" *ngIf="loans">
   <h1 class="mt-2">
     {{userName}}
   </h1>
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Loan</th>
-        <th scope="col">Amount</th>
-        <th scope="col">Interest</th>
-        <th scope="col">Due Date</th>
-        <th scope="col">Paid</th>
-        <!-- <th scope="col">Make Payment</th> -->
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let loan of loans">
-        <td>
-          {{loan.loanName}}
-        </td>
-        <td>
-          {{loan.loanAmount}}
-        </td>
-        <td>
-          {{loan.interest}}
-        </td>
-        <td>
-          {{loan.paymentDay}}
-        </td>
-        <td *ngIf="loan.paid == 1">
-          <div class="bg-primary text-center text-white" style="border-radius: 10%; width: 25%; height: 50%">
-            &#x2713;
+    <div class="alert alert-secondary" role="alert" *ngIf="loans.length == 0">
+       You don't have any loans. Click "Add a Loan" to get started.
+    </div>
+  <ul *ngIf="loans.length > 0">
+      <h2>Loans</h2>
+      <hr>
+      <!-- data-target="#collapseExample"  -->
+      <div class="row">
+        <div class="col-md-4 text-center" id="loanCat">
+          <strong>Loan</strong>
+        </div>
+        <div class="col-md-4 text-center">
+          <strong>payment date</strong>
           </div>
-        </td>
-        <td *ngIf="loan.paid == 0">
-          <!-- <div class="bg-danger text-center text-white d-inline mr-4" style="border-radius: 10%; width: 100%; height: 100%">
-            x
-          </div> -->
-          <button class="btn btn-primary d-inline" (click)=makePayment(loan)>
-              pay
-            </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <button type="button" class="6 btn-primary text-white" data-toggle="modal" data-target="#addLoan">Add a Loan</button>
+          <div class="col-md-4 text-center">
+            <strong>paid</strong>
+            </div>
+        </div>
+        <hr>
+    <li *ngFor="let loan of loans; let i = index" class="mt-1">
+      <div class="row collapsible" data-toggle="collapse" [attr.data-target]="'#' + 'Id' + i ">
+        <div class="col-md-4 text-center">
+            {{loan.loanName}}
+        </div>
+        <div class="col-md-4  text-center">
+          {{loan.paymentDay}}
+          </div>
+          <div class="col-md-4 text-center">
+              <div *ngIf="loan.paid == 1" class="text-center" style="padding-left: 48.5%;">
+                  <div class="bg-success text-white" style="border-radius: 10%;width:30px">
+                    &#x2713;
+                  </div>
+                </div>
+            </div>
+      </div>
+
+      <!-- id="collapseExample" -->
+      <div class="collapse"  [attr.id]= "'Id'+i">
+        <div class="card card-body mt-4 mb-4 mr-4">
+          <div class="row">
+            <div class="col-md-4">
+                <h4>Loan Description</h4>
+                <p class="ml-2">{{loan.loanDescription}}</p>
+                <h4>Loan Amount</h4>
+                <p class="ml-2">{{loan.loanAmount | currency}}</p>
+                <h4>Interest</h4>
+                <p class="ml-2">{{loan.interest}}%</p>
+            </div>
+            <div class="col-md-4">
+              <h4>Loan Payment</h4>
+                <p class="ml-2">{{loan.loanPayment | currency}}</p>
+                <h4>Amount Paid Into Loan</h4>
+                <p class="ml-2">{{loan.loanPaidAmt | currency}}</p>
+                <h4>Remaining Loan Balance</h4>
+                <p class="ml-2">{{loan.loanBalance | currency}}</p>
+            </div>
+            <div class="col-md-4">
+                <h4>Payment</h4>
+                <div *ngIf="loan.paid==1 "class="d-inline">
+                    <p class="d-inline">Monthly Payment Made &nbsp;</p>
+                    <div class="bg-success text-center text-white d-inline pr-1" style="border-radius: 10%; width: 25%; height: 50%">
+                        &#x2713;
+                      </div>
+                  </div>
+                  <div *ngIf="loan.paid == 0">
+                    <div class="form-group">
+                      <label for="payLoan">Input Amount or Pay Minimum</label>
+                      <input type="text" class="form-control" name="payLoan" [(ngModel)]="payLoan">
+                      <button class="btn btn-success m-2" (click)=payCustom(loan)>Pay</button>
+                      <button class="btn btn-success m-2" (click)=minPayment(loan)>Pay Minimum</button>
+                      <button type="button" class="btn btn-danger float-right m-2" data-dismiss="modal">Close</button>
+                      <div class="clearfix"></div>
+                    </div>
+                  </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </li>
+  </ul>
+
+
+  <button type="button" class="6 btn-success text-white mb-4" data-toggle="modal" data-target="#addLoan">Add a Loan</button>
 
   <div class="container">
     <!-- Modal -->
@@ -61,6 +103,10 @@
               <label for="loanName">Loan Name:</label>
               <input type="text" class="form-control" name="loanName" [(ngModel)]="newLoan.loanName">
             </div>
+            <div class="form-group">
+                <label for="loanName">Loan Description:</label>
+                <input type="text" class="form-control" name="loanName" [(ngModel)]="newLoan.loanDescription">
+              </div>
             <div class="form-group">
               <label for="loanAmount">Total Amount:</label>
               <input type="text" class="form-control" name="loanAmount" [(ngModel)]="newLoan.loanAmount">
@@ -80,7 +126,7 @@
 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary" data-dismiss="modal" style="float: left" (click)="addLoan()">Add</button>
+            <button type="button" class="btn btn-success" data-dismiss="modal" style="float: left" (click)="addLoan()">Add</button>
             <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
             <div class="clearfix"></div>
           </div>
