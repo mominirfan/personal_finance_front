@@ -3,8 +3,12 @@
   <h1 class="mt-2">
     {{userName}}
   </h1>
-
-  <ul>
+    <div class="alert alert-secondary" role="alert" *ngIf="loans.length == 0">
+       You don't have any loans. Click "Add a Loan" to get started.
+    </div>
+  <ul *ngIf="loans.length > 0">
+      <h2>Loans</h2>
+      <hr>
       <!-- data-target="#collapseExample"  -->
       <div class="row">
         <div class="col-md-4 text-center" id="loanCat">
@@ -17,6 +21,7 @@
             <strong>paid</strong>
             </div>
         </div>
+        <hr>
     <li *ngFor="let loan of loans; let i = index" class="collapsible mt-1" data-toggle="collapse" [attr.data-target]="'#' + 'Id' + i ">
       <div class="row">
         <div class="col-md-4 text-center">
