@@ -27,6 +27,7 @@ export class BudgetComponent implements OnInit {
   // Editor Members
   budg: Budget = {};
   newBudget: BudgetItem = {};
+  newExpense: Expense = {};
 
   expenses: Expense[];
   depositAmt: number;
@@ -66,11 +67,30 @@ export class BudgetComponent implements OnInit {
     this.newBudget = {};
     this.newBudget.userName = this.currentUser.userName;
     this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
-      this.budget = budget;
-      this.newBudget = {};
-      this.newBudget.userName = this.currentUser.userName;
-      this.initBudgets();
-      this.updateChart();
+    this.budget = budget;
+    this.newBudget = {};
+    this.newBudget.userName = this.currentUser.userName;
+    this.initBudgets();
+    this.updateChart();
+  });
+  }
+
+  saveExpense() {
+    this.expenseService.addExpense(this.newExpense).subscribe(() => {
+      this.getExpenses();
+      console.log(this.expenses);
+    });
+
+
+    this.newExpense = {};
+    this.newExpense.userName = this.currentUser.userName;
+    this.getExpenses();
+    this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
+    this.budget = budget;
+    this.newBudget = {};
+    this.newBudget.userName = this.currentUser.userName;
+    this.initBudgets();
+    this.updateChart();
   });
   }
 
@@ -135,6 +155,7 @@ export class BudgetComponent implements OnInit {
     this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
       this.budget = budget;
       this.newBudget.userName = this.currentUser.userName;
+      this.newExpense.userName = this.currentUser.userName;
       this.monthly_inc = 5000;
       this.initBudgets();
       this.updateChart();
