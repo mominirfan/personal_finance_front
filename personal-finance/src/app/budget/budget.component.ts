@@ -21,7 +21,7 @@ export class BudgetComponent implements OnInit {
   budget_labels = [];
   monthly_inc: number; // make this thier monthly income
   budget_vals = [];
-  spend_vals = [500, 400, 400, 300, 400, 300, 500];
+  spend_vals = [];
   budget = [];
   currentUser: any = {};
   balance: number;
@@ -52,13 +52,27 @@ export class BudgetComponent implements OnInit {
     let i;
     let label;
     let bud;
+    let exp;
     for (i = 0 ; i < this.budget.length ; i++) {
       label = this.budget[i]['budgetType'];
       bud = this.budget[i]['amt'];
+      let k;
+      for (k = 0; k < this.summed_expenses.length; k++) {
+        let temp_exp = this.summed_expenses[k];
+        if (temp_exp.exType === label) {
+          exp = this.summed_expenses[k].amt;
+        }
+
+
+      }
+
       this.budget_labels.push(label);
       this.budget_vals.push(bud);
+      this.spend_vals.push(exp);
+
     }
   }
+
 
   save() {
 
@@ -118,17 +132,28 @@ export class BudgetComponent implements OnInit {
     let remain_points = [];
 
     for (i = 0 ; i < this.budget_labels.length ; i++) {
-      spend_points.push({label: this.budget_labels[i], y: this.spend_vals[i]} );
+      spend_points.push({label: this.budget_labels[i], y: +this.spend_vals[i]} );
     }
 
+
+    console.log(spend_points);
+
     for (i = 0 ; i < this.budget_labels.length ; i++) {
-      remain_points.push({label: this.budget_labels[i], y: (this.budget_vals[i] - this.spend_vals[i])} );
+
+      if ((this.budget_vals[i] - this.spend_vals[i]) > 0) {
+        remain_points.push({label: this.budget_labels[i], y: (this.budget_vals[i] - this.spend_vals[i])} );
+      } else {
+        remain_points.push({label: this.budget_labels[i], y: -1 * (this.budget_vals[i] - this.spend_vals[i]), color : 'rgba(217,83,79,0.9)'});
+      }
     }
+
+    console.log(remain_points);
+
 
     let chart = new CanvasJS.Chart('chartContainer',
     {
       title: {
-      text: ' % Budget For This Month',
+      text: ' Budget % Remaining For This Month',
       },
       axisX: {
         gridThickness: 0
@@ -138,12 +163,12 @@ export class BudgetComponent implements OnInit {
       },
       data: [
       {
-        color: "#000",
+        color: 'rgba(217,83,79,0.9)',
         type: 'stackedBar100',
         dataPoints: spend_points
       },
-        {
-        color: "green",
+      {
+        color: 'rgba(92,184,92,0.9)',
         type: 'stackedBar100',
          dataPoints: remain_points
       }
@@ -168,6 +193,7 @@ export class BudgetComponent implements OnInit {
       this.summed_expenses = summed_expenses;
       this.initBudgets();
       this.updateChart();
+      console.log(this.spend_vals);
 
     });
   }
@@ -184,9 +210,8 @@ export class BudgetComponent implements OnInit {
       this.newBudget.userName = this.currentUser.userName;
       this.newExpense.userName = this.currentUser.userName;
       this.monthly_inc = 5000;
-      this.initBudgets();
       this.getExpenses();
-      this.updateChart();
+      this.getExpenseSum();
   });
 
 }
