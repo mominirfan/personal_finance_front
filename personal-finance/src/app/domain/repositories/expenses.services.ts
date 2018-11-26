@@ -9,6 +9,7 @@ export class ExpensesService {
 
   protected getAllExpensesEndpoint = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/api/get-expenses';
   protected addExpenseEndpoint = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/api/add-expense';
+  protected getSummedExpenses = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/api/get-total-spending';
 
   // protected httpOptions = {
   //   headers: new HttpHeaders({
@@ -22,6 +23,11 @@ export class ExpensesService {
 
   public getExpenses(username: String) {
     return this.httpClient.get<[{}]>(`${this.getAllExpensesEndpoint}/${username}`)
+    .pipe(catchError(this.handleException));
+  }
+
+  public getExpenseSum(username: String) {
+    return this.httpClient.get<[{}]>(`${this.getSummedExpenses}/${username}`)
     .pipe(catchError(this.handleException));
   }
 

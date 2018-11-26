@@ -3,9 +3,6 @@
   <div class="container">
     <h1>{{currentUser.userName}}'s Budget</h1>
     <div class="float-right">
-      <pre>
-        {{newExpense | json}}
-      </pre>
       <div class="container">
           <button type="button" class="btn btn-primary text-white" data-toggle="modal" data-target="#ed">Edit Budget</button>
           <button type="button" class="btn btn-primary text-white" data-toggle="modal" data-target="#expenseModal">Add Expense</button>
@@ -27,7 +24,7 @@
                       <label for="type" class="lead"> Budget Type </label>
                       <br/>
                       <select id="type" (change)="newExpense.exType = $event.target.value">
-                        <option *ngFor="let label of budget_labels">
+                        <option *ngFor="let label of budget_drop">
                               {{label}}
                         </option>
                       </select>
@@ -49,7 +46,7 @@
                   <br />
                   </div>
                   <br />
-                  <div class="modal-footer">
+                  <div class="modal-footer form-group">
                     <button type="button" class="btn btn-primary" data-dismiss="modal" style="float: left" (click)= "saveExpense()">Save</button>
                     <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
                     <div class="clearfix"></div>
@@ -102,8 +99,8 @@
                     <form name="myForm">
                       <label for="type" class="lead"> Budget Type </label>
                       <br/>
-                      <select id="type" (change)="newBudget.budgetType = $event.target.value">
-                        <option *ngFor="let label of budget_labels">
+                      <select id="type" (change)= "newBudget.budgetType = $event.target.value">
+                        <option *ngFor="let label of budget_drop">
                               {{label}}
                         </option>
                       </select>
