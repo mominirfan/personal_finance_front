@@ -1,0 +1,55 @@
+<app-nav-bar></app-nav-bar>
+<div class="row justify-content-center">
+  <div class="col-4">
+    <div class="container-fluid container-bg fill">
+      <div class="card p-3 shadow-lg p-2 rounded">
+        <h1>Change Password</h1>
+        <!-- <img class="card-img-top img-fluid" src="../../assets/logo_transparent_login-white.png" alt="Card image cap"> -->
+        <div class="card-body">
+          <form id="passwordReset" #passwordResetForm="ngForm" name="passwordReset" (submit)=submitPR(passwordResetForm) novalidate>
+            <div class="form-group">
+              <label for="curPass"> Current Password: </label>
+              <input type="password" id="curPass" name="curPass" class="form-control"  [(ngModel)] = "curPass" [(ngModel)] = "curPass">
+            </div>
+
+            <div class="form-group">
+              <label for="newPass"> New Password: </label>
+              <input type="newPass" id="newPass" name="newPass" class="form-control"[(ngModel)] = "newPass">
+            </div>
+
+            <div class="form-group">
+              <label for="newPass2"> Confirm Password: </label>
+              <input type="password" id="newPass2" name="newPass2" class="form-control" [(ngModel)] = "newPass2" >
+            </div>
+
+            <button type="submit" class="btn-primary btn">Submit</button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-4">
+    <div class="container-fluid container-bg fill">
+
+      <div class="card p-3 shadow-lg p-2 rounded">
+        <h1>Update Income</h1>
+        <!-- <img class="card-img-top img-fluid" src="../../assets/logo_transparent_login-white.png" alt="Card image cap"> -->
+        <div class="card-body">
+          <form id="updateIncome" #updateIncomeForm="ngForm" name="updateIncome"(submit) = "submitI(updateIncomeForm)">
+
+            <div class="form-group">
+              <label for="curPass2"> Current Password: </label>
+              <input type="password" id="curPass2" name="curPass2" class="form-control" [(ngModel)] = "curPass2">
+            </div>
+            <div class="form-group">
+              <label for="newIncome"> New Income: </label>
+              <input type="text" id="newIncome" name="newIncome" class="form-control" [(ngModel)] = "newIncome">
+            </div>
+
+            <button type="submit" class="btn-primary btn">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

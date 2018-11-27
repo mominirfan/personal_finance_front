@@ -6,6 +6,7 @@ import { HomepageComponent } from './homepage/homepage.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoansComponent } from './loans/loans.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { SettingsComponent } from './settings/settings.component';
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -13,7 +14,8 @@ const appRoutes: Routes = [
   {path: 'register', component: RegistrationComponent},
   { path: '', component: LandingPageComponent},
   { path: 'budget', component: BudgetComponent},
-  { path: 'loans', component: LoansComponent}
+  { path: 'loans', component: LoansComponent},
+  { path: 'settings', component: SettingsComponent}
 ];
 @NgModule({
   imports: [ RouterModule.forRoot(appRoutes) ],

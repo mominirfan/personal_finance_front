@@ -43,10 +43,10 @@ export class HomepageComponent implements OnInit {
     this.homepageRepo.getBills(this.currentUser.userName).subscribe((bills) => {
        this.bills = bills;
        this.billsBool = true;
-       if(this.bills.length  < 1){
+       if (this.bills.length  < 1) {
          this.billsBool = false;
        }
-    }
+   });
     this.loansRepo.getDashboardLoans(this.currentUser.userName).subscribe((loans) => {
       this.loans = loans;
 
@@ -55,7 +55,7 @@ export class HomepageComponent implements OnInit {
       console.log(this.suggestionsOne);
     });
     this.loansBool = true;
-    if(this.loans.length  < 1){
+    if (this.loans.length  < 1) {
       this.loansBool = false;
     }
     this.homepageRepo.getSuggestions('juice').subscribe((suggestions) => {

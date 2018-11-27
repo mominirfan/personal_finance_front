@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { BudgetEditRepository } from './domain/repositories/budget-edit-repository.service';
 import { ExpensesService } from './domain/repositories/expenses.services';
+import { SettingsComponent } from './settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ExpensesService } from './domain/repositories/expenses.services';
     LoansComponent,
     RegistrationComponent,
     LandingPageComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,
