@@ -7,22 +7,27 @@
         <!-- <img class="card-img-top img-fluid" src="../../assets/logo_transparent_login-white.png" alt="Card image cap"> -->
         <div class="card-body">
           <form id="passwordReset" #passwordResetForm="ngForm" name="passwordReset" (submit)=submitPR(passwordResetForm) novalidate>
-            <div class="form-group">
-              <label for="curPass"> Current Password: </label>
-              <input type="password" id="curPass" name="curPass" class="form-control"  [(ngModel)] = "curPass" [(ngModel)] = "curPass">
-            </div>
 
             <div class="form-group">
               <label for="newPass"> New Password: </label>
-              <input type="newPass" id="newPass" name="newPass" class="form-control"[(ngModel)] = "newPass">
+              <input type="newPass" id="newPass" name="newPass" class="form-control"[(ngModel)] = "newPass" required #password="ngModel">
+            </div>
+
+
+            <div class = "alert alert-danger" role="alert" *ngIf="password.invalid && (password.dirty||password.touched)">
+                New Password is Required!!!
             </div>
 
             <div class="form-group">
               <label for="newPass2"> Confirm Password: </label>
-              <input type="password" id="newPass2" name="newPass2" class="form-control" [(ngModel)] = "newPass2" >
+              <input type="password" id="newPass2" name="newPass2" class="form-control" [(ngModel)] = "newPass2" required #password2="ngModel" >
             </div>
 
-            <button type="submit" class="btn-primary btn">Submit</button>
+            <div class = "alert alert-danger" role="alert" *ngIf="password2.invalid && (password2.dirty||password2.touched)">
+                New Password Confirmation is Required!!!
+            </div>
+
+            <button type="submit" class="btn-primary btn" [disabled]="passwordResetForm.invalid">Submit</button>
           </form>
         </div>
       </div>
@@ -39,17 +44,40 @@
           <form id="updateIncome" #updateIncomeForm="ngForm" name="updateIncome"(submit) = "submitI(updateIncomeForm)">
 
             <div class="form-group">
-              <label for="curPass2"> Current Password: </label>
-              <input type="password" id="curPass2" name="curPass2" class="form-control" [(ngModel)] = "curPass2">
-            </div>
-            <div class="form-group">
               <label for="newIncome"> New Income: </label>
-              <input type="text" id="newIncome" name="newIncome" class="form-control" [(ngModel)] = "newIncome">
+              <input type="text" id="newIncome" name="newIncome" class="form-control" [(ngModel)] = "newIncome" #Income = "ngModel" required pattern="\d*">
             </div>
 
-            <button type="submit" class="btn-primary btn">Submit</button>
+            <div class = "alert alert-danger" role="alert" *ngIf="Income.invalid && (Income.dirty||Income.touched)">
+                Income is required and must be a number!!!
+            </div>
+
+            <button type="submit" class="btn-primary btn" [disabled]="updateIncomeForm.invalid">Submit</button>
           </form>
         </div>
       </div>
+      
     </div>
+    <hr>
+    <div class="container-fluid container-bg fill">
+
+        <div class="card p-3 shadow-lg p-2 rounded">
+          <h1>Update Income</h1>
+          <!-- <img class="card-img-top img-fluid" src="../../assets/logo_transparent_login-white.png" alt="Card image cap"> -->
+          <div class="card-body">
+            <form id="updateBalance" #updateBalanceForm="ngForm" name="updateBalance"(submit) = "submitB(updateBalanceForm)">
+  
+              <div class="form-group">
+                <label for="newBalance"> New Balance: </label>
+                <input type="text" id="newBalance" name="newBalance" class="form-control" [(ngModel)] = "newBalance" #Balance = "ngModel" required pattern="\d*">
+              </div>
+  
+              <div class = "alert alert-danger" role="alert" *ngIf="Balance.invalid && (Balance.dirty||Balance.touched)">
+                  Balance is required and must be a number!!!
+              </div>
+  
+              <button type="submit" class="btn-primary btn" [disabled]="updateBalanceForm.invalid">Submit</button>
+            </form>
+          </div>
+        </div>
   </div>
