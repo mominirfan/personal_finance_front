@@ -1,6 +1,5 @@
 <html>
   <app-nav-bar></app-nav-bar>
-  <pre>{{newBudget | json }}</pre>
   <div class="container" *ngIf="expenses && budget">
       <div class="float-right">
           <div class="container">
@@ -47,7 +46,7 @@
                       </div>
                       <br />
                       <div class="modal-footer form-group ">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" style="float: left" (click)= "saveExpense()">Save</button>
+                        <button type="button" class="btn btn-success" data-dismiss="modal" style="float: left" (click)= "saveExpense()">Save</button>
                         <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
                         <div class="clearfix"></div>
                         </div>
@@ -71,7 +70,7 @@
                             </div>
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal" style="float: left" (click)="deposit()">Add</button>
+                            <button type="button" class="btn btn-success" data-dismiss="modal" style="float: left" (click)="deposit()">Add</button>
                             <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
                             <div class="clearfix"></div>
                           </div>

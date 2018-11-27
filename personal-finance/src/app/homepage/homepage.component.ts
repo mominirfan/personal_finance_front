@@ -55,10 +55,10 @@ export class HomepageComponent implements OnInit {
       this.suggestions = suggestions;
       this.suggestionsOne = [];
       this.suggestionsTwo = [];
-      for (let i = 0; i < 4; i++) {
+      for (let i = 0; i < 5; i++) {
         this.suggestionsOne.push(this.suggestions[i]);
       }
-      for (let i = 4; i < 9; i++) {
+      for (let i = 5; i < 10; i++) {
         this.suggestionsTwo.push(this.suggestions[i]);
       }
       console.log(this.suggestionsOne);
