@@ -10,7 +10,7 @@ import { Suggestion } from '../models/suggestion';
 export class HomepageRepository {
 
   protected endpoint = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/api/get-budgets/';
-  protected suggestionEndpoint = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/api/get-suggs/';
+  protected suggestionEndpoint = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/api/get-sugg/';
 
   constructor (private httpClient: HttpClient) {}
 
@@ -18,8 +18,8 @@ export class HomepageRepository {
     return this.httpClient.get<Bill[]>(`${this.endpoint}${userName}`);
   }
 
-  getSuggestions(type: string): Observable<Suggestion[]> {
-    return this.httpClient.get<Suggestion[]>(`${this.suggestionEndpoint}${type}`);
+  getSuggestions(userName: String): Observable<Suggestion[]> {
+    return this.httpClient.get<Suggestion[]>(`${this.suggestionEndpoint}${userName}`);
   }
 
 }

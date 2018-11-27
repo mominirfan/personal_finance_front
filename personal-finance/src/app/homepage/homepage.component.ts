@@ -17,6 +17,7 @@ export class HomepageComponent implements OnInit {
   loans: Loan[];
   loansBool: boolean;
   name: string;
+  suggestions: Suggestion[];
   suggestionsOne: Suggestion[];
   suggestionsTwo: Suggestion[];
   balance: string;
@@ -50,18 +51,24 @@ export class HomepageComponent implements OnInit {
     this.loansRepo.getDashboardLoans(this.currentUser.userName).subscribe((loans) => {
       this.loans = loans;
 
-     this.homepageRepo.getSuggestions('salt').subscribe((suggestions) => {
-      this.suggestionsOne = suggestions;
+     this.homepageRepo.getSuggestions(this.currentUser.userName).subscribe((suggestions) => {
+      this.suggestions = suggestions;
+      this.suggestionsOne = [];
+      this.suggestionsTwo = [];
+      for (let i = 0; i < 4; i++) {
+        this.suggestionsOne.push(this.suggestions[i]);
+      }
+      for (let i = 4; i < 9; i++) {
+        this.suggestionsTwo.push(this.suggestions[i]);
+      }
       console.log(this.suggestionsOne);
+      console.log(this.suggestionsTwo);
     });
+
     this.loansBool = true;
     if (this.loans.length  < 1) {
       this.loansBool = false;
     }
-    this.homepageRepo.getSuggestions('juice').subscribe((suggestions) => {
-      this.suggestionsTwo = suggestions;
-      console.log(this.suggestionsTwo);
-    });
 
     });
 
