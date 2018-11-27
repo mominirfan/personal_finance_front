@@ -3,7 +3,7 @@
   <h1 class="mt-2">
     {{userName}}
   </h1>
-    <div class="alert alert-secondary" role="alert" *ngIf="loans.length == 0">
+    <div class="alert alert-success" role="alert" *ngIf="loans.length == 0">
        You don't have any loans. Click "Add a Loan" to get started.
     </div>
   <ul *ngIf="loans.length > 0">
