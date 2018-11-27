@@ -59,10 +59,10 @@
         <div class="container">
           <div class="card shadow-sm p-3">
             <h2>Monthly Expenses</h2>
-            <div *ngIf="balance">
+            <div [hidden]="!billsBool">
               <app-chart></app-chart>
             </div>
-            <div *ngIf="!balance">
+            <div [hidden]="billsBool">
               <div class="alert alert-success" role="alert">
                 No current expenses added to your account.
               </div>
@@ -76,6 +76,7 @@
           <div class="card-body" *ngIf=suggestionsOne>
             <h2>Spending Suggestions:</h2>
             <hr>
+          <div [hidden]="!billsBool">
             <div class="row">
               <div class="col-md-6">
                   <h3>
@@ -97,7 +98,12 @@
                       </li>
                     </ul>
               </div>
-
+            </div>
+          </div>
+          <div [hidden]="billsBool">
+            <div class="alert alert-success" role="alert">
+              No current expenses added to your account, no current suggestions.
+            </div>
           </div>
         </div>
       </div>

@@ -15,7 +15,6 @@ export class ChartComponent implements OnInit {
   spend_vals = [];
   bills: Bill[];
   currentUser: any = {};
-
   constructor(
     private homepageRepo: HomepageRepository,
   ) {
@@ -26,7 +25,6 @@ export class ChartComponent implements OnInit {
 
     this.homepageRepo.getBills(this.currentUser.userName).subscribe((bills) => {
       this.bills = bills;
-
       for (const bill of this.bills) {
         this.budget_labels.push(bill.budgetType);
         const amt = +bill.amt;

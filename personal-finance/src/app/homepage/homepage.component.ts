@@ -21,7 +21,8 @@ export class HomepageComponent implements OnInit {
   suggestionsTwo: Suggestion[];
   balance: string;
   currentUser: any = { };
-
+  bills: Bill[];
+  billsBool: boolean;
   constructor(
     private homepageRepo: HomepageRepository,
     private loansRepo: LoanRepository,
@@ -39,10 +40,13 @@ export class HomepageComponent implements OnInit {
     }
     this.name = this.currentUser.userName;
 
-    // this.homepageRepo.getBills(this.currentUser.userName).subscribe((bills) => {
-    //   this.bills = bills;
-    //   console.log(this.bills);
-
+    this.homepageRepo.getBills(this.currentUser.userName).subscribe((bills) => {
+       this.bills = bills;
+       this.billsBool = true;
+       if(this.bills.length  < 1){
+         this.billsBool = false;
+       }
+    }
     this.loansRepo.getDashboardLoans(this.currentUser.userName).subscribe((loans) => {
       this.loans = loans;
 
