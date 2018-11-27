@@ -6,20 +6,28 @@
       {{name}}
     </h1>
     <div class="row">
-      <div class="col-md-6" >
-        <div class="card shadow-sm mb-4" (click)="toLoans()">
+      <div class="col-md-6">
+        <div class="card shadow-sm mb-4">
           <div class="card-body">
             <h2>Current Balance:</h2>
-            <div *ngIf="balance"><h3>{{this.balance}}</h3></div>
+            <hr>
+            <div *ngIf="balance">
+              <h3>{{this.balance | currency}}</h3>
+            </div>
             <div *ngIf="!balance">
+              <!-- ADD A ROUTERLINK HERE TO THE SETTINGS PAGE -->
               <div class="alert alert-success" role="alert">
-                Please update your current balance.
+                You haven't set up a balance for your account. <a routerLink="#">Click here</a>
               </div>
             </div>
-            <hr>
+          </div>
+        </div>
+        <div class="card shadow-sm mb-4" (click)="toLoans()">
+          <div class="card-body">
             <h2>
               Upcoming Loan Payments:
             </h2>
+            <hr>
             <div *ngIf="loansBool">
               <table class="table table-bordered m-1">
                 <thead>
@@ -49,22 +57,23 @@
             </div>
             <div *ngIf="!loansBool">
               <div class="alert alert-success" role="alert">
-                No current loans added to your account.
+                You haven't added any loans to your account. <a routerLink="/loans">Click here</a>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-md-6" >
+      <div class="col-md-6">
         <div class="container">
-          <div class="card shadow-sm p-3">
-            <h2>Monthly Expenses</h2>
-            <div [hidden]="!billsBool">
+          <div class="card shadow-sm p-3" *ngIf="bills" (click)="toBudget()">
+            <h2>Budget Breakdown:</h2>
+            <hr>
+            <div *ngIf="bills.length > 0">
               <app-chart></app-chart>
             </div>
-            <div [hidden]="billsBool">
+            <div *ngIf="bills.length == 0">
               <div class="alert alert-success" role="alert">
-                No current expenses added to your account.
+                You haven't set up a budget yet. <a routerLink="/budget">Click here</a>
               </div>
             </div>
           </div>
@@ -73,36 +82,38 @@
     </div>
     <div class="container mb-4 mt-4">
       <div class="card shadow-sm">
-          <div class="card-body" *ngIf="suggestionsOne && suggestionsTwo">
-            <h2>Spending Suggestions:</h2>
-            <hr>
-          <div *ngIf="billsBool">
-            <div class="row">
-              <div class="col-md-6">
+        <div class="card-body">
+          <h2>Spending Suggestions:</h2>
+          <hr>
+          <div *ngIf="suggestions">
+            <div *ngIf="suggestionsOne.length > 0">
+              <div class="row">
+                <div class="col-md-6" *ngIf="suggestionsOne">
                   <h3>
-                      {{suggestionsOne[0].suggType}}
-                    </h3>
+                    {{suggestionsOne[0].suggType}}
+                  </h3>
                   <ul>
-                      <li *ngFor="let suggestion of suggestionsOne">
-                        {{suggestion.sugg}}
-                      </li>
-                    </ul>
-              </div>
-              <div class="col-md-6">
+                    <li *ngFor="let suggestion of suggestionsOne">
+                      {{suggestion.sugg}}
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-6" *ngIf="suggestionsTwo">
                   <h3>
-                      {{suggestionsTwo[0].suggType}}
-                    </h3>
-                    <ul>
-                      <li *ngFor="let suggestion of suggestionsTwo">
-                        {{suggestion.sugg}}
-                      </li>
-                    </ul>
+                    {{suggestionsTwo[0].suggType}}
+                  </h3>
+                  <ul>
+                    <li *ngFor="let suggestion of suggestionsTwo">
+                      {{suggestion.sugg}}
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
-          <div *ngIf="!billsBool">
+          <div *ngIf="suggestionsOne.length == 0  && suggestionsTwo.length == 0">
             <div class="alert alert-success" role="alert">
-              No current expenses added to your account, no current suggestions.
+              Set up a budget to see suggestions. <a routerLink="/budget">Click here</a>
             </div>
           </div>
         </div>

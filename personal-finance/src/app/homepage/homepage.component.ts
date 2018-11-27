@@ -43,10 +43,6 @@ export class HomepageComponent implements OnInit {
 
     this.homepageRepo.getBills(this.currentUser.userName).subscribe((bills) => {
        this.bills = bills;
-       this.billsBool = true;
-       if (this.bills.length  < 1) {
-         this.billsBool = false;
-       }
    });
     this.loansRepo.getDashboardLoans(this.currentUser.userName).subscribe((loans) => {
       this.loans = loans;
@@ -55,12 +51,18 @@ export class HomepageComponent implements OnInit {
       this.suggestions = suggestions;
       this.suggestionsOne = [];
       this.suggestionsTwo = [];
-      for (let i = 0; i < 5; i++) {
-        this.suggestionsOne.push(this.suggestions[i]);
+      if (suggestions.length > 0 ) {
+        for (let i = 0; i < 5; i++) {
+          this.suggestionsOne.push(this.suggestions[i]);
+        }
       }
-      for (let i = 5; i < 10; i++) {
-        this.suggestionsTwo.push(this.suggestions[i]);
+
+      if (suggestions.length === 10) {
+        for (let i = 5; i < 10; i++) {
+          this.suggestionsTwo.push(this.suggestions[i]);
+        }
       }
+
       console.log(this.suggestionsOne);
       console.log(this.suggestionsTwo);
     });
@@ -76,7 +78,11 @@ export class HomepageComponent implements OnInit {
 
   toLoans() {
     this.router.navigate(['loans']);
-
   }
+
+  toBudget() {
+    this.router.navigate(['budget']);
+  }
+
 
 }
