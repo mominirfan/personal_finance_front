@@ -11,8 +11,8 @@ export class SettingsRepository {
 
   constructor (private httpClient: HttpClient) {}
 
-  updatePassword(userName: String, Pword: String) {
-    return this.httpClient.put<any>(`${this.endpoint}edit-pass`, {userName: userName, Pword: Pword});
+  updatePassword(userName: String, pWord: String) {
+    return this.httpClient.put<any>(`${this.endpoint}edit-pass`, {userName: userName, pWord: pWord});
   }
 
   updateIncome(userName: String, income: number) {
