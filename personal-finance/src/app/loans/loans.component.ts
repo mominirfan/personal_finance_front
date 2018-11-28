@@ -3,6 +3,7 @@ import { Loan } from '../domain/models/loan';
 import { LoanRepository } from '../domain/repositories/loan-repository.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-loans',
@@ -44,18 +45,14 @@ export class LoansComponent implements OnInit {
     });
   }
 
-  addLoan() {
+  addLoan(loanForm: NgForm) {
     this.newLoan.loanBalance = this.newLoan.loanAmount;
     this.newLoan = this.loanRepo.calculateLoanStats(this.newLoan);
     this.newLoan.loanPaidAmt = 0;
     this.loanRepo.addLoan(this.newLoan, this.userName).subscribe(() => {
-      console.log("cunt");
-      console.log(this.newLoan);
       this.loans.push(this.newLoan);
-      console.log("fuck em up");
-      console.log(this.loans);
-      console.log(this.newLoan);
       this.newLoan = new Loan();
+      loanForm.reset();
     this.newLoan.userName = this.currentUser;
     });
   }
