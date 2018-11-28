@@ -49,7 +49,12 @@ export class LoansComponent implements OnInit {
     this.newLoan = this.loanRepo.calculateLoanStats(this.newLoan);
     this.newLoan.loanPaidAmt = 0;
     this.loanRepo.addLoan(this.newLoan, this.userName).subscribe(() => {
+      console.log("cunt");
+      console.log(this.newLoan);
       this.loans.push(this.newLoan);
+      console.log("fuck em up");
+      console.log(this.loans);
+      console.log(this.newLoan);
       this.newLoan = new Loan();
     this.newLoan.userName = this.currentUser;
     });

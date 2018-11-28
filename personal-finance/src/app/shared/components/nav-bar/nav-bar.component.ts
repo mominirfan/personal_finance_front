@@ -22,4 +22,8 @@ export class NavBarComponent implements OnInit {
     // this.router.navigate(['login']);
   }
 
+  toLanding() {
+    this.router.navigate(['landing']);
+  }
+
 }
