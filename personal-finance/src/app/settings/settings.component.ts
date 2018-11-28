@@ -9,20 +9,30 @@ import { SettingsRepository } from '../domain/repositories/settings-repository.s
 })
 export class SettingsComponent implements OnInit {
   currentUser: any = { };
+  oldPass: string;
   newPass: string;
   newPass2: string;
   newBalance: number;
   newIncome: number;
-  constructor(private sr: SettingsRepository) { }
+  passwordForm: FormGroup;
+  passwordNotMatch: boolean;
+  samePass: boolean;
+  constructor(private sr: SettingsRepository) {
+      this.passwordNotMatch = false;
+      this.samePass = false;
+     }
 
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
-  submitPR( passwordResetForm: FormGroup) {
-    console.log('Submitting Password Reset Form');
+  submitPR() {
+    this.passwordNotMatch = false;
+    this.samePass = false;
     if (this.newPass === this.newPass2) {
-      this.sr.updatePassword(this.currentUser.userName, this.newPass).subscribe(x => this.onUpdate(x));
+      this.sr.updatePassword(this.currentUser.userName, this.newPass, this.oldPass).subscribe(x => this.onUpdate(x));
+    } else {
+      this.passwordNotMatch = true;
     }
   }
 
@@ -37,9 +47,16 @@ export class SettingsComponent implements OnInit {
   }
 
   onUpdate(a: any) {
-    this.newPass = null;
-    this.newPass2 = null;
-    this.newIncome = null;
-    this.newBalance = null;
+    if (a === 0) {
+      this.samePass = true;
+      return;
+    } else {
+      this.oldPass = null;
+      this.newPass = null;
+      this.newPass2 = null;
+      this.newIncome = null;
+      this.newBalance = null;
+    }
+
   }
 }

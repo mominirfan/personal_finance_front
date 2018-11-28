@@ -68,8 +68,9 @@
                         &#x2713;
                       </div>
                       <div class="clearfix"></div>
+                      <hr>
                       <div class="form-group">
-                          <label for="payLoan">Input Amount or Pay Minimum</label>
+                          <label for="payLoan">Make Additional Payment</label>
                           <input type="text" class="form-control" name="loanPaymentMoreInput" id="loanPaymentMoreInput"
                           [ngModel]="payLoan"
                           (ngModelChange)="payLoan = $event"
@@ -79,7 +80,7 @@
                           <div *ngIf="loanPaymentMoreForm.invalid && payLoanInput?.errors.pattern && payLoanInput.touched" class="text-danger">
                               Must pay a positive, non-zero amount
                             </div>
-                          <button class="btn btn-success m-2" [disabled]="loanPaymentMoreForm.invalid" (click)=payCustom(loan)>Pay</button>
+                          <button class="btn btn-success m-2" [disabled]="loanPaymentMoreForm.invalid" (click)="payCustom(loan, i)">Pay</button>
                           <div class="clearfix"></div>
                         </div>
                   </form>

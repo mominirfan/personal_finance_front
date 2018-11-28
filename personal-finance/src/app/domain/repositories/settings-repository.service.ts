@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +13,13 @@ export class SettingsRepository {
 
   constructor (private httpClient: HttpClient) {}
 
-  updatePassword(userName: String, pWord: String) {
-    return this.httpClient.put<any>(`${this.endpoint}edit-pass`, {userName: userName, pWord: pWord});
+  updatePassword(userName: String, pWord: String, old_pWord: String) {
+    return this.httpClient.put<any>(`${this.endpoint}edit-pass`, {userName: userName, pWord: pWord, old_pWord: old_pWord})
+    .pipe(map(response => {
+        if (response.error) {
+          return 0;
+        }
+      }));
   }
 
   updateIncome(userName: String, income: number) {
