@@ -17,6 +17,9 @@ export class SettingsComponent implements OnInit {
   passwordForm: FormGroup;
   passwordNotMatch: boolean;
   samePass: boolean;
+  income: number;
+  balance: number;
+  loaded = false;
   constructor(private sr: SettingsRepository) {
       this.passwordNotMatch = false;
       this.samePass = false;
@@ -24,29 +27,40 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.sr.getInfo(this.currentUser.userName).subscribe(info => {
+      this.income = info.income;
+      this.balance = info.bal;
+      this.loaded = true;
+    });
   }
 
   submitPR() {
     this.passwordNotMatch = false;
     this.samePass = false;
     if (this.newPass === this.newPass2) {
-      this.sr.updatePassword(this.currentUser.userName, this.newPass, this.oldPass).subscribe(x => this.onUpdate(x));
+      this.sr.updatePassword(this.currentUser.userName, this.newPass, this.oldPass).subscribe(x => this.onPassUpdate(x));
     } else {
       this.passwordNotMatch = true;
     }
   }
 
-  submitI( incomeUpdateFrom: FormGroup) {
+  submitI() {
     console.log('Submitting Income Update Form');
-    this.sr.updateIncome(this.currentUser.userName, this.newIncome).subscribe(x => this.onUpdate(x));
+    this.sr.updateIncome(this.currentUser.userName, this.newIncome).subscribe(x => {
+      this.income = this.newIncome;
+      this.newIncome = null;
+    });
   }
 
   submitB( incomeUpdateFrom: FormGroup) {
     console.log('Submitting Balance Update Form');
-    this.sr.updateBalance(this.currentUser.userName, this.newBalance).subscribe(x => this.onUpdate(x));
+    this.sr.updateBalance(this.currentUser.userName, this.newBalance).subscribe(x => {
+      this.balance = this.newBalance;
+      this.newBalance = null;
+    });
   }
 
-  onUpdate(a: any) {
+  onPassUpdate(a: any) {
     if (a === 0) {
       this.samePass = true;
       return;
@@ -54,9 +68,6 @@ export class SettingsComponent implements OnInit {
       this.oldPass = null;
       this.newPass = null;
       this.newPass2 = null;
-      this.newIncome = null;
-      this.newBalance = null;
     }
-
   }
 }

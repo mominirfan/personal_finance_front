@@ -10,6 +10,7 @@ import { map } from 'rxjs/operators';
 export class SettingsRepository {
 
   protected endpoint = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/api/';
+  protected getInfoEndpoint = 'http://ec2-18-224-109-208.us-east-2.compute.amazonaws.com:8080/api/login/'
 
   constructor (private httpClient: HttpClient) {}
 
@@ -20,6 +21,10 @@ export class SettingsRepository {
           return 0;
         }
       }));
+  }
+
+  getInfo(userName: String) {
+    return this.httpClient.get<any>(`${this.getInfoEndpoint}${userName}`);
   }
 
   updateIncome(userName: String, income: number) {
