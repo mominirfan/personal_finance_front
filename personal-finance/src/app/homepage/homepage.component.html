@@ -65,8 +65,8 @@
       </div>
       <div class="col-md-6">
         <div class="container">
-          <div class="card shadow-sm p-3" *ngIf="bills" (click)="toBudget()">
-            <h2>Budget Breakdown:</h2>
+          <div class="card shadow-sm p-3" *ngIf="bills">
+            <h2 (click)="toBudget()">Budget Breakdown:</h2>
             <hr>
             <div *ngIf="bills.length > 0">
               <app-chart></app-chart>
