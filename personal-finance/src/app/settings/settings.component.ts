@@ -27,6 +27,7 @@ export class SettingsComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.balance = JSON.parse(localStorage.getItem('balance'));
     this.sr.getInfo(this.currentUser.userName).subscribe(info => {
       this.income = info.income;
       this.balance = info.bal;
@@ -55,6 +56,7 @@ export class SettingsComponent implements OnInit {
   submitB( incomeUpdateFrom: FormGroup) {
     console.log('Submitting Balance Update Form');
     this.sr.updateBalance(this.currentUser.userName, this.newBalance).subscribe(x => {
+      localStorage.setItem('balance', JSON.stringify(this.newBalance));
       this.balance = this.newBalance;
       this.newBalance = null;
     });
