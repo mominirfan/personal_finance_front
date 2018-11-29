@@ -13,6 +13,7 @@
             <hr>
             <div *ngIf="balance">
               <h3>{{this.balance | currency}}</h3>
+              <p> <a routerLink="/settings">Click here</a> to update.</p>
             </div>
 
             <div *ngIf="!balance">
