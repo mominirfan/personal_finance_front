@@ -20,6 +20,7 @@ import { Router } from '@angular/router';
 export class BudgetComponent implements OnInit {
 
   budget_drop = ['','Food','Savings','Util.','Car','House','Ent.','Misc.'];
+  expenses_drop = [''];
   budget_labels = [];
   monthly_inc: number; // make this thier monthly income
   budget_vals = [];
@@ -71,6 +72,10 @@ export class BudgetComponent implements OnInit {
       this.budget_labels.push(label);
       this.budget_vals.push(bud);
       this.spend_vals.push(exp);
+
+      if (this.budget[i]['amt'] > 0 ) {
+        this.expenses_drop.push(this.budget[i]['budgetType']);
+      }
 
     }
   }

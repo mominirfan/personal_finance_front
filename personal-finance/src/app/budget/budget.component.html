@@ -19,34 +19,54 @@
 
                       <div class="modal-body">
 
-                        <form name="myForm">
-                          <label for="type" class="lead"> Budget Type </label>
+                        <form name="myForm" #expensesForm = "ngForm">
+                          <div class="form-group">
+                          <label for="expenseType" class="lead"> Expenses Type: </label>
                           <br/>
-                          <select id="type" (change)="newExpense.exType = $event.target.value">
-                            <option *ngFor="let label of budget_drop">
-                                  {{label}}
+                          <select id="expenseType" name="expenseType" [ngModel]="newExpense.exType" (ngModelChange)="newExpense.exType = $event" #expenseType="ngModel" required>
+                            <option *ngFor="let label of expenses_drop">
+                              {{label}}
                             </option>
                           </select>
-                        </form>
+                          <div *ngIf="expenseType.invalid && expenseType?.errors.required && expenseType.touched" class="text-danger mt-3">
+                              Expenses Type is Required
+                            </div>
 
-                        <br/>
-                        <br/>
+                          <div *ngIf="expenses_drop.length == 1" class="text-danger mt-3">
+                              Add a Budget Before Adding Expenses
+                            </div>
+                          </div>
+
+                        <br>
+                        <br>
                         <div class="form-group">
                           <label for="Amount" class = "lead">
                             Amount
                           </label>
                           <input type="text"
                                 id="amount"
+                                name="amount"
                                 class="form-control"
                                 [ngModel]="newExpense.amt"
-                                (ngModelChange)="newExpense.amt = $event" />
+                                (ngModelChange)="newExpense.amt = $event"
+                                #amount="ngModel"
+                                required
+                                pattern="[[1-9][0-9]*|[0]]"
+                                [disabled]="expenses_drop.length == 1" />
+                                <div *ngIf="amount.invalid && amount?.errors.required && amount.touched" class="text-danger mt-3">
+                                    Amount is required
+                                  </div>
+                                  <div *ngIf="amount.invalid && amount?.errors.pattern && amount.touched" class="text-danger mt-3">
+                                      Amount must be a valid number
+                                    </div>
                       </div>
                       <br />
                       <br />
+                    </form>
                       </div>
                       <br />
                       <div class="modal-footer form-group ">
-                        <button type="button" class="btn btn-success" data-dismiss="modal" style="float: left" (click)= "saveExpense()">Save</button>
+                        <button type="button" [disabled]="expenses_drop.length == 1 ||  expensesForm.invalid" class="btn btn-success" data-dismiss="modal" style="float: left" (click)= "saveExpense()">Save</button>
                         <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
                         <div class="clearfix"></div>
                         </div>
@@ -64,13 +84,31 @@
                             <h4 class="modal-title">Add a Deposit</h4>
                           </div>
                           <div class="modal-body">
+                            <form name="myForm" #depositForm = "ngForm">
                             <div class="form-group">
+
                               <label for="depositAmt">Amount:</label>
-                              <input type="text" class="form-control" name="depositAmt" [(ngModel)]="depositAmt">
+                              <!-- <input type="text" class="form-control" name="depositAmt" [(ngModel)]="depositAmt"> -->
+                              <input type="text"
+                              id="depositAmt"
+                              name="depositAmt"
+                              class="form-control"
+                              [ngModel]="newExpense.amt"
+                              (ngModelChange)="newExpense.amt = $event"
+                              #depositAmt="ngModel"
+                              required
+                              pattern="[[1-9][0-9]*|[0]]"/>
+                              <div *ngIf="depositAmt.invalid && depositAmt?.errors.required && depositAmt.touched" class="text-danger mt-3">
+                                  Amount is required
+                                </div>
+                                <div *ngIf="depositAmt.invalid && depositAmt?.errors.pattern && depositAmt.touched" class="text-danger mt-3">
+                                    Amount must be a valid number
+                                  </div>
                             </div>
+                          </form>
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-success" data-dismiss="modal" style="float: left" (click)="deposit()">Add</button>
+                            <button type="button" class="btn btn-success" [disabled]="depositForm.invalid" data-dismiss="modal" style="float: left" (click)="deposit()">Add</button>
                             <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
                             <div class="clearfix"></div>
                           </div>
@@ -95,34 +133,54 @@
                         <br/>
                         <br/>
 
-                        <form name="myForm">
-                          <label for="type" class="lead"> Budget Type </label>
-                          <br/>
-                          <select id="type" (change)= "newBudget.budgetType = $event.target.value">
-                            <option *ngFor="let label of budget_drop">
-                                  {{label}}
-                            </option>
-                          </select>
-                        </form>
+                        <form name="myForm"  #newBudgetForm = "ngForm">
+
+                            <div class="form-group">
+                                <label for="budgetType" class="lead"> Budget Type </label>
+                                <select id="budgetType" name="budgetType" [ngModel]="newBudget.budgetType" (ngModelChange)="newBudget.budgetType = $event" #budgetType="ngModel" required>
+                                    <option *ngFor="let label of budget_drop">
+                                          {{label}}
+                                    </option>
+                                  </select>
+                                  <div *ngIf="budgetType.invalid && budgetType?.errors.required && budgetType.touched" class="text-danger mt-3">
+                                      Budget Type is Required
+                                    </div>
+                            </div>
+
+
 
                         <br/>
                         <br/>
+
                         <div class="form-group">
-                          <label for="Amount" class = "lead">
-                            Amount
-                          </label>
-                          <input type="text"
-                                id="amount"
-                                class="form-control"
-                                [ngModel]="newBudget.amt"
-                                (ngModelChange)="newBudget.amt = $event" />
-                      </div>
+
+                            <label for="newBudgAmt">Amount:</label>
+                            <!-- <input type="text" class="form-control" name="depositAmt" [(ngModel)]="depositAmt"> -->
+                            <input type="text"
+                            id="newBudgAmt"
+                            name="newBudgAmt"
+                            class="form-control"
+                            [ngModel]="newBudget.amt"
+                            (ngModelChange)="newBudget.amt = $event"
+                            #newBudgAmt="ngModel"
+                            required
+                            pattern="[[1-9][0-9]*|[0]]"/>
+                            <div *ngIf="newBudgAmt.invalid && newBudgAmt?.errors.required && newBudgAmt.touched" class="text-danger mt-3">
+                                Amount is required
+                              </div>
+                              <div *ngIf="newBudgAmt.invalid && newBudgAmt?.errors.pattern && newBudgAmt.touched" class="text-danger mt-3">
+                                  Amount must be a valid number
+                                </div>
+                          </div>
+
                       <br />
                       <br />
+                    </form>
                       </div>
+
                       <br />
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" data-dismiss="modal" style="float: left" (click)= "save()">Save</button>
+                        <button type="button" [disabled]="newBudgetForm.invalid" class="btn btn-success" data-dismiss="modal" style="float: left" (click)= "save()">Save</button>
                         <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
                         <div class="clearfix"></div>
                         </div>
