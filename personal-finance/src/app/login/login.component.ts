@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   userName: String;
   pWord: String;
   currentUser: any = {};
+  load = false;
 
   constructor(
     // private formBuilder: FormBuilder,
@@ -26,6 +27,7 @@ export class LoginComponent implements OnInit {
     if (this.currentUser) {
       this.router.navigate(['dashboard']);
     }
+    this.load = true;
   }
 
   login() {
