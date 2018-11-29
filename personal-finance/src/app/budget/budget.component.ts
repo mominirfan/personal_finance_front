@@ -84,7 +84,6 @@ export class BudgetComponent implements OnInit {
       // this.budg = this.newBudget;
 
 
-      this.newBudget.amt = undefined;
       this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
       this.budget = budget;
       this.initBudgets();
@@ -98,7 +97,6 @@ export class BudgetComponent implements OnInit {
       // this.budg = this.newBudget;
 
 
-      this.newBudget.amt = undefined;
       this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
       this.budget = budget;
       this.initBudgets();
@@ -114,15 +112,15 @@ export class BudgetComponent implements OnInit {
   saveExpense() {
     this.expenseService.addExpense(this.newExpense).subscribe(() => {
       this.getExpenses();
-      console.log(this.expenses);
     });
 
 
-    this.newExpense.amt = undefined;
     this.getExpenses();
     this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
     this.initBudgets();
     this.updateChart();
+    window.location.reload();
+
   });
   }
 
