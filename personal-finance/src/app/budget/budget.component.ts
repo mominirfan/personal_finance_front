@@ -11,6 +11,7 @@ import * as CanvasJS from '../chart/canvasjs.min';
 import { ExpensesService } from '../domain/repositories/expenses.services';
 import { Expense } from '../domain/models/expense';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -89,12 +90,15 @@ export class BudgetComponent implements OnInit {
   }
 
 
-  save() {
+  save(budgetForm: NgForm) {
     if (this.budget_labels.includes(this.newBudget.budgetType)) {
 
       this.budgetRepo.editBudget(this.newBudget).subscribe(() => {
         this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
         this.budget = budget;
+        this.newBudget.budgetType = null;
+        this.newBudget.amt = null;
+        budgetForm.reset();
         this.initBudgets();
         this.updateChart();
       });
@@ -107,6 +111,8 @@ export class BudgetComponent implements OnInit {
       this.budgetRepo.addBudget(this.newBudget).subscribe(() => {
         this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
         this.budget = budget;
+        this.newBudget.budgetType = null;
+        this.newBudget.amt = null;
         this.initBudgets();
         this.updateChart();
       });
@@ -235,10 +241,12 @@ export class BudgetComponent implements OnInit {
   });
 
 }
-  deposit() {
+  deposit(depositForm: NgForm) {
     this.budgetRepo.addDeposit(this.depositAmt, this.currentUser.userName).subscribe(() => {
       this.balance = +this.balance + +this.depositAmt;
       localStorage.setItem('balance', JSON.stringify(this.balance));
+      this.depositAmt = null;
+      depositForm.reset();
     });
   }
 
@@ -246,6 +254,6 @@ export class BudgetComponent implements OnInit {
     this.LoginService.getInfo(this.currentUser.userName).subscribe((user) => {
       this.incUser = user;
       this.monthly_inc = this.incUser.income;
-    })
+    });
   }
 }

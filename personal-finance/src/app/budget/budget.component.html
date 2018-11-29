@@ -108,7 +108,7 @@
                           </form>
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-success" [disabled]="depositForm.invalid" data-dismiss="modal" style="float: left" (click)="deposit()">Add</button>
+                            <button type="button" class="btn btn-success" [disabled]="depositForm.invalid" data-dismiss="modal" style="float: left" (click)="deposit(depositForm)">Add</button>
                             <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
                             <div class="clearfix"></div>
                           </div>
@@ -180,7 +180,7 @@
 
                       <br />
                       <div class="modal-footer">
-                        <button type="button" [disabled]="newBudgetForm.invalid" class="btn btn-success" data-dismiss="modal" style="float: left" (click)= "save()">Save</button>
+                        <button type="button" [disabled]="newBudgetForm.invalid" class="btn btn-success" data-dismiss="modal" style="float: left" (click)= "save(newBudgetForm)">Save</button>
                         <button type="button" class="btn btn-danger float-right" data-dismiss="modal">Close</button>
                         <div class="clearfix"></div>
                         </div>
