@@ -47,7 +47,7 @@
 
         <div class="card p-3 shadow-sm p-2 rounded">
             <h1>Update Income</h1>
-            <h3 *ngIf=balance>Current Income: {{this.income | currency }}</h3>
+            <h3 *ngIf=balance>Current Monthly Income: {{this.income | currency }}</h3>
             <div class="alert alert-success" *ngIf=!income role="alert">
                 You don't have a Income yet, enter one below.
               </div>
@@ -56,7 +56,7 @@
             <div class="card-body">
                 <form id="incomeUpdate" #incomeUpdateForm="ngForm" name="incomeUpdate" novalidate>
                   <div class="form-group">
-                    <label for="newIncome"> New Income: </label>
+                    <label for="newIncome"> New Monthly Income: </label>
                     <input type="text" id="newIncome" name="newIncome" class="form-control" [(ngModel)] = "newIncome" required pattern="[0-9]+" #Income="ngModel" >
                     <div class = "alert alert-danger mt-3" role="alert" *ngIf="incomeUpdateForm.invalid && Income?.errors.pattern && Income.touched">
                         Income must be a valid number
