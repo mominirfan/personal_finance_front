@@ -43,6 +43,17 @@ export class HomepageComponent implements OnInit {
 
     this.homepageRepo.getBills(this.currentUser.userName).subscribe((bills) => {
        this.bills = bills;
+       let i;
+       for (i=0; i < bills.length;i++){
+         let b = bills[i];
+         if (+b.amt == 0){
+           continue
+         }
+         else{
+           this.billsBool = true;
+           break;
+         }
+       }
    });
     this.loansRepo.getDashboardLoans(this.currentUser.userName).subscribe((loans) => {
       this.loans = loans;

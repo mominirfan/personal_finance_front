@@ -10,10 +10,12 @@
         <div class="card shadow-sm mb-4">
           <div class="card-body">
             <h2>Current Balance:</h2>
+
             <hr>
             <div *ngIf="balance">
               <h3>{{this.balance | currency}}</h3>
             </div>
+
             <div *ngIf="!balance">
               <!-- ADD A ROUTERLINK HERE TO THE SETTINGS PAGE -->
               <div class="alert alert-success" role="alert">
@@ -68,10 +70,10 @@
           <div class="card shadow-sm p-3" *ngIf="bills">
             <h2 (click)="toBudget()">Budget Breakdown:</h2>
             <hr>
-            <div *ngIf="bills.length > 0">
+            <div *ngIf="billsBool">
               <app-chart></app-chart>
             </div>
-            <div *ngIf="bills.length == 0">
+            <div *ngIf="!billsBool">
               <div class="alert alert-success" role="alert">
                 You haven't set up a budget yet. <a routerLink="/budget">Click here</a>
               </div>
