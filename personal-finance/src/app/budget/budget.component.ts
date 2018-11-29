@@ -116,6 +116,7 @@ export class BudgetComponent implements OnInit {
     this.expenseService.addExpense(this.newExpense).subscribe(() => {
       this.expenseService.getExpenseSum(this.currentUser.userName).subscribe((summed_expenses) => {
         this.ngOnInit();
+        window.location.reload();
       });
 
     });
@@ -190,7 +191,13 @@ export class BudgetComponent implements OnInit {
     this.expenseService.getExpenseSum(this.currentUser.userName).subscribe((summed_expenses) => {
       this.summed_expenses = summed_expenses;
       this.initBudgets();
-      this.updateChart();
+      try{
+        this.updateChart();
+      }
+      catch{
+        window.location.reload();
+      }
+
 
     });
   }
