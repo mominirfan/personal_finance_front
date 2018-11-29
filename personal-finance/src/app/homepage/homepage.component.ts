@@ -29,18 +29,21 @@ export class HomepageComponent implements OnInit {
     private loansRepo: LoanRepository,
     private router: Router,
   ) {
+
   }
 
   ngOnInit() {
+
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
     this.balance = JSON.parse(localStorage.getItem('balance'));
+
+    this.name = this.currentUser.userName;
 
     if (!this.currentUser) {
       this.router.navigate(['login']);
       return;
     }
 
-    this.name = this.currentUser.userName;
 
     this.homepageRepo.getBills(this.currentUser.userName).subscribe((bills) => {
        this.bills = bills;
