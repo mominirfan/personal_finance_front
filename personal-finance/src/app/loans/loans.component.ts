@@ -3,6 +3,7 @@ import { Loan } from '../domain/models/loan';
 import { LoanRepository } from '../domain/repositories/loan-repository.service';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-loans',
@@ -16,6 +17,7 @@ export class LoansComponent implements OnInit {
   currentUser: any = {};
   userName: String = '';
   payLoan: number;
+  // dates: Date[];
 
   @Input() index: number;
 
@@ -27,6 +29,10 @@ export class LoansComponent implements OnInit {
     private router: Router,
   ) {
     this.newLoan.paid = 0;
+    // const d = new Date();
+    // let month = d.getMonth();
+    // let year = d.getFullYear();
+
   }
 
   ngOnInit() {
@@ -40,17 +46,19 @@ export class LoansComponent implements OnInit {
 
     this.loanRepo.getAllLoans(this.userName).subscribe((loans) => {
       this.loans = loans;
+      // for(i = 0 ; i < this.loans.length)
       console.log(this.loans);
     });
   }
 
-  addLoan() {
+  addLoan(loanForm: NgForm) {
     this.newLoan.loanBalance = this.newLoan.loanAmount;
     this.newLoan = this.loanRepo.calculateLoanStats(this.newLoan);
     this.newLoan.loanPaidAmt = 0;
     this.loanRepo.addLoan(this.newLoan, this.userName).subscribe(() => {
       this.loans.push(this.newLoan);
       this.newLoan = new Loan();
+      loanForm.reset();
     this.newLoan.userName = this.currentUser;
     });
   }
@@ -69,7 +77,7 @@ export class LoansComponent implements OnInit {
     });
   }
 
-  payCustom(loan: Loan) {
+  payCustom(loan: Loan, indx: number) {
     loan.paid = 1;
     loan.loanBalance = +loan.loanBalance - +this.payLoan;
     loan.loanPaidAmt = +loan.loanPaidAmt + +this.payLoan;
@@ -80,6 +88,12 @@ export class LoansComponent implements OnInit {
       this.loanRepo.updatePaidLoan(loan, this.userName).subscribe(() => {
         this.loanRepo.subtractFromBal(this.payLoan, this.userName).subscribe(() => {
           this.payLoan = 0;
+          console.log("here");
+          console.log(loan.loanBalance);
+          if (loan.loanBalance <= 0) {
+            this.loans.splice(indx, 1);
+            console.log(this.loans);
+          }
         });
       });
 

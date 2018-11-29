@@ -1,33 +1,41 @@
 <app-nav-bar></app-nav-bar>
-<div class="row justify-content-center">
+<div class="row justify-content-center" *ngIf="loaded">
   <div class="col-4">
     <div class="container-fluid container-bg fill">
-      <div class="card p-3 shadow-lg p-2 rounded">
+      <div class="card p-3 shadow-sm p-2 rounded">
         <h1>Change Password</h1>
+        <hr>
         <!-- <img class="card-img-top img-fluid" src="../../assets/logo_transparent_login-white.png" alt="Card image cap"> -->
         <div class="card-body">
-          <form id="passwordReset" #passwordResetForm="ngForm" name="passwordReset" (submit)=submitPR(passwordResetForm) novalidate>
+          <form id="passwordReset" #passwordResetForm="ngForm" name="passwordReset" novalidate>
+
+              <div class="form-group">
+                  <label for="newPass"> Old Password: </label>
+                  <input type="text" id="oldPass" name="oldPass" class="form-control"[(ngModel)] = "oldPass" required #oldPassword="ngModel">
+                </div>
 
             <div class="form-group">
               <label for="newPass"> New Password: </label>
-              <input type="newPass" id="newPass" name="newPass" class="form-control"[(ngModel)] = "newPass" required #password="ngModel">
+              <input type="text" id="newPass" name="newPass" class="form-control"[(ngModel)] = "newPass" required #password="ngModel">
             </div>
 
 
-            <div class = "alert alert-danger" role="alert" *ngIf="password.invalid && (password.dirty||password.touched)">
+            <!-- <div class = "alert alert-danger" role="alert" *ngIf="password.invalid && (password.dirty||password.touched)">
                 New Password is Required!!!
-            </div>
+            </div> -->
 
             <div class="form-group">
               <label for="newPass2"> Confirm Password: </label>
-              <input type="password" id="newPass2" name="newPass2" class="form-control" [(ngModel)] = "newPass2" required #password2="ngModel" >
+              <input type="text" id="newPass2" name="newPass2" class="form-control" [(ngModel)] = "newPass2" required #password2="ngModel" >
             </div>
 
-            <div class = "alert alert-danger" role="alert" *ngIf="password2.invalid && (password2.dirty||password2.touched)">
-                New Password Confirmation is Required!!!
+            <div class = "alert alert-danger" role="alert" *ngIf="passwordNotMatch">
+                New passwords Don't Match
             </div>
-
-            <button type="submit" class="btn-primary btn" [disabled]="passwordResetForm.invalid">Submit</button>
+            <div class = "alert alert-danger" role="alert" *ngIf="samePass">
+                Old and New Passwords Cannot Be The Same
+            </div>
+            <button type="submit" class="btn-success btn" (click)=submitPR() [disabled]="passwordResetForm.invalid">Submit</button>
           </form>
         </div>
       </div>
@@ -37,47 +45,56 @@
   <div class="col-4">
     <div class="container-fluid container-bg fill">
 
-      <div class="card p-3 shadow-lg p-2 rounded">
-        <h1>Update Income</h1>
-        <!-- <img class="card-img-top img-fluid" src="../../assets/logo_transparent_login-white.png" alt="Card image cap"> -->
-        <div class="card-body">
-          <form id="updateIncome" #updateIncomeForm="ngForm" name="updateIncome"(submit) = "submitI(updateIncomeForm)">
-
-            <div class="form-group">
-              <label for="newIncome"> New Income: </label>
-              <input type="text" id="newIncome" name="newIncome" class="form-control" [(ngModel)] = "newIncome" #Income = "ngModel" required pattern="\d*">
+        <div class="card p-3 shadow-sm p-2 rounded">
+            <h1>Update Income</h1>
+            <h3 *ngIf=balance>Current Income: {{this.income | currency }}</h3>
+            <div class="alert alert-success" *ngIf=!income role="alert">
+                You don't have a Income yet, enter one below.
+              </div>
+            <hr>
+            <!-- <img class="card-img-top img-fluid" src="../../assets/logo_transparent_login-white.png" alt="Card image cap"> -->
+            <div class="card-body">
+                <form id="incomeUpdate" #incomeUpdateForm="ngForm" name="incomeUpdate" novalidate>
+                  <div class="form-group">
+                    <label for="newIncome"> New Income: </label>
+                    <input type="text" id="newIncome" name="newIncome" class="form-control" [(ngModel)] = "newIncome" required pattern="[0-9]+" #Income="ngModel" >
+                    <div class = "alert alert-danger mt-3" role="alert" *ngIf="incomeUpdateForm.invalid && Income?.errors.pattern && Income.touched">
+                        Income must be a valid number
+                    </div>
+                  </div>
+                  <button type="submit" class="btn-success btn" (click)=submitI() [disabled]="incomeUpdateForm.invalid">Submit</button>
+                </form>
             </div>
+          </div>
 
-            <div class = "alert alert-danger" role="alert" *ngIf="Income.invalid && (Income.dirty||Income.touched)">
-                Income is required and must be a number!!!
-            </div>
-
-            <button type="submit" class="btn-primary btn" [disabled]="updateIncomeForm.invalid">Submit</button>
-          </form>
-        </div>
-      </div>
-      
     </div>
-    <hr>
+    <br>
     <div class="container-fluid container-bg fill">
 
-        <div class="card p-3 shadow-lg p-2 rounded">
-          <h1>Update Income</h1>
+        <div class="card p-3 shadow-sm p-2 rounded">
+          <h1>Update Balance</h1>
+          <h3 *ngIf=balance>Current Balance: {{this.balance | currency }}</h3>
+          <div class="alert alert-success" *ngIf=!balance role="alert">
+              You don't have a balance yet, enter one below.
+            </div>
+          <hr>
           <!-- <img class="card-img-top img-fluid" src="../../assets/logo_transparent_login-white.png" alt="Card image cap"> -->
           <div class="card-body">
-            <form id="updateBalance" #updateBalanceForm="ngForm" name="updateBalance"(submit) = "submitB(updateBalanceForm)">
-  
-              <div class="form-group">
-                <label for="newBalance"> New Balance: </label>
-                <input type="text" id="newBalance" name="newBalance" class="form-control" [(ngModel)] = "newBalance" #Balance = "ngModel" required pattern="\d*">
-              </div>
-  
-              <div class = "alert alert-danger" role="alert" *ngIf="Balance.invalid && (Balance.dirty||Balance.touched)">
-                  Balance is required and must be a number!!!
-              </div>
-  
-              <button type="submit" class="btn-primary btn" [disabled]="updateBalanceForm.invalid">Submit</button>
-            </form>
+              <form id="balanceUpdate" #balanceUpdateForm="ngForm" name="balanceUpdate" novalidate>
+                <div class="form-group">
+                  <label for="newBalance"> New Balance: </label>
+                  <input type="text" id="newBalance" name="newBalance" class="form-control" [(ngModel)] = "newBalance" required pattern="[0-9]+" #Balance="ngModel" >
+                  <div class = "alert alert-danger mt-3" role="alert" *ngIf="balanceUpdateForm.invalid && Balance?.errors.pattern && Balance.touched">
+                      Balance must be a valid number
+                  </div>
+                </div>
+                <button type="submit" class="btn-success btn" (click)=submitB() [disabled]="balanceUpdateForm.invalid">Submit</button>
+              </form>
           </div>
         </div>
   </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
