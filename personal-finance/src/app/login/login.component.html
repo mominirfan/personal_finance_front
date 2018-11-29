@@ -1,10 +1,10 @@
-<div class="container-fluid container-bg fill">
+<!-- <div class="container-fluid container-bg fill">
   <div class="row justify-content-center">
     <div class="card col-4 p-3 shadow-lg p-2 rounded">
       <img class="card-img-top img-fluid" src="../../assets/logo_transparent_login-white.png" alt="Card image cap">
       <div class="card-body">
         <br>
-        <form>
+        <form form id = "entry" #Login = "ngForm">
           <div class="form-group">
             <label for="username">Username</label>
             <input type="text" class="form-control" id="username" name="username" aria-describedby="emailHelp" placeholder="Username" [(ngModel)]="userName">
@@ -15,7 +15,7 @@
             <input type="password" class="form-control" id="password" name="password" placeholder="Password" [(ngModel)]="pWord">
           </div>
           <div class="d-flex justify-content-center">
-            <button type="button" (click)="login()" class="btn btn-success login-btn">Login</button>
+            <button type="button" [disabled]="Login.invalid" (click)="login()" class="btn btn-success login-btn">Login</button>
           </div>
           <p class="mt-4 text-center">
             Don't have an account register<a routerLink="/register"> here</a>
@@ -24,4 +24,56 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
+<div class="container-fluid container-bg fill">
+    <div class="row justify-content-center">
+      <div class="card col-4 p-3 shadow-lg p-2 rounded">
+        <img class="card-img-top img-fluid" src="../../assets/logo_transparent_login-white.png" alt="Card image cap">
+        <div class="card-body">
+          <br>
+          <form id = "entry" #loginForm = "ngForm">
+            <div class="form-group">
+                <label for = "username"> Username: </label>
+                <input type="text" class="form-control" name="username"
+                id="username"
+                class="form-control"
+                [ngModel]="userName"
+                (ngModelChange)="userName = $event"
+                #username="ngModel"
+                required
+                pattern="[A-z ]+" placeholder="Username">
+                <div *ngIf="username.invalid && username?.errors.required && username.touched" class="text-danger">
+                    Username is required
+                  </div>
+
+            </div>
+
+            <div class="form-group">
+                <label for = "Password"> Password: </label>
+                <input type="text" class="form-control" name="Password"
+                id="Password"
+                class="form-control"
+                [(ngModel)]="pWord"
+                (ngModelChange)="pWord = $event"
+                #Password="ngModel"
+                required
+                pattern=".+" placeholder="Password">
+                <div *ngIf="Password.invalid && Password?.errors.required && Password.touched" class="text-danger">
+                    Password is required
+                  </div>
+
+
+            </div>
+
+            <div class="d-flex justify-content-center">
+                <button type = "submit" class = "btn btn-success submit-btn" [disabled]="loginForm.invalid" (click) = "login()"> Submit </button>
+              </div>
+            <p class="mt-4 text-center">
+              Don't have an account register<a routerLink="/register"> here</a>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

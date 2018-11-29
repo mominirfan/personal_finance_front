@@ -8,10 +8,10 @@ import { Router } from '@angular/router';
 })
 export class RegistrationComponent implements OnInit {
 
-  private account: Account;
+  account: Account;
   // private username: string;
-  private password: string;
-  private password2: string;
+  password: string;
+  password2: string;
   // private firstname: string;
   // private lastname: string;
   // private email: string;
