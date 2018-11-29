@@ -18,6 +18,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { BudgetEditRepository } from './domain/repositories/budget-edit-repository.service';
 import { ExpensesService } from './domain/repositories/expenses.services';
 import { SettingsComponent } from './settings/settings.component';
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { SettingsComponent } from './settings/settings.component';
     RegistrationComponent,
     LandingPageComponent,
     SettingsComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,6 +48,6 @@ import { SettingsComponent } from './settings/settings.component';
     ExpensesService,
   ],
   bootstrap: [AppComponent],
-  exports: []
+  exports: [NotFoundComponent]
 })
 export class AppModule { }

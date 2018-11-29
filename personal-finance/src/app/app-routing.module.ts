@@ -1,3 +1,4 @@
+import { NotFoundComponent } from './not-found/not-found.component';
 import { BudgetComponent } from './budget/budget.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -15,7 +16,8 @@ const appRoutes: Routes = [
   { path: '', component: LandingPageComponent},
   { path: 'budget', component: BudgetComponent},
   { path: 'loans', component: LoansComponent},
-  { path: 'settings', component: SettingsComponent}
+  { path: 'settings', component: SettingsComponent},
+  {path: '**',  component: NotFoundComponent}
 ];
 @NgModule({
   imports: [ RouterModule.forRoot(appRoutes) ],
