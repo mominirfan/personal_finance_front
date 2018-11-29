@@ -90,7 +90,7 @@
           <div *ngIf="suggestions">
             <div *ngIf="suggestionsOne.length > 0">
               <div class="row">
-                <div class="col-md-6" *ngIf="suggestionsOne">
+                <div class="col-md-6" *ngIf="suggestionsOne.length > 0">
                   <h3>
                     {{suggestionsOne[0].suggType}}
                   </h3>
@@ -100,7 +100,7 @@
                     </li>
                   </ul>
                 </div>
-                <div class="col-md-6" *ngIf="suggestionsTwo">
+                <div class="col-md-6" *ngIf="suggestionsTwo.length > 0">
                   <h3>
                     {{suggestionsTwo[0].suggType}}
                   </h3>
@@ -113,11 +113,13 @@
               </div>
             </div>
           </div>
+          <div *ngIf=suggestions>
           <div *ngIf="suggestionsOne.length == 0  && suggestionsTwo.length == 0">
             <div class="alert alert-success" role="alert">
               Set up a budget to see suggestions. <a routerLink="/budget">Click here</a>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </div>

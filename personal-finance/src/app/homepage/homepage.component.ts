@@ -64,6 +64,7 @@ export class HomepageComponent implements OnInit {
 
      this.homepageRepo.getSuggestions(this.currentUser.userName).subscribe((suggestions) => {
       this.suggestions = suggestions;
+      console.log(this.suggestions);
       this.suggestionsOne = [];
       this.suggestionsTwo = [];
       if (suggestions.length > 0 ) {
