@@ -11,12 +11,12 @@
 
               <div class="form-group">
                   <label for="newPass"> Old Password: </label>
-                  <input type="text" id="oldPass" name="oldPass" class="form-control"[(ngModel)] = "oldPass" required #oldPassword="ngModel">
+                  <input type="password" id="oldPass" name="oldPass" class="form-control"[(ngModel)] = "oldPass" required #oldPassword="ngModel">
                 </div>
 
             <div class="form-group">
               <label for="newPass"> New Password: </label>
-              <input type="text" id="newPass" name="newPass" class="form-control"[(ngModel)] = "newPass" required #password="ngModel">
+              <input type="password" id="newPass" name="newPass" class="form-control"[(ngModel)] = "newPass" required #password="ngModel">
             </div>
 
 
@@ -26,7 +26,7 @@
 
             <div class="form-group">
               <label for="newPass2"> Confirm Password: </label>
-              <input type="text" id="newPass2" name="newPass2" class="form-control" [(ngModel)] = "newPass2" required #password2="ngModel" >
+              <input type="password" id="newPass2" name="newPass2" class="form-control" [(ngModel)] = "newPass2" required #password2="ngModel" >
             </div>
 
             <div class = "alert alert-danger" role="alert" *ngIf="passwordNotMatch">
