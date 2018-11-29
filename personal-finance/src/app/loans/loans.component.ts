@@ -18,6 +18,7 @@ export class LoansComponent implements OnInit {
   currentUser: any = {};
   userName: String = '';
   payLoan: number;
+  balance: number;
   // dates: Date[];
 
   @Input() index: number;
@@ -38,6 +39,7 @@ export class LoansComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.balance = JSON.parse(localStorage.getItem('balance'));
     if (!this.currentUser) {
       this.router.navigate(['login']);
       return;
@@ -73,6 +75,8 @@ export class LoansComponent implements OnInit {
     this.loanRepo.updateLoan(loan, this.userName).subscribe(() => {
       this.loanRepo.updatePaidLoan(loan, this.userName).subscribe(() => {
         this.loanRepo.subtractFromBal(loan.loanPayment, this.userName).subscribe(() => {
+          this.balance = this.balance - +loan.loanPayment;
+          localStorage.setItem('balance', JSON.stringify(this.balance));
           this.payLoan = 0;
         });
       });
@@ -83,6 +87,9 @@ export class LoansComponent implements OnInit {
     loan.paid = 1;
     loan.loanBalance = +loan.loanBalance - +this.payLoan;
     loan.loanPaidAmt = +loan.loanPaidAmt + +this.payLoan;
+
+    this.balance = this.balance - + this.payLoan;
+    localStorage.setItem('balance', JSON.stringify(this.balance));
 
     loan = this.loanRepo.calculateLoanStats(loan);
 
