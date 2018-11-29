@@ -56,6 +56,7 @@ export class LoansComponent implements OnInit {
     this.newLoan.loanBalance = this.newLoan.loanAmount;
     this.newLoan = this.loanRepo.calculateLoanStats(this.newLoan);
     this.newLoan.loanPaidAmt = 0;
+    this.newLoan.paymentDay = Number(String(this.newLoan.paymentDay).substring(0, String(this.newLoan.paymentDay).length - 2));
     this.loanRepo.addLoan(this.newLoan, this.userName).subscribe(() => {
       this.loans.push(this.newLoan);
       this.newLoan = new Loan();

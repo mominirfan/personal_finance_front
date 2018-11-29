@@ -55,8 +55,10 @@ export class BudgetComponent implements OnInit {
   }
 
   initBudgets() {
+
     this.budget_labels = [];
     this.budget_vals = [];
+    this.expenses_drop = [''];
     let i;
     let label;
     let bud;
@@ -78,6 +80,7 @@ export class BudgetComponent implements OnInit {
       this.budget_vals.push(bud);
       this.spend_vals.push(exp);
 
+
       if (this.budget[i]['amt'] > 0 ) {
         this.expenses_drop.push(this.budget[i]['budgetType']);
       }
@@ -87,11 +90,9 @@ export class BudgetComponent implements OnInit {
 
 
   save() {
-
     if (this.budget_labels.includes(this.newBudget.budgetType)) {
 
       this.budgetRepo.editBudget(this.newBudget).subscribe(() => {
-        console.log(this.newBudget);
         this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
         this.budget = budget;
         this.initBudgets();
@@ -104,7 +105,6 @@ export class BudgetComponent implements OnInit {
 
     } else {
       this.budgetRepo.addBudget(this.newBudget).subscribe(() => {
-        console.log(this.newBudget);
         this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
         this.budget = budget;
         this.initBudgets();
@@ -125,13 +125,14 @@ export class BudgetComponent implements OnInit {
   saveExpense() {
     this.expenseService.addExpense(this.newExpense).subscribe(() => {
       this.expenseService.getExpenseSum(this.currentUser.userName).subscribe((summed_expenses) => {
-        this.ngOnInit();
+
         let amt = +this.newExpense.amt;
         this.loanRepo.subtractFromBal(amt, this.currentUser.userName).subscribe(() => {
           this.balance = +this.balance - amt;
           localStorage.setItem('balance', JSON.stringify(this.balance));
+          this.ngOnInit();
+          window.location.reload();
         });
-        window.location.reload();
       });
 
     });
@@ -198,7 +199,6 @@ export class BudgetComponent implements OnInit {
   getExpenses() {
     this.expenseService.getExpenses(this.currentUser.userName).subscribe((expenses) => {
       this.expenses = expenses;
-      console.log(this.expenses);
     });
   }
 
@@ -242,7 +242,7 @@ export class BudgetComponent implements OnInit {
     });
   }
 
-  getIncome(){
+  getIncome() {
     this.LoginService.getInfo(this.currentUser.userName).subscribe((user) => {
       this.incUser = user;
       this.monthly_inc = this.incUser.income;
