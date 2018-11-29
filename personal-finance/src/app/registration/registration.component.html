@@ -18,6 +18,9 @@
               <div *ngIf="username.invalid && username?.errors.required && username.touched" class="text-danger">
                   Username is required
                 </div>
+                <div *ngIf="dupUsername" class="text-danger">
+                    Username already exists
+                  </div>
                 <div *ngIf="username.invalid && username?.errors.pattern && username.touched" class="text-danger">
                     Username must contain valid letters
                   </div>
@@ -27,7 +30,7 @@
 
           <div class = "form-group">
               <label for = "Password"> Password: </label>
-              <input type="text" class="form-control" name="Password"
+              <input type="password" class="form-control" name="Password"
               id="Password"
               class="form-control"
               [(ngModel)]="password"
@@ -47,14 +50,14 @@
 
           <div class = "form-group">
               <label for = "Password2"> Confirm Password: </label>
-              <input type="text" class="form-control" name="Password2"
+              <input type="password" class="form-control" name="Password2"
               id="Password2"
               class="form-control"
               [(ngModel)]="password2"
               (ngModelChange)="password2 = $event"
               #Password2="ngModel"
               required
-              pattern=".+" placeholder="Password">
+              pattern=".+" placeholder="Confirm Password">
               <div *ngIf="Password2.invalid && Password2?.errors.required && Password2.touched" class="text-danger">
                   Confirm Password is required
                 </div>

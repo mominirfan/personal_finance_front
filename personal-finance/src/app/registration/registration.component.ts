@@ -12,6 +12,7 @@ export class RegistrationComponent implements OnInit {
   // private username: string;
   password: string;
   password2: string;
+  dupUsername = false;
   // private firstname: string;
   // private lastname: string;
   // private email: string;
@@ -25,12 +26,28 @@ export class RegistrationComponent implements OnInit {
   ngOnInit() {
   }
 
-  private subReg() {
+
+
+
+  subReg() {
     if (this.password === this.password2) {
       this.account.pWord = this.password;
-      this.registrationRepository.register(this.account).subscribe(x => this.register(x));
+      this.registrationRepository.register(this.account).subscribe(x => {
+        if (x === 0 ) {
+          this.dupUsername = true;
+          return;
+        } else {
+          this.account = new Account;
+          // console.log(account);
+          this.password = null;
+          this.password2 = null;
+          this.router.navigate(['login']);
+        }
+      }
+        // this.register(x)
+        );
     }
-    this.router.navigate(['login']);
+
 
   }
   private register( account: Account ) {

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Account } from '../models/account';
+import { map } from 'rxjs/operators';
 @Injectable()
 export class RegistrationRepository {
 
@@ -9,8 +10,23 @@ export class RegistrationRepository {
 
   constructor (private httpClient: HttpClient) {}
 
-  public register(account: Account): Observable<Account> {
-    return this.httpClient.post(this.endpoint, account);
+  // updatePassword(userName: String, pWord: String, old_pWord: String) {
+  //   return this.httpClient.put<any>(`${this.endpoint}edit-pass`, {userName: userName, pWord: pWord, old_pWord: old_pWord})
+  //   .pipe(map(response => {
+  //       if (response.error) {
+  //         return 0;
+  //       }
+  //     }));
+  // }
+
+
+  public register(account: Account): Observable<any> {
+    return this.httpClient.post<any>(this.endpoint, account)
+    .pipe(map(response => {
+        if (response.error) {
+          return 0;
+        }
+    }));
   }
 
 }
