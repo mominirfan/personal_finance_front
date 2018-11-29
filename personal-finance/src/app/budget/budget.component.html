@@ -167,10 +167,11 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let expense of expenses">
-                <td>{{expense.exType}}</td>
-                <td>{{expense.amt | currency}}</td>
-              </tr>
+                <tr *ngFor="let expense of expenses" >
+                    <td *ngIf="expense.amt > 0.0">{{expense.exType}}</td>
+                    <td *ngIf="expense.amt > 0.0">{{expense.amt | currency}}</td>
+                </tr>
+
             </tbody>
           </table>
         </div>

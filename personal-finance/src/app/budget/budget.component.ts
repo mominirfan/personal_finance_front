@@ -1,3 +1,5 @@
+import { Account } from './../domain/models/account';
+import { LoginService } from './../domain/repositories/login.service';
 import { ExpenseSum } from './../domain/models/expense_sum';
 import { BudgetItem } from './../domain/models/budget-item';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -17,13 +19,14 @@ import { Router } from '@angular/router';
 })
 export class BudgetComponent implements OnInit {
 
-  budget_drop = ['','Food','Savings','Util.','Car','House','Ent.'];
+  budget_drop = ['','Food','Savings','Util.','Car','House','Ent.','Misc.'];
   budget_labels = [];
   monthly_inc: number; // make this thier monthly income
   budget_vals = [];
   spend_vals = [];
   budget = [];
-  currentUser: any = {};
+  currentUser: Account;
+  incUser: Account;
   balance: number;
 
   // Editor Members
@@ -40,10 +43,9 @@ export class BudgetComponent implements OnInit {
     private modalService: NgbModal,
     private expenseService: ExpensesService,
     private router: Router,
+    private LoginService: LoginService
   ) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.balance = JSON.parse(localStorage.getItem('balance'));
-
   }
 
   initBudgets() {
@@ -80,29 +82,28 @@ export class BudgetComponent implements OnInit {
 
       this.budgetRepo.editBudget(this.newBudget).subscribe(() => {
         console.log(this.newBudget);
+        this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
+        this.budget = budget;
+        this.initBudgets();
+        this.updateChart();
       });
-      // this.budg = this.newBudget;
 
 
-      this.newBudget.amt = undefined;
-      this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
-      this.budget = budget;
-      this.initBudgets();
-      this.updateChart();
+
     });
 
     } else {
       this.budgetRepo.addBudget(this.newBudget).subscribe(() => {
         console.log(this.newBudget);
+        this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
+        this.budget = budget;
+        this.initBudgets();
+        this.updateChart();
       });
       // this.budg = this.newBudget;
 
 
-      this.newBudget.amt = undefined;
-      this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
-      this.budget = budget;
-      this.initBudgets();
-      this.updateChart();
+
 
     });
 
@@ -113,17 +114,14 @@ export class BudgetComponent implements OnInit {
 
   saveExpense() {
     this.expenseService.addExpense(this.newExpense).subscribe(() => {
-      this.getExpenses();
-      console.log(this.expenses);
+      this.expenseService.getExpenseSum(this.currentUser.userName).subscribe((summed_expenses) => {
+        this.ngOnInit();
+      });
+
     });
 
 
-    this.newExpense.amt = undefined;
-    this.getExpenses();
-    this.budgetRepo.getBudget(this.currentUser.userName).subscribe((budget) => {
-    this.initBudgets();
-    this.updateChart();
-  });
+
   }
 
   updateChart() {
@@ -193,7 +191,6 @@ export class BudgetComponent implements OnInit {
       this.summed_expenses = summed_expenses;
       this.initBudgets();
       this.updateChart();
-      console.log(this.spend_vals);
 
     });
   }
@@ -209,9 +206,10 @@ export class BudgetComponent implements OnInit {
       this.budget = budget;
       this.newBudget.userName = this.currentUser.userName;
       this.newExpense.userName = this.currentUser.userName;
-      this.monthly_inc = 5000;
+      this.monthly_inc = this.currentUser.income;
       this.getExpenses();
       this.getExpenseSum();
+      this.getIncome();
   });
 
 }
@@ -220,5 +218,12 @@ export class BudgetComponent implements OnInit {
       this.balance = +this.balance + +this.depositAmt;
       localStorage.setItem('balance', JSON.stringify(this.balance));
     });
+  }
+
+  getIncome(){
+    this.LoginService.getInfo(this.currentUser.userName).subscribe((user) => {
+      this.incUser = user;
+      this.monthly_inc = this.incUser.income;
+    })
   }
 }
