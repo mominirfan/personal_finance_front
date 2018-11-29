@@ -19,6 +19,7 @@ import { BudgetEditRepository } from './domain/repositories/budget-edit-reposito
 import { ExpensesService } from './domain/repositories/expenses.services';
 import { SettingsComponent } from './settings/settings.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { DateSuffixPipe } from './shared/pipes/date-suffix.pipe';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
     LandingPageComponent,
     SettingsComponent,
     NotFoundComponent,
+    DateSuffixPipe,
   ],
   imports: [
     BrowserModule,
@@ -48,6 +50,6 @@ import { NotFoundComponent } from './not-found/not-found.component';
     ExpensesService,
   ],
   bootstrap: [AppComponent],
-  exports: [NotFoundComponent]
+  exports: [NotFoundComponent, DateSuffixPipe]
 })
 export class AppModule { }
