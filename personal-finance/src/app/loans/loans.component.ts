@@ -5,6 +5,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 
+
 @Component({
   selector: 'app-loans',
   templateUrl: './loans.component.html',

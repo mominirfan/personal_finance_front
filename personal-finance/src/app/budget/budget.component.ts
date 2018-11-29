@@ -1,3 +1,4 @@
+import { LoanRepository } from './../domain/repositories/loan-repository.service';
 import { Account } from './../domain/models/account';
 import { LoginService } from './../domain/repositories/login.service';
 import { ExpenseSum } from './../domain/models/expense_sum';
@@ -44,9 +45,13 @@ export class BudgetComponent implements OnInit {
     private modalService: NgbModal,
     private expenseService: ExpensesService,
     private router: Router,
-    private LoginService: LoginService
+    private LoginService: LoginService,
+    private loanRepo: LoanRepository
+
   ) {
     this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.balance = JSON.parse(localStorage.getItem('balance'));
+
   }
 
   initBudgets() {
@@ -121,6 +126,11 @@ export class BudgetComponent implements OnInit {
     this.expenseService.addExpense(this.newExpense).subscribe(() => {
       this.expenseService.getExpenseSum(this.currentUser.userName).subscribe((summed_expenses) => {
         this.ngOnInit();
+        let amt = +this.newExpense.amt;
+        this.loanRepo.subtractFromBal(amt, this.currentUser.userName).subscribe(() => {
+          this.balance = +this.balance - amt;
+          localStorage.setItem('balance', JSON.stringify(this.balance));
+        });
         window.location.reload();
       });
 

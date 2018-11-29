@@ -1,5 +1,4 @@
 <app-nav-bar></app-nav-bar>
-
 <body *ngIf="name">
   <div class="container" style="background-color: white">
     <h1>
@@ -59,7 +58,7 @@
             </div>
             <div *ngIf="!loansBool">
               <div class="alert alert-success" role="alert">
-                You haven't added any loans to your account. <a routerLink="/loans">Click here</a>
+                You don't have any upcoming loan payments for you account. <a routerLink="/loans">Click here</a>
               </div>
             </div>
           </div>

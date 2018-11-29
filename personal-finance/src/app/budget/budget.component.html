@@ -198,6 +198,7 @@
         </div>
         <div class="clearfix"></div>
     <h1>{{currentUser.userName}}'s Budget</h1>
+    <h3>Current Balance: {{balance | currency}}</h3>
     <br>
     <div *ngIf="budget.length == 0">
         <div class="alert alert-success" role="alert">
