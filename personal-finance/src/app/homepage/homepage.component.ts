@@ -39,6 +39,7 @@ export class HomepageComponent implements OnInit {
       this.router.navigate(['login']);
       return;
     }
+
     this.name = this.currentUser.userName;
 
     this.homepageRepo.getBills(this.currentUser.userName).subscribe((bills) => {
