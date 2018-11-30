@@ -59,8 +59,20 @@ export class HomepageComponent implements OnInit {
          }
        }
    });
-    this.loansRepo.getDashboardLoans(this.currentUser.userName).subscribe((loans) => {
-      this.loans = loans;
+    // this.loansRepo.getDashboardLoans(this.currentUser.userName).subscribe((loans) => {
+    //   this.loans = loans;
+    this.loansRepo.getAllLoans(this.currentUser.userName).subscribe((loans) => {
+      this.loans = [];
+      for (let i = 0; i < loans.length; i += 1 ) {
+        if ( Number(loans[i]["paymentDay"]) >= 29) {
+          if (this.loans.length <= 2) {
+            this.loans.push(loans[i]);
+          }
+
+        }
+
+      }
+
 
      this.homepageRepo.getSuggestions(this.currentUser.userName).subscribe((suggestions) => {
       this.suggestions = suggestions;
