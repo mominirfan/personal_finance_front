@@ -24,21 +24,21 @@ export class BudgetEditRepository {
 
   constructor(protected httpClient: HttpClient) {}
 
-  public getBudget(username: string): Observable<[{}]> {
+  public getBudget(username: string): Observable<[Budget]> {
     return this.httpClient
-      .get<[{}]>(`${this.endPoint}/${username}`, this.httpOptions)
+      .get<[Budget]>(`${this.endPoint}/${username}`, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 
-  public addBudget(budget: {}): Observable<{}> {
+  public addBudget(budget: {}): Observable<Budget> {
     return this.httpClient
-      .post<{}>(`${this.endPoint2}`, budget, this.httpOptions)
+      .post<Budget>(`${this.endPoint2}`, budget, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 
-  public editBudget(budget: {}): Observable<{}> {
+  public editBudget(budget: {}): Observable<Budget> {
     return this.httpClient
-      .put<{}>(`${this.endPoint3}`, budget, this.httpOptions)
+      .put<Budget>(`${this.endPoint3}`, budget, this.httpOptions)
       .pipe(catchError(this.handleException));
   }
 
