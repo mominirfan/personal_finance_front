@@ -15,7 +15,6 @@ export class LoginComponent implements OnInit {
   load = false;
 
   constructor(
-    // private formBuilder: FormBuilder,
     private loginRepo: LoginService,
     private router: Router,
   ) {
@@ -39,6 +38,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['dashboard']);
         });
       } else {
+
       }
     });
   }

@@ -9,14 +9,10 @@ import { Router } from '@angular/router';
 export class RegistrationComponent implements OnInit {
 
   account: Account;
-  // private username: string;
+  currentUser: any = {};
   password: string;
   password2: string;
   dupUsername = false;
-  // private firstname: string;
-  // private lastname: string;
-  // private email: string;
-  // private income: string;
 
   constructor( private registrationRepository: RegistrationRepository,
     private router: Router, ) {
@@ -24,6 +20,12 @@ export class RegistrationComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    if (this.currentUser) {
+      this.router.navigate(['dashboard']);
+    }
+
   }
 
 
