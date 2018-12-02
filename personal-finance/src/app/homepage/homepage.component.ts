@@ -21,7 +21,7 @@ export class HomepageComponent implements OnInit {
   suggestionsOne: Suggestion[];
   suggestionsTwo: Suggestion[];
   balance: string;
-  currentUser: any = { };
+  currentUser: any = {};
   bills: Bill[];
   billsBool: boolean;
   constructor(
@@ -46,49 +46,45 @@ export class HomepageComponent implements OnInit {
 
 
     this.homepageRepo.getBills(this.currentUser.userName).subscribe((bills) => {
-       this.bills = bills;
-       let i;
-       for (i=0; i < bills.length;i++){
-         let b = bills[i];
-         if (+b.amt == 0){
-           continue
-         }
-         else{
-           this.billsBool = true;
-           break;
-         }
-       }
-   });
-
-      this.loansRepo.getDashboardLoans(this.currentUser.userName).subscribe(( loansasdf) => {
-        this.loans = loansasdf;
-
-
-     this.homepageRepo.getSuggestions(this.currentUser.userName).subscribe((suggestions) => {
-      this.suggestions = suggestions;
-      console.log(this.suggestions);
-      this.suggestionsOne = [];
-      this.suggestionsTwo = [];
-      if (suggestions.length > 0 ) {
-        for (let i = 0; i < 5; i++) {
-          this.suggestionsOne.push(this.suggestions[i]);
+      this.bills = bills;
+      let i;
+      for (i = 0; i < bills.length; i++) {
+        let b = bills[i];
+        if (+b.amt == 0) {
+          continue
+        }
+        else {
+          this.billsBool = true;
+          break;
         }
       }
-
-      if (suggestions.length === 10) {
-        for (let i = 5; i < 10; i++) {
-          this.suggestionsTwo.push(this.suggestions[i]);
-        }
-      }
-
-      console.log(this.suggestionsOne);
-      console.log(this.suggestionsTwo);
     });
 
-    this.loansBool = true;
-    if (this.loans.length  < 1) {
-      this.loansBool = false;
-    }
+    this.loansRepo.getDashboardLoans(this.currentUser.userName).subscribe((loansasdf) => {
+      this.loans = loansasdf;
+
+
+      this.homepageRepo.getSuggestions(this.currentUser.userName).subscribe((suggestions) => {
+        this.suggestions = suggestions;
+        this.suggestionsOne = [];
+        this.suggestionsTwo = [];
+        if (suggestions.length > 0) {
+          for (let i = 0; i < 5; i++) {
+            this.suggestionsOne.push(this.suggestions[i]);
+          }
+        }
+
+        if (suggestions.length === 10) {
+          for (let i = 5; i < 10; i++) {
+            this.suggestionsTwo.push(this.suggestions[i]);
+          }
+        }
+      });
+
+      this.loansBool = true;
+      if (this.loans.length < 1) {
+        this.loansBool = false;
+      }
 
     });
 

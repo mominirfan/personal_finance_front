@@ -46,7 +46,6 @@ export class SettingsComponent implements OnInit {
   }
 
   submitI() {
-    console.log('Submitting Income Update Form');
     this.sr.updateIncome(this.currentUser.userName, this.newIncome).subscribe(x => {
       this.income = this.newIncome;
       this.newIncome = null;
@@ -54,7 +53,6 @@ export class SettingsComponent implements OnInit {
   }
 
   submitB( incomeUpdateFrom: FormGroup) {
-    console.log('Submitting Balance Update Form');
     this.sr.updateBalance(this.currentUser.userName, this.newBalance).subscribe(x => {
       localStorage.setItem('balance', JSON.stringify(this.newBalance));
       this.balance = this.newBalance;

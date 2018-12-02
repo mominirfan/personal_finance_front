@@ -19,7 +19,6 @@ export class LoansComponent implements OnInit {
   userName: String = '';
   payLoan: number;
   balance: number;
-  // dates: Date[];
 
   @Input() index: number;
 
@@ -31,10 +30,6 @@ export class LoansComponent implements OnInit {
     private router: Router,
   ) {
     this.newLoan.paid = 0;
-    // const d = new Date();
-    // let month = d.getMonth();
-    // let year = d.getFullYear();
-
   }
 
   ngOnInit() {
@@ -49,8 +44,6 @@ export class LoansComponent implements OnInit {
 
     this.loanRepo.getAllLoans(this.userName).subscribe((loans) => {
       this.loans = loans;
-      // for(i = 0 ; i < this.loans.length)
-      console.log(this.loans);
     });
   }
 
@@ -97,11 +90,8 @@ export class LoansComponent implements OnInit {
       this.loanRepo.updatePaidLoan(loan, this.userName).subscribe(() => {
         this.loanRepo.subtractFromBal(this.payLoan, this.userName).subscribe(() => {
           this.payLoan = 0;
-          console.log("here");
-          console.log(loan.loanBalance);
           if (loan.loanBalance <= 0) {
             this.loans.splice(indx, 1);
-            console.log(this.loans);
           }
         });
       });

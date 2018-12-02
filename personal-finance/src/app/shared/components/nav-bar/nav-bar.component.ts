@@ -19,7 +19,6 @@ export class NavBarComponent implements OnInit {
 
   logout() {
     this.loginRepo.logout();
-    // this.router.navigate(['login']);
   }
 
   toLanding() {

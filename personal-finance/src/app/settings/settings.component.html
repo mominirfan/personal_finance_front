@@ -5,7 +5,6 @@
       <div class="card p-3 shadow-sm p-2 rounded">
         <h1>Change Password</h1>
         <hr>
-        <!-- <img class="card-img-top img-fluid" src="../../assets/logo_transparent_login-white.png" alt="Card image cap"> -->
         <div class="card-body">
           <form id="passwordReset" #passwordResetForm="ngForm" name="passwordReset" novalidate>
 
@@ -18,11 +17,6 @@
               <label for="newPass"> New Password: </label>
               <input type="password" id="newPass" name="newPass" class="form-control"[(ngModel)] = "newPass" required #password="ngModel">
             </div>
-
-
-            <!-- <div class = "alert alert-danger" role="alert" *ngIf="password.invalid && (password.dirty||password.touched)">
-                New Password is Required!!!
-            </div> -->
 
             <div class="form-group">
               <label for="newPass2"> Confirm Password: </label>
@@ -52,7 +46,6 @@
                 You don't have a Income yet, enter one below.
               </div>
             <hr>
-            <!-- <img class="card-img-top img-fluid" src="../../assets/logo_transparent_login-white.png" alt="Card image cap"> -->
             <div class="card-body">
                 <form id="incomeUpdate" #incomeUpdateForm="ngForm" name="incomeUpdate" novalidate>
                   <div class="form-group">
@@ -78,7 +71,6 @@
               You don't have a balance yet, enter one below.
             </div>
           <hr>
-          <!-- <img class="card-img-top img-fluid" src="../../assets/logo_transparent_login-white.png" alt="Card image cap"> -->
           <div class="card-body">
               <form id="balanceUpdate" #balanceUpdateForm="ngForm" name="balanceUpdate" novalidate>
                 <div class="form-group">

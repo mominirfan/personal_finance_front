@@ -28,9 +28,6 @@ export class RegistrationComponent implements OnInit {
 
   }
 
-
-
-
   subReg() {
     if (this.password === this.password2) {
       this.account.pWord = this.password;
@@ -40,13 +37,11 @@ export class RegistrationComponent implements OnInit {
           return;
         } else {
           this.account = new Account;
-          // console.log(account);
           this.password = null;
           this.password2 = null;
           this.router.navigate(['login']);
         }
       }
-        // this.register(x)
         );
     }
 
