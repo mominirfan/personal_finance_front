@@ -23,11 +23,11 @@ export class LoanRepository {
   constructor(private httpClient: HttpClient) {}
 
   getAllLoans(userName: String): Observable<Loan[]> {
-    return this.httpClient.get<Loan[]>(`${this.endpoint}${userName}`);
+    return this.httpClient.get<any>(`${this.endpoint}${userName}`);
   }
 
   getDashboardLoans(userName: String): Observable<Loan[]> {
-    return this.httpClient.get<Loan[]>(`${this.dashboardEndpoint}${userName}`);
+    return this.httpClient.get<any>(`${this.dashboardEndpoint}${userName}`);
   }
 
   calculateLoanStats(loan: Loan) {
