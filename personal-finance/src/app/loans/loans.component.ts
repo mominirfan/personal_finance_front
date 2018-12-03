@@ -51,8 +51,10 @@ export class LoansComponent implements OnInit {
     this.newLoan.loanBalance = this.newLoan.loanAmount;
     this.newLoan = this.loanRepo.calculateLoanStats(this.newLoan);
     this.newLoan.loanPaidAmt = 0;
+    this.newLoan.paid = 0;
     this.newLoan.paymentDay = Number(String(this.newLoan.paymentDay).substring(0, String(this.newLoan.paymentDay).length - 2));
     this.loanRepo.addLoan(this.newLoan, this.userName).subscribe(() => {
+      this.newLoan.interest = this.newLoan.interest * 100;
       this.loans.push(this.newLoan);
       this.newLoan = new Loan();
       loanForm.reset();
@@ -76,7 +78,7 @@ export class LoansComponent implements OnInit {
     });
   }
 
-  payCustom(loan: Loan, indx: number) {
+  payCustom(loan: Loan, indx: any) {
     loan.paid = 1;
     loan.loanBalance = +loan.loanBalance - +this.payLoan;
     loan.loanPaidAmt = +loan.loanPaidAmt + +this.payLoan;

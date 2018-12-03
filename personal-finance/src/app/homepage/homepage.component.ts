@@ -60,8 +60,12 @@ export class HomepageComponent implements OnInit {
       }
     });
 
-    this.loansRepo.getDashboardLoans(this.currentUser.userName).subscribe((loansasdf) => {
-      this.loans = loansasdf;
+    this.loansRepo.getDashboardLoans(this.currentUser.userName).subscribe((loans) => {
+      this.loans = [];
+      for ( let i = 0 ; i < 3; i += 1 ) {
+        this.loans.push(loans[i]);
+      }
+
 
 
       this.homepageRepo.getSuggestions(this.currentUser.userName).subscribe((suggestions) => {

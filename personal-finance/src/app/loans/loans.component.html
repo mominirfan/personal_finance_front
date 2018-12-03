@@ -57,7 +57,7 @@
               <h4>Remaining Loan Balance</h4>
               <p class="ml-2">{{loan.loanBalance | currency}}</p>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 " *ngIf="!this.newLoan.loanName">
               <h4>Payment</h4>
               <form *ngIf="loan.paid==1 " class="d-inline" novalidate #loanPaymentMoreForm="ngForm" name="loanPaymentMoreForm">
                 <p class="d-inline">Monthly Payment Made &nbsp;</p>
@@ -75,6 +75,7 @@
                     class="text-danger">
                     Must pay a positive, non-zero amount
                   </div>
+
                   <button class="btn btn-success m-2" [disabled]="loanPaymentMoreForm.invalid" (click)="payCustom(loan, i)">Pay</button>
                   <div class="clearfix"></div>
                 </div>
@@ -87,7 +88,7 @@
                   <div *ngIf="loanPaymentForm.invalid && payLoanInput?.errors.pattern && payLoanInput.touched" class="text-danger">
                     Must pay a positive, non-zero amount
                   </div>
-                  <button class="btn btn-success m-2" [disabled]="loanPaymentForm.invalid" (click)=payCustom(loan)>Pay</button>
+                  <button class="btn btn-success m-2" [disabled]="loanPaymentForm.invalid" (click)=payCustom(loan,i)>Pay</button>
                   <button class="btn btn-success m-2" (click)=minPayment(loan)>Pay Minimum</button>
                   <div class="clearfix"></div>
                 </div>
